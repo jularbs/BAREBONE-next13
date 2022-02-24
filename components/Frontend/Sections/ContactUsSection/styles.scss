@@ -1,0 +1,73 @@
+.contactus-section-container {
+  padding-bottom: 3rem;
+  overflow-x: hidden;
+  background-color: #f3f3f3;
+
+  .map-container {
+    .details {
+      padding: 1rem;
+      font-weight: 300;
+      color: white;
+      background-color: #162570;
+
+      font-size: 0.9rem;
+      h3 {
+        color: white;
+        font-weight: 300;
+        font-size: 0.9rem;
+      }
+
+      .contact-details {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+
+        .icon {
+          width: 1.5rem;
+          margin-right: 1rem;
+          color: #0092dd;
+        }
+
+        .content {
+          max-width: 400px;
+        }
+      }
+    }
+
+  }
+
+  .form-container {
+    padding: 1rem;
+
+    .custom-submit {
+      background-color: #0092dd;
+      border-color: #0092dd;
+      text-transform: uppercase;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      text-transform: uppercase;
+      font-size: 1.5rem;
+    }
+
+    label {
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
+
+    .form-control {
+      background-color: #f3f3f3;
+      border-radius: 0;
+      border-width: 1px;
+      color: black;
+      font-weight: 300;
+      border-color: rgba(0, 0, 0, 0.3);
+
+      &:focus {
+        border-color: black;
+      }
+    }
+  }
+}

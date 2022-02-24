@@ -1,0 +1,74 @@
+.portrait-card-container {
+  padding: 0.5rem;
+  text-align: center;
+  color: black;
+  margin-bottom: 1rem;
+  .portrait-img {
+    width: 100%;
+    aspect-ratio: 2/3;
+
+    background-size: cover;
+  }
+
+  .name {
+    font-weight: 600;
+    margin-top: 0.75rem;
+  }
+
+  .position {
+    font-weight: 300;
+    font-size: 0.8rem;
+  }
+
+  //MODAL
+}
+.portait-modal {
+  max-width: 1200px;
+  .modal-content {
+    border-radius: 0;
+    .modal-body {
+      padding: 0;
+    }
+  }
+  .portrait-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    .img-details {
+      width: 100%;
+      min-height: 600px;
+      height: 100%;
+      background-size: cover;
+      background-position: top center;
+    }
+    .content {
+      padding: 4rem;
+      padding-right: 5rem;
+      color: black;
+      .name {
+        font-weight: 600;
+      }
+
+      .position {
+        font-weight: 400;
+      }
+
+      .writeup {
+        margin-top: 2rem;
+        font-weight: 300;
+        line-height: 1.75rem;
+      }
+
+      .socmed-icons {
+          margin-top: 2rem;
+        a {
+          color: grey;
+          font-size: 1.2rem;
+          margin-right: 1.2rem;
+        }
+      }
+    }
+  }
+}

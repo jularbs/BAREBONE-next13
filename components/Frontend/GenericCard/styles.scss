@@ -1,0 +1,22 @@
+.generic-card-container {
+    margin-bottom: 2rem;
+  .img-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: grey;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .title {
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .excerpt {
+    font-weight: 300;
+    padding: 0 1rem;
+  }
+}

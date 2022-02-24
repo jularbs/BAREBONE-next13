@@ -1,0 +1,35 @@
+.generic-cta-container {
+  position: relative;
+  padding: 6rem 1rem 10rem 1rem;
+  background-size: cover;
+  background-position: center;
+  color: white;
+
+  .content {
+    position: relative;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+
+    .title {
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      line-height: 2rem;
+    }
+    .btn-cta {
+      padding: 1.5rem;
+      color: white;
+      border-color: white;
+      border-radius: 0;
+      width: 80%;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+  }
+}
