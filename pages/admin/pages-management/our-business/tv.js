@@ -1,17 +1,50 @@
 import React from "react";
 
-import { Container } from "reactstrap";
-
+import { Container, Row, Col } from "reactstrap";
 // layout for this page
 import Admin from "layouts/Admin.js";
 // core components
-import CardsHeader from "components/Headers/CardsHeader.js";
+import AlternativeHeader from "components/Headers/AlternativeHeader.js";
+
+import { useState, useEffect } from "react";
+import { HERO_TV, HERO_TYPE_BRANDING } from "constants.js";
+
+import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
+
+import { readHeroByTypeLocation } from "actions/hero";
 
 function TV() {
+  const [heroData, setHeroData] = useState({
+    heroLocation: HERO_TV,
+    heroType: HERO_TYPE_BRANDING,
+    title: "",
+    content: "",
+    ctaText: "",
+    ctaLink: "",
+    image: "",
+    background: "",
+    videoURL: "",
+  });
+
+  useEffect(() => {
+    const data = { type: heroData.heroType, location: heroData.heroLocation };
+    readHeroByTypeLocation(data).then((data) => {
+      if (data.data) setHeroData(data.data);
+    });
+  }, []);
   return (
     <>
-      <CardsHeader name="TV" parentName="Pages" />
-      <Container className="mt--6" fluid></Container>
+      <AlternativeHeader name="Television" parentName="Pages" />
+      <Container className="mt--6" fluid>
+        <Row className="justify-content-center">
+          <Col className="card-wrapper" lg="9">
+            <BrandingHeroComponentForm
+              formValues={heroData}
+              setFormValues={setHeroData}
+            />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

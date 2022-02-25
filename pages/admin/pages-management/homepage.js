@@ -38,7 +38,7 @@ function Homepage() {
   });
 
   useEffect(() => {
-    const data = { type: HERO_TYPE_BRANDING, location: HERO_HOMEPAGE };
+    const data = { type: heroData.heroType, location: heroData.heroLocation };
     readHeroByTypeLocation(data).then((data) => {
       if (data.data) setHeroData(data.data);
     });
