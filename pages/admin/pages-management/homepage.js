@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Button,
-  FormGroup,
-  Input,
-} from "reactstrap";
+import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 
 // layout for this page
 import Admin from "layouts/Admin.js";

@@ -5,12 +5,12 @@ import { Container } from "reactstrap";
 // layout for this page
 import Admin from "layouts/Admin.js";
 // core components
-import CardsHeader from "components/Headers/CardsHeader.js";
+import AlternativeHeader from "components/Headers/AlternativeHeader";
 
 function InvestorRelations() {
   return (
     <>
-      <CardsHeader name="Investor Relations" parentName="Pages" />
+      <AlternativeHeader name="Investor Relations" parentName="Pages" />
       <Container className="mt--6" fluid></Container>
     </>
   );

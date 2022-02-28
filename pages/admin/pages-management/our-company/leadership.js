@@ -8,7 +8,7 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
-
+import PortraitCardForm from "components/Forms/PortraitCardForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 import { HERO_LEADERSHIP, HERO_TYPE_SIMPLE } from "constants.js";
@@ -28,6 +28,7 @@ function Leadership() {
       if (data.data) setHeroData(data.data);
     });
   }, []);
+
   return (
     <>
       <AlternativeHeader name="Leadership" parentName="Pages" />
@@ -37,6 +38,11 @@ function Leadership() {
             <SimpleHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
+            />
+            <PortraitCardForm
+              label="Board of Directors Management"
+              location={"LEADERSHIP_PAGE"}
+              group={"BOARD_OF_DIRECTORS"}
             />
           </Col>
         </Row>
