@@ -27,6 +27,18 @@ export const updatePortrait = (token, data) => {
   });
 };
 
+export const removePortrait = (token, slug) => {
+  return axios({
+    method: "DELETE",
+    url: `${process.env.API}/v1/portrait/${slug}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    return res.data;
+  });
+};
+
 export const getPortraitListByGroupLocation = (data) => {
   const { group, location } = data;
   return axios({
