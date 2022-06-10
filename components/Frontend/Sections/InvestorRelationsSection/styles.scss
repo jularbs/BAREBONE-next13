@@ -1,0 +1,118 @@
+.investorRelationsSectionContainer {
+  .tabsContainer {
+    .header {
+      padding: 2rem;
+      color: rgba(55, 52, 53, 1);
+
+      .title {
+        font-size: 50px;
+        line-height: 54px;
+        text-transform: uppercase;
+        font-weight: 300;
+
+        span {
+          font-weight: 600;
+        }
+      }
+
+      .subtitle {
+        font-size: 30px;
+        line-height: 34px;
+        font-weight: 600;
+      }
+    }
+
+    .tabsWrapper {
+      color: rgba(55, 52, 53, 1);
+
+      .tab-item {
+        border-top: 1px rgba(55, 52, 53, 0.3) solid;
+        background-color: rgba(248, 248, 248, 1);
+
+        &.active {
+          .heading {
+            color: rgba(22, 37, 112, 1);
+            .chevron {
+              transform: rotate(-90deg);
+            }
+          }
+
+          .children {
+            height: 100%;
+          }
+        }
+
+        .heading {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 1rem;
+          padding: 1rem;
+          padding-left: 2rem;
+          cursor: pointer;
+
+          .chevron {
+            font-size: 20px;
+            transform: rotate(90deg);
+            transition: transform 0.125s;
+          }
+        }
+
+        .children {
+          background-color: white;
+          height: 0;
+          overflow: hidden;
+
+          .childItem {
+            padding: 1rem;
+            padding-left: 3rem;
+            font-weight: 400;
+            color: rgba(0, 146, 221, 1);
+            cursor: pointer;
+
+            &.active {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pdfViewerContainer {
+    padding: 1rem;
+    padding-top: 0;
+    background-color: rgba(229, 229, 229, 1);
+
+    .pdfNavigator {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: flex-end;
+
+      div {
+        display: flex;
+        align-items: center;
+        padding: 0 2.5rem;
+        border-right: 1px rgba(55, 52, 53, 0.3) solid;
+      }
+
+      .tools {
+        .download,
+        .print {
+          padding: 0 5px;
+          .icon {
+            width: 25px;
+          }
+        }
+      }
+    }
+    .pdfWrapper {
+      margin: 0 auto;
+
+      .react-pdf__Page__canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+  }
+}

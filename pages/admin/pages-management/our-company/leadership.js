@@ -9,6 +9,7 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import PortraitCardForm from "components/Forms/PortraitCardForm";
+import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 import { HERO_LEADERSHIP, HERO_TYPE_SIMPLE } from "constants.js";
@@ -41,6 +42,11 @@ function Leadership() {
             />
             <PortraitCardForm
               label="Board of Directors Management"
+              location={"LEADERSHIP_PAGE"}
+              group={"BOARD_OF_DIRECTORS"}
+            />
+            <SideBySideComponentForm
+              label="Leadership Posts"
               location={"LEADERSHIP_PAGE"}
               group={"BOARD_OF_DIRECTORS"}
             />

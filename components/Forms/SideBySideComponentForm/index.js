@@ -1,3 +1,5 @@
+//TODOS: Convert to SideBySide
+
 import React from "react";
 import {
   Row,
@@ -27,7 +29,7 @@ import {
 import { getLink } from "actions/media";
 import _ from "lodash";
 
-const PortraitCardForm = ({ label, location, group }) => {
+const SideBySideComponentForm = ({ label, location, group }) => {
   //Component States
   const [loading, setLoading] = useState({
     fetch: false,
@@ -36,6 +38,7 @@ const PortraitCardForm = ({ label, location, group }) => {
     delete: false,
     update: false,
   });
+  
   const [responseMessage, setResponseMessage] = useState({
     error: "",
     success: "",
@@ -1078,4 +1081,4 @@ const PortraitCardForm = ({ label, location, group }) => {
   );
 };
 
-export default PortraitCardForm;
+export default SideBySideComponentForm;
