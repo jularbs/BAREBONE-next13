@@ -2,8 +2,9 @@ import { forwardRef, useState } from "react";
 import "./styles.scss";
 
 import VisibilitySensor from "react-visibility-sensor";
+import { forEach } from "lodash";
 
-const HeroMetrics = forwardRef(({ next }, myRef) => {
+const HeroMetrics = forwardRef(({ next, data }, myRef) => {
   const [metrics, setMetrics] = useState([
     {
       figures: "0",
@@ -51,30 +52,21 @@ const HeroMetrics = forwardRef(({ next }, myRef) => {
 
   const onMetricsVisibility = (isVisible) => {
     if (isVisible) {
-      document.getElementById("yt-odo").innerHTML = 10;
-      document.getElementById("number-of-years-odo").innerHTML = 46;
-      document.getElementById("twitter-odo").innerHTML = 3;
-      document.getElementById("fb-odo").innerHTML = 3.5;
-      document.getElementById("awards-odo").innerHTML = 1.5;
-      document.getElementById("stations-reach-odo").innerHTML = 1;
-    } else {
-      document.getElementById("yt-odo").innerHTML = 0;
-      document.getElementById("number-of-years-odo").innerHTML = 0;
-      document.getElementById("twitter-odo").innerHTML = 0;
-      document.getElementById("fb-odo").innerHTML = 0;
-      document.getElementById("awards-odo").innerHTML = 0;
-      document.getElementById("stations-reach-odo").innerHTML = 0;
+      data.forEach((item) => {
+        document.getElementById(`${item.slug}-odo`).innerHTML = item.figures;
+      });
     }
   };
+  
   const showMetrics = () => {
-    return metrics.map((item, key) => {
+    return data.map((item, key) => {
       return (
         <div className="metric-item" key={key}>
           <div className="d-flex justify-content-center">
-            <span className="odometer figures" id={item.id}>
-              {item.figures}
+            <span className="odometer figures" id={`${item.slug}-odo`}>
+              {/* {item.figures} */}0
             </span>
-            <div className="figures" style={{ paddingTop: "5px" }}>
+            <div className="figures" style={{ paddingTop: "3px" }}>
               {item.suffix}
             </div>
           </div>

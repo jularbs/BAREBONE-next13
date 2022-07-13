@@ -1,0 +1,253 @@
+@import "assets/scss/breakpoints.scss";
+
+.workWithUsSection {
+  display: flex;
+  flex-direction: column;
+  .title {
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    font-size: 2rem;
+    color: rgba(55, 52, 53, 1);
+    font-weight: 600;
+    padding: 1rem 0;
+  }
+
+  .core {
+    display: flex;
+    flex-wrap: wrap;
+
+    .banner,
+    .content {
+      color: white;
+      padding: 3rem 2rem;
+      width: 100vw;
+
+      @include for-tablet-landscape-up {
+        width: 50vw;
+        padding: 3rem 2rem;
+      }
+    }
+
+    .banner {
+      background-color: black;
+      text-align: center;
+
+      @include for-tablet-landscape-up {
+        text-align: end;
+      }
+
+      .header {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      ul {
+        padding-left: 0;
+      }
+      ul > li {
+        list-style-type: none;
+        padding: 10px 0;
+        font-size: 1.2rem;
+        font-weight: 300;
+      }
+    }
+
+    .content {
+      background-color: rgba(0, 146, 221, 1);
+
+      .header {
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0.5rem 0 1.5rem 0;
+      }
+
+      p {
+        font-weight: 300;
+        line-height: 2rem;
+      }
+    }
+  }
+
+  .benefits {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .subHeading {
+      margin-bottom: 3rem;
+      max-width: 700px;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .content {
+      margin: 2rem 0;
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+      justify-items: start;
+
+      @include for-tablet-landscape-up {
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+      }
+
+      .gridItem {
+        .icon {
+          width: 26px;
+          margin-right: 10px;
+          color: rgba(0, 146, 221, 1);
+        }
+        font-weight: 600;
+      }
+    }
+  }
+
+  .faqs {
+    .topbar {
+      padding: 1rem 2rem;
+      color: black;
+      border-bottom: 1px black solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow-x: hidden;
+
+      &::before {
+        content: "FAQs";
+        font-size: 32px;
+        line-height: 32px;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-right: 20px;
+
+        @include for-tablet-landscape-up {
+          margin-right: 50px;
+          content: "Frequently Asked Questions";
+        }
+      }
+      .searchContainer {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+
+        .searchWrapper {
+          width: 100%;
+          background-color: transparent;
+          border: 1px black solid;
+          padding: 0.5rem 1rem;
+        }
+
+        .searchIcon {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    .questionsContainer {
+      width: 100%;
+      max-width: 1200px;
+      margin: 1rem auto;
+
+      .questionItem {
+        .question {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1rem 0.5rem;
+          border-bottom: 1px black solid;
+
+          .arrow {
+            font-size: 25px;
+          }
+
+          .englishTranslation {
+            margin-bottom: 5px;
+          }
+
+          .tagalogTranslation {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.6;
+          }
+        }
+
+        .answer {
+          background-color: white;
+          max-height: 0;
+          overflow: hidden;
+        }
+
+        &.active {
+          .question {
+            .arrow {
+              transform: rotate(180deg);
+              color: #0092dd;
+            }
+
+            .englishTranslation {
+              font-weight: 600;
+            }
+          }
+
+          .answer {
+            padding: 1rem;
+            border-bottom: 1px black solid;
+            height: auto;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .ctaButtons {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin: 0 1rem;
+      padding: 1rem 2rem;
+      text-transform: uppercase;
+      background-color: transparent;
+      border: 1px rgba(22, 37, 112, 1) solid;
+      color: rgba(22, 37, 112, 1);
+
+      &:hover {
+        color: white;
+        background-color: rgba(22, 37, 112, 1);
+      }
+    }
+  }
+
+  .testimonials{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    .header{
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(55, 52, 53, 1);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

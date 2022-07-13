@@ -7,10 +7,14 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import { useState, useEffect } from "react";
-import { HERO_RADIO, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_RADIO,
+  HERO_TYPE_BRANDING,
+  OUR_BUSINESS_RADIO,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
+import CompanyShowcaseComponentForm from "components/Forms/CompanyShowcaseComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 function Radio() {
@@ -37,10 +41,15 @@ function Radio() {
       <AlternativeHeader name="Radio" parentName="Pages" />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
-          <Col className="card-wrapper" lg="9">
+          <Col className="card-wrapper" lg="12" md="12">
             <BrandingHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
+            />
+            <CompanyShowcaseComponentForm
+              label="Company Showcase Component"
+              location={OUR_BUSINESS_RADIO}
+              fields=""
             />
           </Col>
         </Row>

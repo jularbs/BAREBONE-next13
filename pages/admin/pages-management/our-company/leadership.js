@@ -45,6 +45,11 @@ function Leadership() {
               location={"LEADERSHIP_PAGE"}
               group={"BOARD_OF_DIRECTORS"}
             />
+            <PortraitCardForm
+              label="Key Officers Management"
+              location={"LEADERSHIP_PAGE"}
+              group={"KEY_OFFICERS"}
+            />
             <SideBySideComponentForm
               label="Leadership Posts"
               location={"LEADERSHIP_PAGE"}

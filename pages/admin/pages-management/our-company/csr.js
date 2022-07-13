@@ -13,6 +13,9 @@ import { HERO_CSR, HERO_TYPE_SAMA_SAMA } from "constants.js";
 import SamaSamaHeroComponentForm from "components/Forms/SamaSamaHeroComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
+import { OUR_COMPANY_CSR } from "constants.js";
+import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
+
 function CSR() {
   const [heroData, setHeroData] = useState({
     heroLocation: HERO_CSR,
@@ -43,6 +46,11 @@ function CSR() {
             <SamaSamaHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
+            />
+            <SideBySideComponentForm
+              location={OUR_COMPANY_CSR}
+              label={"Corporate Social Responsibility Data"}
+              fields=""
             />
           </Col>
         </Row>

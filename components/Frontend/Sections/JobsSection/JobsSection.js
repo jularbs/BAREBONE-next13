@@ -1,5 +1,6 @@
 import "./styles.scss";
 import { useState } from "react";
+import Link from "next/link";
 
 const JobsSection = () => {
   const [openings, setOpening] = useState([
@@ -52,7 +53,9 @@ const JobsSection = () => {
           />
         </div>
         <div className="jobsContainer">{showOpenings()}</div>
-        <div className="internshipCTA">APPLY FOR INTERNSHIP</div>
+        <Link href="/work-with-us/internship">
+          <div className="internshipCTA">APPLY FOR INTERNSHIP</div>
+        </Link>
       </div>
     </>
   );

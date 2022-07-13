@@ -10,7 +10,9 @@ import { useState, useEffect } from "react";
 import { HERO_HOMEPAGE, HERO_TYPE_BRANDING } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
+import OurBusinessComponentForm from "components/Forms/OurBusinessComponentForm";
+import MetricsComponentForm from "components/Forms/MetricsComponentForm";
+import LogoShowcaseComponentForm from "components/Forms/LogoShowcaseComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 function Homepage() {
@@ -43,30 +45,15 @@ function Homepage() {
               formValues={heroData}
               setFormValues={setHeroData}
             />
-            <Card>
-              <CardHeader>
-                <h3 className="mb-0">Our Business Component</h3>
-              </CardHeader>
-              <CardBody></CardBody>
-            </Card>
-            <Card>
-              <CardHeader>
-                <h3 className="mb-0">Metrics Component</h3>
-              </CardHeader>
-              <CardBody></CardBody>
-            </Card>
+            <OurBusinessComponentForm />
+            <MetricsComponentForm />
             <Card>
               <CardHeader>
                 <h3 className="mb-0">CTA Component</h3>
               </CardHeader>
               <CardBody></CardBody>
             </Card>
-            <Card>
-              <CardHeader>
-                <h3 className="mb-0">Logo Showcase Component</h3>
-              </CardHeader>
-              <CardBody></CardBody>
-            </Card>
+            <LogoShowcaseComponentForm />
           </Col>
         </Row>
       </Container>

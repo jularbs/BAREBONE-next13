@@ -1,3 +1,5 @@
+//TODOS: UseRef for array
+
 import React from "react";
 
 import Navigation from "components/Frontend/Navigation";
@@ -5,18 +7,39 @@ import HeroBasic from "components/Frontend/HeroBasic";
 
 import SideBySide from "components/Frontend/SideBySide";
 
-import { useRef } from "react";
+import { OUR_BRAND_VISION_AND_CULTURE } from "constants.js";
 
-function VisionAndCulturePage() {
-  const visionRef = useRef(null);
-  const missionRef = useRef(null);
-  const coreValuesRef = useRef(null);
+import { getSideBySideByLocation } from "actions/sideBySide";
+import { getLink } from "actions/media";
+import { createRef } from "react";
+
+
+const VisionAndCulturePage = ({ sideBySide }) => {
+  const refs = sideBySide.map((item) => createRef());
+
+  const showSideBySide = () => {
+    return sideBySide.map((item, key) => {
+      return (
+        <SideBySide
+          ref={refs[key]}
+          next={refs[key + 1]}
+          data={{
+            imgLocation: getLink(item.background),
+            title: item.header,
+            content: item.content,
+          }}
+          key={key}
+          reverse={key % 2 == 0 ? true : false}
+        />
+      );
+    });
+  };
   return (
     <>
       <Navigation />
       <div className="main">
         <HeroBasic
-          next={visionRef}
+          next={refs[0]}
           blue
           black
           data={{
@@ -26,39 +49,22 @@ function VisionAndCulturePage() {
             bgLocation: "/bg/vnc.png",
           }}
         />
-        <SideBySide
-          ref={visionRef}
-          next={missionRef}
-          data={{
-            imgLocation: "/bg/vision.png",
-            title: "Our Vision",
-            content:
-              "To continuously be the leader in content creation for existing and emerging multimedia platforms, providing global audiences with relevant, compelling content and advertisers with cost-effective ways to reach target audiences.",
-          }}
-        />
-        <SideBySide
-          ref={missionRef}
-          next={coreValuesRef}
-          reverse
-          data={{
-            imgLocation: "/bg/our-mission.png",
-            title: "Our Mission",
-            content:
-              "Guided by the principles of integrity, responsible financial stewardship, and transparent corporate governance, we continuously serve our internal and external stakeholders, specifically, our audiences, advertisers, and investors.<br><br> We value innovation and adaptability, acknowledging that our continued relevance and competitiveness depends on growing our audiences and our platforms, adding value for our stakeholders, venturing boldly into areas where we enjoy a strategic advantage, providing our clients with integrated marketing solutions, and serving as a socially-responsible corporate citizen.",
-          }}
-        />
-        <SideBySide
-          ref={coreValuesRef}
-          data={{
-            imgLocation: "/bg/core-value.png",
-            title: "Our core values",
-            content:
-              "In the spirit of entrepreneurship and innovation, we nurture a corporate culture that encourages and empowers organization members from all levels to make decisions, act proactively, and provide feedback on how to improve our policies and processes.</br></br>We recognize that our people are our most important asset and so we nurture a meritocratic environment that emphasizes the value of leadership, career growth, teamwork, dedication, and loyalty.</br></br>We build strong, lasting relationships with business partners that share our vision and values and our commitment to being a socially and environmentally-responsible corporate citizen in every community that we serve.",
-          }}
-        />
+
+        {showSideBySide()}
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await getSideBySideByLocation(OUR_BRAND_VISION_AND_CULTURE);
+  // Pass data to the page via props
+  return {
+    props: {
+      sideBySide: res.data,
+    },
+  };
 }
 
 export default VisionAndCulturePage;

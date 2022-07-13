@@ -105,7 +105,14 @@ const InvestorRelationsSection = () => {
             <div className="pdfViewerContainer">
               <div className="pdfNavigator">
                 <div className="pdfSelector">
-                  <select></select>
+                  <select>
+                    <option value="">Latest (06-22-2022)</option>
+                    <option value="">As of 05-22-2022</option>
+                    <option value="">As of 04-18-2022</option>
+                    <option value="">As of 03-21-2022</option>
+                    <option value="">As of 02-22-2022</option>
+                    <option value="">As of 01-15-2022</option>
+                  </select>
                 </div>
                 <div className="pdfPagination">
                   {pageNumber} / {numPages}

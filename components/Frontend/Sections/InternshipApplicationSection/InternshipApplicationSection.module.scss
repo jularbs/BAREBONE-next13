@@ -1,3 +1,85 @@
-.container {
+.InternshipApplicationSectionContainer {
   display: flex;
+  flex-direction: row;
+
+  .requirements,
+  .internshipForm {
+    flex-basis: 50%;
+  }
+
+  .requirements {
+    background-color: rgba(22, 37, 112, 1);
+    padding: 1.5rem 2rem;
+    color: white;
+
+    .header {
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content {
+      color: white;
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: white;
+        text-transform: uppercase;
+        margin: 0;
+        font-weight: 700 !important;
+      }
+    }
+  }
+
+  .internshipForm {
+    padding: 1.5rem 2rem;
+    color: black;
+    .header {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .formContainer {
+      label {
+        font-weight: 300;
+        font-size: 0.9rem;
+      }
+
+      .row {
+        margin-left: -5px;
+        margin-right: -5px;
+
+        .col {
+          padding: 0 5px;
+        }
+      }
+
+      .textInputWrapper {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+        border: 1px rgba(196, 196, 196, 1) solid;
+        padding: 10px;
+        font-weight: 300;
+      }
+
+      .submitBtn {
+        margin: 0 auto;
+        text-align: center;
+        max-width: 500px;
+        white-space: nowrap;
+        text-decoration: none;
+        padding: 0.5rem 1.5rem;
+        background-color: rgba(0, 146, 221, 1);
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
 }

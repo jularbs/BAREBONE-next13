@@ -34,12 +34,15 @@ const Navigation = () => {
               <Link href="/our-company/leadership">
                 <div className="dropdown-item">LEADERSHIP</div>
               </Link>
+              <Link href="/our-company/our-teams">
+                <div className="dropdown-item">OUR TEAMS</div>
+              </Link>
               <Link href="/our-company/csr">
                 <div className="dropdown-item">
                   CORPORATE SOCIAL RESPONSIBILITY
                 </div>
               </Link>
-              <Link href="investor-relations">
+              <Link href="/investor-relations">
                 <div className="dropdown-item">INVESTOR RELATIONS</div>
               </Link>
             </div>
@@ -70,6 +73,20 @@ const Navigation = () => {
           <Link href="/collaborate-with-us">
             <div className="nav-item">COLLABORATE WITH US</div>
           </Link>
+          <div className="nav-item">
+            WORK WITH US
+            <div className="dropdown-wrapper">
+              <Link href="/work-with-us">
+                <div className="dropdown-item">WHY MBC?</div>
+              </Link>
+              <Link href="/work-with-us/internship">
+                <div className="dropdown-item">INTERNSHIP PROGRAM</div>
+              </Link>
+              <Link href="/work-with-us/careers">
+                <div className="dropdown-item">CAREER OPPORTUNITIES</div>
+              </Link>
+            </div>
+          </div>
           <Link href="/contact-us">
             <div className="nav-item">CONTACT US</div>
           </Link>
@@ -156,6 +173,9 @@ const Navigation = () => {
           </div>
           <Link href="/collaborate-with-us">
             <div className="nav-item">Collaborate With Us</div>
+          </Link>
+          <Link href="/work-with-us">
+            <div className="nav-item">Work With Us</div>
           </Link>
           <Link href="/contact-us">
             <div className="nav-item">Contact Us</div>

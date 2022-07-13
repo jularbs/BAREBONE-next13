@@ -43,6 +43,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      cursor: pointer;
 
       .logo {
         position: absolute;
@@ -52,7 +53,6 @@
       }
 
       .arrow-icon {
-        cursor: pointer;
         position: absolute;
         bottom: 2rem;
         right: 2rem;

@@ -9,13 +9,18 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
       next.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
   return (
     <>
       <div
         className={`side-by-side-container ${reverse ? "reverse" : ""}`}
         ref={myRef}
       >
-        <Col lg={6} sm={12} className="px-0 d-flex justify-content-center align-items-center">
+        <Col
+          lg={6}
+          sm={12}
+          className="px-0 d-flex justify-content-center align-items-center"
+        >
           <div className="content-container">
             {data && data.logoLocation && (
               <img src={data.logoLocation} className="logo" />
@@ -38,7 +43,7 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
           {data && data.imgLocation && (
             <div
               className="img-container"
-              style={{ backgroundImage: `url(${data.imgLocation})` }}
+              style={{ backgroundImage: `url("${data.imgLocation}")` }}
             ></div>
           )}
         </Col>

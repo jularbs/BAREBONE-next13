@@ -10,6 +10,12 @@ import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
 
 import { useRef } from "react";
 
+import {
+  HERO_RADIO,
+  OUR_BUSINESS_RADIO,
+} from "constants.js";
+
+
 function RadioPage() {
   const stationsRef = useRef(null);
 
@@ -28,7 +34,7 @@ function RadioPage() {
       <Navigation />
       <div className="main">
         <HeroBranding next={stationsRef} data={data} />
-        <OurBusinessesSection ref={stationsRef} />
+        <OurBusinessesSection location={OUR_BUSINESS_RADIO} ref={stationsRef} />
         <ContactUsSection />
       </div>
     </>

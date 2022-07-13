@@ -52,3 +52,8 @@ export const HERO_CONTACT_US = "hero-contact-us";
 export const HERO_TYPE_SIMPLE = "hero-simple";
 export const HERO_TYPE_BRANDING = "hero-branding";
 export const HERO_TYPE_SAMA_SAMA = "hero-sama-sama";
+
+//SIDE-BY-SIDE LOCATIONS
+export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";
+export const OUR_COMPANY_CSR = "OUR-COMPANY-CSR";
+export const OUR_BUSINESS_RADIO = "OUR-BUSINESS-RADIO";

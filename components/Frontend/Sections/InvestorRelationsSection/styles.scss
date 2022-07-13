@@ -89,6 +89,11 @@
       display: flex;
       justify-content: flex-end;
 
+      .pdfSelector > select {
+        padding: .225rem 3rem .225rem .225rem;
+        background-color: transparent;
+      }
+
       div {
         display: flex;
         align-items: center;
