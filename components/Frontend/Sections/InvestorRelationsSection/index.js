@@ -1,6 +1,8 @@
+//TODOS: pick category with file then empty category then with file returns error
+
 import "./styles.scss";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import {
   IoChevronForwardOutline,
@@ -8,42 +10,56 @@ import {
   IoPrintOutline,
 } from "react-icons/io5";
 
+import { getCategoryList } from "actions/categoryIR";
+import { getFileListByCategory } from "actions/fileIR";
+import { getLink } from "actions/media";
+
 import { Document, Page, pdfjs } from "react-pdf";
 import pdfjsWorker from "react-pdf/dist/esm/pdf.worker.entry";
-
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 const InvestorRelationsSection = () => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(3);
+  const [pageNumber, setPageNumber] = useState(10);
   const [activeHeading, setActiveHeading] = useState(null);
   const [activeChild, setActiveChild] = useState(null);
-  const [fileHistory, setFileHistory] = useState([
-    "Latest",
-    "2022-01-01",
-    "2021-01-01",
-  ]);
+  const [activeFile, setActiveFile] = useState("");
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
 
-  const header = [
-    { name: "Articles of Incorporation and By-Laws", slug: "articles" },
-    { name: "SEC FORM 17-A Annual Report", slug: "17-a" },
-    { name: "SEC FORM 17-Q Quarterly Report", slug: "17-q" },
-    { name: "SEC FORM 20-IS Information Sheet", slug: "20-is" },
-  ];
+  const [categories, setCategories] = useState([]);
 
-  const children = [
-    { name: "Articles of Incorporation", slug: "aoi", parent: "articles" },
-    { name: "By-Laws", slug: "bl", parent: "articles" },
-    { name: "SEC Form 17-a", slug: "sf17a", parent: "17-a" },
-    { name: "MBC Quarterly Reports", slug: "mqr", parent: "17-q" },
-  ];
+  useEffect(() => {
+    getCategoryList().then((data) => {
+      setCategories(data.data);
+    });
+  }, []);
 
-  const showHeadings = () =>
-    header.map((head, index) => {
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    setActiveFile("");
+    getFileListByCategory(activeChild).then((data) => {
+      setFiles(data.data);
+    });
+  }, [activeChild]);
+
+  useEffect(() => {
+    if (files.length !== 0) {
+      setActiveFile(getLink(files[0].file));
+    }
+  }, [files]);
+
+  const showHeadings = () => {
+    const sorted = categories
+      .filter((item) => item.parent == null)
+      .sort((a, b) => {
+        return a.order - b.order;
+      });
+
+    return sorted.map((head, index) => {
       return (
         <div
           className={`tab-item ${activeHeading == head.slug ? "active" : ""}`}
@@ -59,32 +75,48 @@ const InvestorRelationsSection = () => {
               }
             }}
           >
-            <span>{head.name}</span>
+            <span>{head.label}</span>
             <IoChevronForwardOutline className="chevron" />
           </div>
-          <div className="children">{showChildren(head.slug)}</div>
+          <div className="children">{showChildren(head._id)}</div>
         </div>
       );
     });
+  };
 
-  const showChildren = (slug) => {
-    return children
-      .filter((child) => child.parent == slug)
+  const showChildren = (id) => {
+    return categories
+      .filter((child) => child.parent == id)
       .map((child, key) => {
         return (
           <div
-            className={`childItem ${activeChild == child.slug ? "active" : ""}`}
+            className={`childItem ${activeChild == child._id ? "active" : ""}`}
             onClick={() => {
-              setActiveChild(child.slug);
+              setActiveChild(child._id);
             }}
           >
-            {child.name}
+            {child.label}
           </div>
         );
       });
   };
 
-  
+  const showFiles = () => {
+    if (files.length == 0) return <option value="">No files available</option>;
+    return files.map((item, key) => {
+      return (
+        <option value={JSON.stringify(item)} key={key}>
+          As of: {item.asOf}
+        </option>
+      );
+    });
+  };
+
+  const handleFileChange = (e) => {
+    let item = JSON.parse(e.target.value);
+    setActiveFile(getLink(item.file));
+    console.log(JSON.parse(e.target.value));
+  };
 
   return (
     <>
@@ -105,14 +137,7 @@ const InvestorRelationsSection = () => {
             <div className="pdfViewerContainer">
               <div className="pdfNavigator">
                 <div className="pdfSelector">
-                  <select>
-                    <option value="">Latest (06-22-2022)</option>
-                    <option value="">As of 05-22-2022</option>
-                    <option value="">As of 04-18-2022</option>
-                    <option value="">As of 03-21-2022</option>
-                    <option value="">As of 02-22-2022</option>
-                    <option value="">As of 01-15-2022</option>
-                  </select>
+                  <select onChange={handleFileChange}>{showFiles()}</select>
                 </div>
                 <div className="pdfPagination">
                   {pageNumber} / {numPages}
@@ -128,7 +153,7 @@ const InvestorRelationsSection = () => {
                 </div>
               </div>
               <Document
-                file="samplepdf.pdf"
+                file={activeFile}
                 onLoadSuccess={onDocumentLoadSuccess}
                 className="pdfWrapper"
               >

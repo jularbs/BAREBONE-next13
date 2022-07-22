@@ -53,7 +53,28 @@ export const HERO_TYPE_SIMPLE = "hero-simple";
 export const HERO_TYPE_BRANDING = "hero-branding";
 export const HERO_TYPE_SAMA_SAMA = "hero-sama-sama";
 
+//OPTION INDICES
+export const HERO_THEN_VALUES = "hero-then-values";
+export const HERO_NOW_VALUES = "hero-now-values";
+
 //SIDE-BY-SIDE LOCATIONS
 export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";
 export const OUR_COMPANY_CSR = "OUR-COMPANY-CSR";
 export const OUR_BUSINESS_RADIO = "OUR-BUSINESS-RADIO";
+export const OUR_COMPANY_OUR_TEAMS = "OUR-COMPANY-OUR-TEAMS";
+
+//PORTRAIT LOCATIONS
+export const OUR_LEADERSHIP_BOARD_OF_DIRECTORS =
+  "our-leadership-board-of-directors";
+export const OUR_LEADERSHIP_KEY_OFFICERS = "our-leadership-key-officers";
+export const OUR_BUSINESS_TALENTS = "our-business-talents";
+
+//BASIC POST LOCATIONS
+export const NETWORK_INITIATED_EVENTS = "NETWORK-INITIATED_EVENTS";
+export const CLIENT_INITIATED_EVENTS = "CLIENT-INITIATED_EVENTS";
+export const NETWORK_INITIATED_PROMOS = "NETWORK-INITIATED_PROMOS";
+export const CLIENT_INITIATED_PROMOS = "CLIENT-INITIATED_PROMOS";
+export const OUR_BUSINESS_MBC_TALENTS = "OUR-BUSINESS_MBC-TALENTS";
+
+//FAQ LOCATIONS
+export const WORK_WITH_US_FAQ = "WORK-WITH-US-FAQ";

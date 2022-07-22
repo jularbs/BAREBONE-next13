@@ -8,20 +8,19 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import { useState, useEffect } from "react";
 import {
-  HERO_PROMOS,
+  HERO_RADIO,
   HERO_TYPE_BRANDING,
-  NETWORK_INITIATED_PROMOS,
-  CLIENT_INITIATED_PROMOS,
+  OUR_BUSINESS_RADIO,
 } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
-
+import CompanyShowcaseComponentForm from "components/Forms/CompanyShowcaseComponentForm";
+import JobPostingComponentForm from "components/Forms/JobPostingComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
-function Promos() {
+function CareersPage() {
   const [heroData, setHeroData] = useState({
-    heroLocation: HERO_PROMOS,
+    heroLocation: HERO_RADIO,
     heroType: HERO_TYPE_BRANDING,
     title: "",
     content: "",
@@ -40,22 +39,15 @@ function Promos() {
   }, []);
   return (
     <>
-      <AlternativeHeader name="Digital" parentName="Pages" />
+      <AlternativeHeader name="Careers" parentName="Work with us" />
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
-          <Col className="card-wrapper" lg="9">
-            <BrandingHeroComponentForm
+          <Col className="card-wrapper" lg="12" md="12">
+            {/* <BrandingHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
-            />
-            <BasicPostComponentForm
-              label="Network Initiated Promos Posts"
-              location={NETWORK_INITIATED_PROMOS}
-            />
-            <BasicPostComponentForm
-              label="Client Initiated Promos Posts"
-              location={CLIENT_INITIATED_PROMOS}
-            />
+            /> */}
+            <JobPostingComponentForm />
           </Col>
         </Row>
       </Container>
@@ -63,6 +55,6 @@ function Promos() {
   );
 }
 
-Promos.layout = Admin;
+CareersPage.layout = Admin;
 
-export default Promos;
+export default CareersPage;

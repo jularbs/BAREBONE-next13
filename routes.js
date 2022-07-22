@@ -43,6 +43,12 @@ const routes = [
         layout: "/admin",
       },
       {
+        path: "/pages-management/our-company/our-teams",
+        name: "Our Teams",
+        miniName: "T",
+        layout: "/admin",
+      },
+      {
         path: "/pages-management/our-company/csr",
         name: "CSR",
         miniName: "m",
@@ -105,6 +111,32 @@ const routes = [
     name: "Collaborate with us",
     icon: "ni ni-single-copy-04",
     layout: "/admin",
+  },
+  {
+    collapse: true,
+    name: "Work With Us",
+    icon: "ni ni-single-copy-04",
+    state: "workWithUsCollapse",
+    views: [
+      {
+        path: "/pages-management/work-with-us/why-mbc",
+        name: "Why MBC?",
+        miniName: "W",
+        layout: "/admin",
+      },
+      {
+        path: "/pages-management/work-with-us/internship",
+        name: "Internship Program",
+        miniName: "U",
+        layout: "/admin",
+      },
+      {
+        path: "/pages-management/work-with-us/careers",
+        name: "Career Opportunities",
+        miniName: "U",
+        layout: "/admin",
+      },
+    ],
   },
   {
     path: "/pages-management/contact-us",

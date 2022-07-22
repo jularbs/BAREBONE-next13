@@ -19,18 +19,11 @@ import {
 
 import { useState, useEffect } from "react";
 
-import {
-  createCategory,
-  getCategoryList,
-  updateCategory,
-  removeCategory,
-} from "actions/categoryIR";
-
-import { createFile } from "actions/fileIR";
+import { getFAQbyLocation, createFAQ, updateFAQ, removeFAQ } from "actions/faq";
 
 import _ from "lodash";
 
-const InvestorRelationsCategoryForm = () => {
+const FaqComponentForm = ({ location }) => {
   //Component States
   const [loading, setLoading] = useState({
     fetch: false,
@@ -38,7 +31,6 @@ const InvestorRelationsCategoryForm = () => {
     update: false,
     delete: false,
     update: false,
-    upload: false,
   });
 
   const [responseMessage, setResponseMessage] = useState({
@@ -48,25 +40,23 @@ const InvestorRelationsCategoryForm = () => {
     deleteSuccess: "",
     updateError: "",
     updateSuccess: "",
-    uploadSuccess: "",
-    uploadErorr: "",
   });
 
   const [formValues, setFormValues] = useState({
-    order: "",
-    label: "",
+    location: location,
   });
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
-  const [categoryList, setCategoryList] = useState([]);
+  const [metricList, setMetricList] = useState([]);
+  const [faqList, setFaqList] = useState([]);
 
   //Component Lifecycles
   useEffect(() => {
     setLoading({ ...loading, fetch: true });
-    getCategoryList().then((data) => {
+    getFAQbyLocation(location).then((data) => {
       setLoading({ ...loading, fetch: false });
-      setCategoryList(data.data);
+      setFaqList(data.data);
     });
   }, []);
 
@@ -83,7 +73,7 @@ const InvestorRelationsCategoryForm = () => {
       create: true,
     });
 
-    createCategory("", formValues)
+    createFAQ("", formValues)
       .then((data) => {
         setLoading({
           ...loading,
@@ -91,8 +81,10 @@ const InvestorRelationsCategoryForm = () => {
         });
         setAddFormModalOpen(false);
         setResponseMessage({ success: data.message, error: "" });
-        setFormValues({});
-        setCategoryList([...categoryList, data.data]);
+        setFormValues({
+          location: location,
+        });
+        setFaqList([...faqList, data.data]);
       })
       .catch((e) => {
         setLoading({
@@ -103,29 +95,18 @@ const InvestorRelationsCategoryForm = () => {
       });
   };
 
-  const showPossibleParents = () => {
-    return categoryList
-      .filter((item) => item.parent == null)
-      .map((item, key) => (
-        <option key={key} value={item._id}>
-          {item.label}
-        </option>
-      ));
-  };
-
   const showAddForm = () => {
     return (
       <Modal
         toggle={() => setAddFormModalOpen(!addFormModalOpen)}
         isOpen={addFormModalOpen}
-        // className="add-portrait-modal"
+        className="add-portrait-modal"
       >
-        <ModalHeader>Add Category</ModalHeader>
+        <ModalHeader>Add FAQ</ModalHeader>
         <ModalBody className="py-4">
           {showErrorMessage()}
           <Row>
-            <Col>
-              <h3>Category Details</h3>
+            <Col lg="6">
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
                   Order
@@ -136,28 +117,55 @@ const InvestorRelationsCategoryForm = () => {
                   type="text"
                 />
               </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg="6">
+              <h3>English</h3>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
-                  Label
+                  Question
                 </label>
                 <Input
-                  value={formValues.label}
-                  onChange={handleTextChange("label")}
+                  value={formValues.englishQuestion}
+                  onChange={handleTextChange("englishQuestion")}
                   type="text"
                 />
               </FormGroup>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
-                  Parent Category
+                  Answer
                 </label>
                 <Input
-                  value={formValues.parent}
-                  onChange={handleTextChange("parent")}
-                  type="select"
-                >
-                  <option value={undefined}>No Parent</option>
-                  {showPossibleParents()}
-                </Input>
+                  value={formValues.englishAnswer}
+                  onChange={handleTextChange("englishAnswer")}
+                  type="textarea"
+                  rows="5"
+                />
+              </FormGroup>
+            </Col>
+            <Col lg="6">
+              <h3>Tagalog</h3>
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Question
+                </label>
+                <Input
+                  value={formValues.tagalogQuestion}
+                  onChange={handleTextChange("tagalogQuestion")}
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Answer
+                </label>
+                <Input
+                  value={formValues.tagalogAnswer}
+                  onChange={handleTextChange("tagalogAnswer")}
+                  type="textarea"
+                  rows="5"
+                />
               </FormGroup>
             </Col>
           </Row>
@@ -176,7 +184,7 @@ const InvestorRelationsCategoryForm = () => {
             {loading.create && (
               <Spinner color="white" size="sm" className="mr-2" />
             )}
-            Add Category
+            Add FAQ
           </Button>
         </ModalFooter>
       </Modal>
@@ -216,16 +224,12 @@ const InvestorRelationsCategoryForm = () => {
   //UpdateHandlers
   const [updateFormModalOpen, setUpdateFormModalOpen] = useState(false);
 
-  const [updateValues, setUpdateValues] = useState({
-    order: "",
-    label: "",
-    parent: "",
-  });
+  const [updateValues, setUpdateValues] = useState({});
 
   const handleUpdate = () => {
     setLoading({ ...loading, update: true });
-    console.log("UPDATE: ", updateValues);
-    updateCategory("", updateValues)
+
+    updateFAQ("", updateValues)
       .then((data) => {
         setLoading({ ...loading, update: false });
         setResponseMessage({
@@ -235,19 +239,12 @@ const InvestorRelationsCategoryForm = () => {
         setUpdateFormModalOpen(false);
 
         //reset form
-        setUpdateValues({
-          order: "",
-          label: "",
-          parent: "",
-          slug: "",
-        });
+        setUpdateValues({});
 
         //remove old
-        let newList = categoryList.filter(
-          (item) => item.slug !== data.data.slug
-        );
+        let newList = faqList.filter((item) => item.slug !== data.data.slug);
         //Add new
-        setCategoryList([data.data, ...newList]);
+        setFaqList([data.data, ...newList]);
       })
       .catch((e) => {
         setLoading({
@@ -259,7 +256,8 @@ const InvestorRelationsCategoryForm = () => {
           updateError: e.response.data.message,
         });
 
-        //reset formx
+        //reset form
+        setUpdateValues({});
       });
   };
 
@@ -273,20 +271,16 @@ const InvestorRelationsCategoryForm = () => {
       <Modal
         toggle={() => {
           setUpdateFormModalOpen(!updateFormModalOpen);
-          setUpdateValues({
-            order: "",
-            label: "",
-            parent: "",
-          });
+          setUpdateValues({});
         }}
+        className="add-portrait-modal"
         isOpen={updateFormModalOpen}
       >
-        <ModalHeader>Update Category</ModalHeader>
+        <ModalHeader>Update FAQ</ModalHeader>
         <ModalBody className="py-4">
           {showUpdateErrorMessage()}
           <Row>
-            <Col>
-              <h3>Category Details</h3>
+            <Col lg="6">
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
                   Order
@@ -297,28 +291,55 @@ const InvestorRelationsCategoryForm = () => {
                   type="text"
                 />
               </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg="6">
+              <h3>English</h3>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
-                  Label
+                  Question
                 </label>
                 <Input
-                  value={updateValues.label}
-                  onChange={handleUpdateTextChange("label")}
+                  value={updateValues.englishQuestion}
+                  onChange={handleUpdateTextChange("englishQuestion")}
                   type="text"
                 />
               </FormGroup>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
-                  Parent Category
+                  Answer
                 </label>
                 <Input
-                  value={updateValues.parent}
-                  onChange={handleUpdateTextChange("parent")}
-                  type="select"
-                >
-                  <option value="">No Parent</option>
-                  {showPossibleParents()}
-                </Input>
+                  value={updateValues.englishAnswer}
+                  onChange={handleUpdateTextChange("englishAnswer")}
+                  type="textarea"
+                  rows="5"
+                />
+              </FormGroup>
+            </Col>
+            <Col lg="6">
+              <h3>Tagalog</h3>
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Question
+                </label>
+                <Input
+                  value={updateValues.tagalogQuestion}
+                  onChange={handleUpdateTextChange("tagalogQuestion")}
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Answer
+                </label>
+                <Input
+                  value={updateValues.tagalogAnswer}
+                  onChange={handleUpdateTextChange("tagalogAnswer")}
+                  type="textarea"
+                  rows="5"
+                />
               </FormGroup>
             </Col>
           </Row>
@@ -338,7 +359,7 @@ const InvestorRelationsCategoryForm = () => {
             {loading.update && (
               <Spinner color="white" size="sm" className="mr-2" />
             )}
-            Update Category
+            Update FAQ
           </Button>
         </ModalFooter>
       </Modal>
@@ -445,7 +466,7 @@ const InvestorRelationsCategoryForm = () => {
       delete: true,
     });
 
-    removeCategory("", key)
+    removeFAQ("", key)
       .then((data) => {
         setLoading({ ...loading, delete: false });
         if (data.status && data.status == "200") {
@@ -454,10 +475,10 @@ const InvestorRelationsCategoryForm = () => {
             ...responseMessage,
             deleteSuccess: data.message,
           });
-          const newList = categoryList.filter(
+          const newList = faqList.filter(
             (item) => item.slug !== deleteHandler.key
           );
-          setCategoryList(newList);
+          setFaqList(newList);
           setDeleteHandler({
             key: "",
             input: "",
@@ -506,297 +527,63 @@ const InvestorRelationsCategoryForm = () => {
       </UncontrolledAlert>
     );
 
-  const [fileUploadModalOpen, setFileUploadModalOpen] = useState(false);
-  const [fileUploadCategoryDisplay, setFileUploadCategoryDisplay] =
-    useState("");
-
-  const [fileUploadValues, setFileUploadValues] = useState({
-    file: "",
-    category: "",
-    asOf: "",
-  });
-
-  const handleUpload = () => {
-    setLoading({ ...loading, upload: true });
-
-    const { asOf, category, file } = fileUploadValues;
-
-    const data = new FormData();
-    //set form fields
-
-    //basic fields
-    data.set("asOf", asOf);
-    data.set("category", category);
-    data.set("file", file);
-
-    //set form files
-    createFile("", data)
-      .then((data) => {
-        setLoading({ ...loading, upload: false });
-        setResponseMessage({
-          ...responseMessage,
-          uploadSuccess: data.message,
-        });
-        setFileUploadModalOpen(false);
-
-        //reset form
-        setFileUploadValues({
-          file: "",
-          category: "",
-          asOf: "",
-        });
-      })
-      .catch((e) => {
-        setLoading({
-          ...loading,
-          upload: false,
-        });
-        setResponseMessage({
-          ...responseMessage,
-          uploadError: e.response.data.message,
-        });
-
-        //reset formx
-      });
-  };
-
-  const handleFileUploadTextChange = (name) => (e) => {
-    const value = e.target.value;
-    setFileUploadValues({ ...fileUploadValues, [name]: value });
-  };
-
-  const handleFileUploadFileChange = (name) => (e) => {
-    if (e.target.files[0]) {
-      setFileUploadValues({
-        ...fileUploadValues,
-        [name]: e.target.files[0],
-      });
-    }
-  };
-
-  const showFileUploadingForm = () => {
-    return (
-      <Modal
-        toggle={() => {
-          setFileUploadModalOpen(!fileUploadModalOpen);
-          setFileUploadValues({
-            file: "",
-            category: "",
-            asOf: "",
-          });
-        }}
-        isOpen={fileUploadModalOpen}
-      >
-        <ModalHeader>Upload File</ModalHeader>
-        <ModalBody className="py-4">
-          {showUploadErrorMessage()}
-          <Row>
-            <Col>
-              <h3>Uploading file for {fileUploadCategoryDisplay}</h3>
-              <FormGroup>
-                <label className="form-control-label" htmlFor="title">
-                  As of
-                </label>
-                <Input
-                value={fileUploadValues.asOf}
-                  onChange={handleFileUploadTextChange("asOf")}
-                  type="text"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  onChange={handleFileUploadFileChange("file")}
-                  type="file"
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            outline
-            className="px-5"
-            onClick={() => {
-              setFileUploadModalOpen(false);
-              setFileUploadValues({});
-            }}
-          >
-            Cancel
-          </Button>
-          <Button color="primary" onClick={handleUpload}>
-            {loading.upload && (
-              <Spinner color="white" size="sm" className="mr-2" />
-            )}
-            Upload File
-          </Button>
-        </ModalFooter>
-      </Modal>
-    );
-  };
-
-  const showUploadSuccessMessage = () =>
-    responseMessage.uploadSuccess && (
-      <UncontrolledAlert
-        color="primary"
-        onClick={() => {
-          setResponseMessage({ ...responseMessage, uploadSuccess: "" });
-        }}
-      >
-        <span className="alert-icon">
-          <i className="ni ni-like-2" />
-        </span>
-        <span className="alert-text ml-1">{responseMessage.uploadSuccess}</span>
-      </UncontrolledAlert>
-    );
-
-  const showUploadErrorMessage = () =>
-    responseMessage.uploadError && (
-      <UncontrolledAlert
-        color="danger"
-        onClick={() => {
-          setResponseMessage({ ...responseMessage, uploadError: "" });
-        }}
-      >
-        <span className="alert-icon">
-          <i className="ni ni-like-2" />
-        </span>
-        <span className="alert-text ml-1">{responseMessage.uploadError}</span>
-      </UncontrolledAlert>
-    );
-
   //Component Views
-  const showCategoryList = () => {
+  const showFaqList = () => {
     return (
       <Table className="align-items-center table-flush" responsive>
         <thead className="thead-light">
           <tr>
-            <th cope="col">Label</th>
-            <th className="d-flex justify-content-end">Actions</th>
+            <th scope="col">Order</th>
+            <th cope="col">Question</th>
+            <th scope="col">Answer</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody className="list">{showParentsData()}</tbody>
+        <tbody className="list">{showFaqListData()}</tbody>
       </Table>
     );
   };
 
-  const showChildrenData = (id) => {
-    const sorted = categoryList
-      .filter((item) => item.parent == id)
-      .sort((a, b) => {
-        return a.order - b.order;
-      });
+  const showFaqListData = () => {
+    const sorted = faqList.sort((a, b) => {
+      return a.order - b.order;
+    });
     return sorted.map((item, index) => (
-      <>
-        <tr key={index}>
-          <td style={{ paddingLeft: "45px" }}>{item.label}</td>
-          <td className="d-flex justify-content-end">
-            <Button
-              size="sm"
-              color="dark"
-              onClick={() => {
-                setFileUploadModalOpen(true);
-                setFileUploadCategoryDisplay(item.label);
-                setFileUploadValues({
-                  ...fileUploadValues,
-                  category: item._id,
-                  asOf: new Date().toISOString().split("T")[0],
-                });
-              }}
-            >
-              Upload
-            </Button>
-            <Button
-              size="sm"
-              color="primary"
-              className="px-3"
-              onClick={() => {
-                setUpdateFormModalOpen(true);
-                const toUpdate = _.merge(updateValues, item);
-                setUpdateValues(toUpdate);
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              size="sm"
-              color="danger"
-              outline
-              onClick={() => {
-                //TODOS: change key to slug for delete handler
-                setDeleteHandler({ key: item.slug, input: "" });
-                setDeleteModalOpen(true);
-              }}
-            >
-              Delete
-            </Button>
-          </td>
-        </tr>
-      </>
-    ));
-  };
-
-  const showParentsData = () => {
-    const sorted = categoryList
-      .filter((item) => item.parent == null)
-      .sort((a, b) => {
-        return a.order - b.order;
-      });
-    return sorted.map((item, index) => (
-      <>
-        <tr key={index}>
-          <td
-            style={{
-              textTransform: "uppercase",
-              fontWeight: "700",
-              fontSize: "1rem",
+      <tr key={index}>
+        <td>{item.order}</td>
+        <td>
+          <div>{item.englishQuestion}</div>
+        </td>
+        <td style={{ whiteSpace: "pre-wrap" }}>
+          {item.englishAnswer}
+        </td>
+        <td className="d-flex justify-content-end">
+          <Button
+            size="sm"
+            color="danger"
+            outline
+            onClick={() => {
+              //TODOS: change key to slug for delete handler
+              setDeleteHandler({ key: item.slug, input: "" });
+              setDeleteModalOpen(true);
             }}
           >
-            {item.label}
-          </td>
-          <td className="d-flex justify-content-end">
-            <Button
-              size="sm"
-              color="secondary"
-              onClick={() => {
-                setFileUploadModalOpen(true);
-                setFileUploadCategoryDisplay(item.label);
-                setFileUploadValues({
-                  ...fileUploadValues,
-                  category: item._id,
-                  asOf: new Date().toISOString().split("T")[0],
-                });
-              }}
-            >
-              Add child
-            </Button>
-            <Button
-              size="sm"
-              color="primary"
-              className="px-3"
-              onClick={() => {
-                setUpdateFormModalOpen(true);
-                const toUpdate = _.merge(updateValues, item);
-                setUpdateValues(toUpdate);
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              size="sm"
-              color="danger"
-              outline
-              onClick={() => {
-                //TODOS: change key to slug for delete handler
-                setDeleteHandler({ key: item.slug, input: "" });
-                setDeleteModalOpen(true);
-              }}
-            >
-              Delete
-            </Button>
-          </td>
-        </tr>
-        {showChildrenData(item._id)}
-      </>
+            Delete
+          </Button>
+          <Button
+            size="sm"
+            color="primary"
+            className="px-3"
+            onClick={() => {
+              setUpdateFormModalOpen(true);
+              const toUpdate = _.merge(updateValues, item);
+              setUpdateValues(toUpdate);
+            }}
+          >
+            Edit
+          </Button>
+        </td>
+      </tr>
     ));
   };
 
@@ -805,10 +592,9 @@ const InvestorRelationsCategoryForm = () => {
       {showAddForm()}
       {showUpdateForm()}
       {showDeleteConfirmation()}
-      {showFileUploadingForm()}
       <Card>
         <CardHeader className="d-flex align-items-center justify-content-between">
-          <h2 className="mb-0 d-inline-block">Categories</h2>
+          <h2 className="mb-0 d-inline-block">Frequently Asked Questions</h2>
           <Button
             size="sm"
             color="primary"
@@ -816,18 +602,17 @@ const InvestorRelationsCategoryForm = () => {
               setAddFormModalOpen(true);
             }}
           >
-            + Add Category
+            + Add FAQ
           </Button>
         </CardHeader>
         <CardBody>
           {showSuccessMessage()}
           {showDeleteSuccessMessage()}
           {showUpdateSuccessMessage()}
-          {showUploadSuccessMessage()}
-          {categoryList.length > 0 ? (
-            showCategoryList()
+          {faqList.length > 0 ? (
+            showFaqList()
           ) : (
-            <div className="mx-auto text-center">No categories found</div>
+            <div className="mx-auto text-center">No FAQs found</div>
           )}
         </CardBody>
       </Card>
@@ -835,4 +620,4 @@ const InvestorRelationsCategoryForm = () => {
   );
 };
 
-export default InvestorRelationsCategoryForm;
+export default FaqComponentForm;

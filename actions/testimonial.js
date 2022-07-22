@@ -1,10 +1,9 @@
 import axios from "axios";
-import cookie from "js-cookie";
 
-export const createPortrait = (token, data) => {
+export const createTestimonial = (token, data) => {
   return axios({
     method: "POST",
-    url: `${process.env.API}/v1/portrait`,
+    url: `${process.env.API}/v1/testimonial`,
     data: data,
     headers: {
       Authorization: `Bearer ${token}`,
@@ -14,10 +13,10 @@ export const createPortrait = (token, data) => {
   });
 };
 
-export const updatePortrait = (token, data) => {
+export const updateTestimonial = (token, data) => {
   return axios({
     method: "PUT",
-    url: `${process.env.API}/v1/portrait`,
+    url: `${process.env.API}/v1/testimonial`,
     data: data,
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,10 +26,10 @@ export const updatePortrait = (token, data) => {
   });
 };
 
-export const removePortrait = (token, slug) => {
+export const removeTestimonial = (token, slug) => {
   return axios({
     method: "DELETE",
-    url: `${process.env.API}/v1/portrait/${slug}`,
+    url: `${process.env.API}/v1/testimonial/${slug}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -39,10 +38,10 @@ export const removePortrait = (token, slug) => {
   });
 };
 
-export const getPortraitListByLocation = (data) => {
+export const getTestimonialByLocation = (data) => {
   return axios({
     method: "GET",
-    url: `${process.env.API}/v1/portrait/${data}`,
+    url: `${process.env.API}/v1/testimonial/${data}`,
   }).then((res) => {
     return res.data;
   });

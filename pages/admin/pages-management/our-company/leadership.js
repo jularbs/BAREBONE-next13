@@ -9,10 +9,14 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import PortraitCardForm from "components/Forms/PortraitCardForm";
-import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
-import { HERO_LEADERSHIP, HERO_TYPE_SIMPLE } from "constants.js";
+import {
+  HERO_LEADERSHIP,
+  HERO_TYPE_SIMPLE,
+  OUR_LEADERSHIP_BOARD_OF_DIRECTORS,
+  OUR_LEADERSHIP_KEY_OFFICERS,
+} from "constants.js";
 
 function Leadership() {
   const [heroData, setHeroData] = useState({
@@ -42,18 +46,11 @@ function Leadership() {
             />
             <PortraitCardForm
               label="Board of Directors Management"
-              location={"LEADERSHIP_PAGE"}
-              group={"BOARD_OF_DIRECTORS"}
+              location={OUR_LEADERSHIP_BOARD_OF_DIRECTORS}
             />
             <PortraitCardForm
               label="Key Officers Management"
-              location={"LEADERSHIP_PAGE"}
-              group={"KEY_OFFICERS"}
-            />
-            <SideBySideComponentForm
-              label="Leadership Posts"
-              location={"LEADERSHIP_PAGE"}
-              group={"BOARD_OF_DIRECTORS"}
+              location={OUR_LEADERSHIP_KEY_OFFICERS}
             />
           </Col>
         </Row>

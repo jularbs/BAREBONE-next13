@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { HERO_COLLABORATE_WITH_US, HERO_TYPE_BRANDING } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
+import CollaborationComponentForm from "components/Forms/CollaborationComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 function CollaborateWithUs() {
@@ -43,6 +43,7 @@ function CollaborateWithUs() {
               formValues={heroData}
               setFormValues={setHeroData}
             />
+            <CollaborationComponentForm />
           </Col>
         </Row>
       </Container>

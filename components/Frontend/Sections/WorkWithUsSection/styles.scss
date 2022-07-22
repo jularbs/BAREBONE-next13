@@ -210,6 +210,13 @@
             border-bottom: 1px black solid;
             height: auto;
             max-height: 100%;
+
+            .tagalog {
+              font-weight: 400;
+              font-size: 0.9rem;
+              opacity: 0.8;
+              margin-top: 1rem;
+            }
           }
         }
       }
@@ -236,18 +243,25 @@
     }
   }
 
-  .testimonials{
+  .testimonials {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem 0;
 
-    .header{
+    .header {
       text-align: center;
       text-transform: uppercase;
       font-weight: 500;
       color: rgba(55, 52, 53, 1);
       font-size: 2rem;
       margin-bottom: 1rem;
+    }
+
+    .testimonial-list-container {
+      display: flex;
+      overflow-x: scroll;
+      padding-bottom: 2rem;
+      padding-left: 2rem;
     }
   }
 }

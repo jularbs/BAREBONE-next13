@@ -1,8 +1,14 @@
 import "./styles.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
+import { getJobPostingList } from "actions/jobPosting";
+
 const JobsSection = () => {
+  const [jobPostingList, setJobPostingList] = useState([]);
+  const [loading, setLoading] = useState({
+    fetch: false,
+  });
   const [openings, setOpening] = useState([
     {
       title: "Sales Executive",
@@ -24,15 +30,23 @@ const JobsSection = () => {
     },
   ]);
 
+  useEffect(() => {
+    setLoading({ ...loading, fetch: true });
+    getJobPostingList().then((data) => {
+      setLoading({ ...loading, fetch: false });
+      setJobPostingList(data.data);
+    });
+  }, []);
+
   const showOpenings = () => {
-    return openings.map((opening, key) => {
+    return jobPostingList.map((job, key) => {
       return (
         <div className="jobsItem">
-          <div className="title">{opening.title}</div>
-          <div className="requirements">{opening.requirements}</div>
-          <div className="company">{opening.company}</div>
+          <div className="title">{job.position}</div>
+          <div className="requirements">{job.requirements}</div>
+          <div className="company">{job.company}</div>
           <div className="link">
-            <a href={opening.link} className="openingLink">
+            <a href={job.destinationURL} target="_blank" className="openingLink">
               APPLY NOW
             </a>
           </div>
@@ -40,6 +54,7 @@ const JobsSection = () => {
       );
     });
   };
+
   return (
     <>
       <div className="jobsSectionContainer">

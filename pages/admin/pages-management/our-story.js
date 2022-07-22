@@ -10,7 +10,13 @@ import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 
 import { readHeroByTypeLocation } from "actions/hero";
 
-import { HERO_OUR_STORY, HERO_TYPE_SIMPLE } from "constants.js";
+import {
+  HERO_OUR_STORY,
+  HERO_TYPE_SIMPLE,
+  HERO_THEN_VALUES,
+  HERO_NOW_VALUES,
+} from "constants.js";
+import ThenNowHeroComponentForm from "components/Forms/ThenNowHeroComponentForm";
 
 function OurStory() {
   const [heroData, setHeroData] = useState({
@@ -38,6 +44,20 @@ function OurStory() {
               formValues={heroData}
               setFormValues={setHeroData}
             />
+            <Row>
+              <Col>
+                <ThenNowHeroComponentForm
+                  label="Then Details"
+                  index={HERO_THEN_VALUES}
+                />
+              </Col>
+              <Col>
+                <ThenNowHeroComponentForm
+                  label="Now Details"
+                  index={HERO_NOW_VALUES}
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

@@ -1,10 +1,9 @@
 import axios from "axios";
-import cookie from "js-cookie";
 
-export const createFile = (token, data) => {
+export const createHistory = (token, data) => {
   return axios({
     method: "POST",
-    url: `${process.env.API}/v1/file-ir`,
+    url: `${process.env.API}/v1/history`,
     data: data,
     headers: {
       Authorization: `Bearer ${token}`,
@@ -14,19 +13,19 @@ export const createFile = (token, data) => {
   });
 };
 
-export const getFileList = () => {
+export const getHistoryList = () => {
   return axios({
     method: "GET",
-    url: `${process.env.API}/v1/file-ir`,
+    url: `${process.env.API}/v1/history`,
   }).then((res) => {
     return res.data;
   });
 };
 
-export const updateFile = (token, data) => {
+export const updateHistory = (token, data) => {
   return axios({
     method: "PUT",
-    url: `${process.env.API}/v1/file-ir`,
+    url: `${process.env.API}/v1/history`,
     data: data,
     headers: {
       Authorization: `Bearer ${token}`,
@@ -36,22 +35,13 @@ export const updateFile = (token, data) => {
   });
 };
 
-export const removeFile = (token, id) => {
+export const removeHistory = (token, slug) => {
   return axios({
     method: "DELETE",
-    url: `${process.env.API}/v1/file-ir/${id}`,
+    url: `${process.env.API}/v1/history/${slug}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.data;
-  });
-};
-
-export const getFileListByCategory = (id) => {
-  return axios({
-    method: "GET",
-    url: `${process.env.API}/v1/file-ir/${id}`,
   }).then((res) => {
     return res.data;
   });

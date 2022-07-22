@@ -4,6 +4,8 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { forwardRef } from "react";
 import { Row, Col } from "reactstrap";
 
+import { getLink } from "actions/media";
+
 const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
   const { before, nextLabel, futures, current } = timeline;
 
@@ -14,10 +16,23 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
   };
 
   const showTimeline = (timeArray) => {
+    const labelIndex = timeArray.indexOf(data.label);
     return timeArray.map((item, index) => {
+      console.log(
+        `Label: ${item}, Index: ${index}, IndexOf: ${timeArray.indexOf(
+          data.label
+        )}`
+      );
       return (
         <>
-          <div className="timeline-item">
+          <div
+            className={`timeline-item ${index == labelIndex ? "active" : ""} ${
+              index == labelIndex + 1 ? "arrow-wrapper" : ""
+            }`}
+            onClick={() => {
+              if (index == labelIndex + 1) scrollNext();
+            }}
+          >
             <div className="label">{item}</div>
           </div>
           <div className="timeline-line" key={index}></div>
@@ -30,7 +45,7 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
     <>
       <div
         className="storycard-container"
-        style={{ backgroundImage: `url(${data.bgLocation})` }}
+        style={{ backgroundImage: `url('${getLink(data.background)}')` }}
         ref={myRef}
       >
         <div className="black-gradient-overlay" />
@@ -39,7 +54,9 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
           <Row>
             <Col lg={6} sm={12} xs={12}>
               <div className="img-container">
-                <img className="img-wrapper" src={data.imgLocation} />
+                {data.image && (
+                  <img className="img-wrapper" src={getLink(data.image)} />
+                )}
               </div>
             </Col>
             <Col lg={6} sm={12} xs={12}>
@@ -54,7 +71,13 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
             <Col>
               <div className="timeline-container">
                 <div className="timeline-wrapper">
-                  {/* before */}
+                  <IoChevronBackOutline className="icon" />
+                  <div className="timeline-line"></div>
+
+                  {showTimeline(timeline)}
+
+                  <IoChevronForwardOutline className="icon" />
+
                   {before && (
                     <>
                       <IoChevronBackOutline className="icon" />

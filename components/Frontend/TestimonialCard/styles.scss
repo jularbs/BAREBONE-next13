@@ -1,0 +1,40 @@
+.testimonial-wrapper {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  background-color: white;
+  margin-right: 1.5rem;
+
+  .profile-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+
+    .image-wrapper {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50% !important;
+      margin-right: 10px;
+      img {
+        width: 40px;
+        height: auto;
+      }
+    }
+    .name {
+      font-weight: 600;
+    }
+    .position {
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
+  }
+  .blurb {
+    width: 450px;
+    font-weight: 300;
+    padding: 1.5rem 2rem;
+  }
+}

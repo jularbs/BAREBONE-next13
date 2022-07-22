@@ -1,54 +1,34 @@
 import "./styles.scss";
 
 import { Fa500Px, FaAddressCard, FaGlasses, FaSearch } from "react-icons/fa";
-import { IoCaretDown, IoChevronDownOutline } from "react-icons/io5";
+import { IoChevronDownOutline } from "react-icons/io5";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+
+import { getFAQbyLocation } from "actions/faq";
+import { WORK_WITH_US_FAQ } from "constants.js";
+
+import TestimonialCard from "components/Frontend/TestimonialCard";
+import { getTestimonialByLocation } from "actions/testimonial";
 
 const WorkWithUsSection = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
-
-  const sampleQuestions = [
-    {
-      _id: 1,
-      englishTranslation: "How do I apply for a job vacancy?",
-      tagalogTranslation: "Paano mag-apply ng trabaho?",
-      answer:
-        " Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies.",
-    },
-    {
-      _id: 2,
-      englishTranslation:
-        "Can I apply even if there is no active job vacancy that I am qualified with?",
-      tagalogTranslation:
-        "Pwede ba akong mag-apply kahit wala pang bakanteng posisyon?",
-      answer:
-        " Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies.",
-    },
-    {
-      _id: 3,
-      englishTranslation:
-        "Can I apply even if there is no active job vacancy that I am qualified with?",
-      tagalogTranslation:
-        "Pwede ba akong mag-apply kahit wala pang bakanteng posisyon?",
-      answer:
-        " Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies.",
-    },
-    {
-      _id: 4,
-      englishTranslation:
-        "Can I apply even if there is no active job vacancy that I am qualified with?",
-      tagalogTranslation:
-        "Pwede ba akong mag-apply kahit wala pang bakanteng posisyon?",
-      answer:
-        " Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies.",
-    },
-  ];
+  const [faqs, setFaqs] = useState([]);
+  const [testimonialList, setTestimonialList] = useState([]);
+  useEffect(() => {
+    getTestimonialByLocation(WORK_WITH_US_FAQ).then((data) => {
+      console.log(data);
+      setTestimonialList(data.data);
+    });
+    getFAQbyLocation(WORK_WITH_US_FAQ).then((data) => {
+      setFaqs(data.data);
+    });
+  }, []);
 
   const showQuestions = () =>
-    sampleQuestions.map((item, key) => {
+    faqs.map((item, key) => {
       return (
         <div
           className={`questionItem ${
@@ -67,19 +47,24 @@ const WorkWithUsSection = () => {
             }}
           >
             <div>
-              <div className="englishTranslation">
-                {item.englishTranslation}
-              </div>
-              <div className="tagalogTranslation">
-                {item.tagalogTranslation}
-              </div>
+              <div className="englishTranslation">{item.englishQuestion}</div>
+              <div className="tagalogTranslation">{item.tagalogQuestion}</div>
             </div>
             <IoChevronDownOutline className="arrow" />
           </div>
-          <div className="answer">{item.answer}</div>
+          <div className="answer">
+            <div>{item.englishAnswer}</div>
+            <div className="tagalog">{item.tagalogAnswer}</div>
+          </div>
         </div>
       );
     });
+
+  const showTestimonials = () => {
+    return testimonialList.map((item, key) => {
+      return <TestimonialCard data={item} />;
+    });
+  };
 
   return (
     <>
@@ -172,6 +157,7 @@ const WorkWithUsSection = () => {
 
         <div className="testimonials">
           <div className="header">What our employees say about us</div>
+          <div className="testimonial-list-container">{showTestimonials()}</div>
         </div>
         <div className="ctaButtons">
           <Link href="work-with-us/careers">

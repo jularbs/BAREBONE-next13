@@ -1,4 +1,4 @@
-//TODOS: Convert to SideBySide
+//TODOS: create helper to display datetime with timezone specific
 
 import React from "react";
 import {
@@ -22,16 +22,17 @@ import {
 import { useState, useEffect } from "react";
 
 import {
-  getSideBySideByLocation,
-  createSideBySide,
-  updateSideBySide,
-  removeSideBySide,
-} from "actions/sideBySide";
+  createBasicPost,
+  updateBasicPost,
+  getBasicPostByLocation,
+  removeBasicPost,
+} from "actions/basicPost";
 
 import { getLink } from "actions/media";
 import _ from "lodash";
+import moment from "moment";
 
-const SideBySideComponentForm = ({ label, location, fields }) => {
+const BasicPostComponentForm = ({ label, location }) => {
   //Component States
   const [loading, setLoading] = useState({
     fetch: false,
@@ -51,28 +52,24 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
   });
 
   const [previewImage, setPreviewImage] = useState({
-    background: "",
     logo: "",
   });
 
   const [formValues, setFormValues] = useState({
     location: location,
-    order: "",
-    title: "",
-    content: "",
-    background: "",
   });
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
-  const [sideBySideList, setSideBySideList] = useState([]);
+  const [companyShowcaseList, setCompanyShowcaseList] = useState([]);
+  const [basicPostList, setBasicPostList] = useState([]);
 
   //Component Lifecycles
   useEffect(() => {
     setLoading({ ...loading, fetch: true });
-    getSideBySideByLocation(location).then((data) => {
+    getBasicPostByLocation(location).then((data) => {
       setLoading({ ...loading, fetch: false });
-      setSideBySideList(data.data);
+      setBasicPostList(data.data);
     });
   }, []);
 
@@ -97,24 +94,16 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
   };
 
   //Create Handlers
-  const handleSubmit = () => {
+  const handleSubmit = (status) => (e) => {
+    e.preventDefault();
     setLoading({
       ...loading,
       create: true,
     });
 
     //destructure input
-    const {
-      location,
-      order,
-      title,
-      header,
-      content,
-      ctaText,
-      ctaLink,
-      background,
-      logo,
-    } = formValues;
+    const { location, order, title, content, publishDate, displayImage } =
+      formValues;
 
     const data = new FormData();
     //set form fields
@@ -123,16 +112,18 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
     data.set("location", location);
     data.set("order", order);
     data.set("title", title);
+
+    if (status === "publish") {
+      data.set("status", true);
+    } else {
+      data.set("status", false);
+    }
+
+    data.set("publishDate", publishDate);
     data.set("content", content);
-    if (background) data.set("background", background);
+    if (displayImage) data.set("displayImage", displayImage);
 
-    //optional fields
-    if (header) data.set("header", header);
-    if (ctaText) data.set("ctaText", ctaText);
-    if (ctaLink) data.set("ctaLink", ctaLink);
-    if (logo) data.set("logo", logo);
-
-    createSideBySide("", data)
+    createBasicPost("", data)
       .then((data) => {
         setLoading({
           ...loading,
@@ -140,9 +131,9 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
         });
         setAddFormModalOpen(false);
         setResponseMessage({ success: data.message, error: "" });
-        setFormValues({});
+        setFormValues({ location: location });
         setPreviewImage({});
-        setSideBySideList([...sideBySideList, data.data]);
+        setBasicPostList([...basicPostList, data.data]);
       })
       .catch((e) => {
         setLoading({
@@ -160,7 +151,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
         isOpen={addFormModalOpen}
         className="add-portrait-modal"
       >
-        <ModalHeader>Add Data</ModalHeader>
+        <ModalHeader>Add Basic Post</ModalHeader>
         <ModalBody className="py-4">
           {showErrorMessage()}
           <Row>
@@ -186,19 +177,16 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                   type="text"
                 />
               </FormGroup>
-              {fields.includes("header") && (
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="title">
-                    Header
-                  </label>
-                  <Input
-                    value={formValues.header}
-                    onChange={handleTextChange("header")}
-                    type="text"
-                  />
-                </FormGroup>
-              )}
-
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Publish Date
+                </label>
+                <Input
+                  value={formValues.publishDate}
+                  onChange={handleTextChange("publishDate")}
+                  type="datetime-local"
+                />
+              </FormGroup>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
                   Content
@@ -215,23 +203,23 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
             <Col lg="6">
               <div className="d-flex flex-column align-items-center">
                 <div className="d-flex justify-content-between w-100">
-                  <h3 className="d-inline ">Background Image</h3>
+                  <h3 className="d-inline ">Display Image</h3>
                   <label className="btn btn-default btn-sm">
                     Choose file...
                     <Input
                       type="file"
                       hidden
                       accept="image/*"
-                      onChange={handleFileChange("background")}
+                      onChange={handleFileChange("displayImage")}
                     />
                   </label>
                 </div>
                 <img
                   src={
-                    previewImage.background
-                      ? previewImage.background
-                      : formValues.background
-                      ? getLink(formValues.background)
+                    previewImage.displayImage
+                      ? previewImage.displayImage
+                      : formValues.displayImage
+                      ? getLink(formValues.displayImage)
                       : ""
                   }
                   style={{
@@ -241,91 +229,11 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                     backgroundColor: "#ECECEC",
                   }}
                 />
-                {(fields.includes("logo") || fields.includes("contentBG")) && (
-                  <>
-                    <div className="d-flex justify-content-between w-100">
-                      <h3 className="d-inline ">{fields.includes("logo") ? "Logo" : "Content Background"} Placement</h3>
-                      <label className="btn btn-default btn-sm">
-                        Choose file...
-                        <Input
-                          type="file"
-                          hidden
-                          accept="image/*"
-                          onChange={handleFileChange("logo")}
-                        />
-                      </label>
-                    </div>
-                    <img
-                      src={
-                        previewImage.logo
-                          ? previewImage.logo
-                          : formValues.logo
-                          ? getLink(formValues.logo)
-                          : ""
-                      }
-                      style={{
-                        maxWidth: "200px",
-                        width: "100%",
-                        margin: "2rem 0",
-                        backgroundColor: "#ECECEC",
-                      }}
-                    />
-                  </>
-                )}
               </div>
-              {fields.includes("cta") && (
-                <>
-                  <h3>Call To Action Button</h3>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Button Label
-                    </label>
-                    <Input
-                      placeholder=""
-                      type="text"
-                      value={formValues.ctaText}
-                      onChange={handleTextChange("ctaText")}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Destination
-                    </label>
-                    <Input
-                      placeholder=""
-                      type="text"
-                      value={formValues.ctaLink}
-                      onChange={handleTextChange("ctaLink")}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Preview
-                    </label>
-                    <div className="cta-preview">
-                      <a href={formValues.ctaLink} target="_blank">
-                        <button className="cta-button btn btn-block">
-                          <span>{formValues.ctaText}</span>
-                          <img src="/common/arrow-white.svg" />
-                        </button>
-                      </a>
-                    </div>
-                  </FormGroup>
-                </>
-              )}
             </Col>
           </Row>
         </ModalBody>
-        <ModalFooter className="d-flex justify-content-between">
-          <Button
-            color="dark"
-            className="px-5"
-            onClick={() => {
-              setAddFormModalOpen(false);
-            }}
-          >
-            Preview
-          </Button>
+        <ModalFooter className="d-flex justify-content-end">
           <div>
             <Button
               outline
@@ -337,11 +245,26 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
               Cancel
             </Button>
 
-            <Button color="primary" onClick={handleSubmit} className="px-5">
+            <Button
+              color="dark"
+              outline
+              onClick={handleSubmit("draft")}
+              className="px-5"
+            >
               {loading.create && (
                 <Spinner color="white" size="sm" className="mr-2" />
               )}
-              Add Data
+              Save as draft
+            </Button>
+            <Button
+              color="primary"
+              onClick={handleSubmit("publish")}
+              className="px-5"
+            >
+              {loading.create && (
+                <Spinner color="white" size="sm" className="mr-2" />
+              )}
+              Publish Post
             </Button>
           </div>
         </ModalFooter>
@@ -389,32 +312,29 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
     logo: "",
   });
 
-  const handleUpdate = () => {
+  const handleUpdate = (status) => (e) => {
     setLoading({ ...loading, update: true });
 
-    const { slug, location, order, title, header, content, ctaText, ctaLink } =
+    const { slug, order, title, publishDate, content, displayImage } =
       updateValues;
-
-    const { background, logo } = updatePreviewImage;
 
     const data = new FormData();
     //set form fields
 
     //required fields
     data.set("slug", slug);
-    data.set("location", location);
     data.set("order", order);
+    if (status === "publish") {
+      data.set("status", true);
+    } else {
+      data.set("status", false);
+    }
     data.set("title", title);
+    data.set("publishDate", publishDate);
     data.set("content", content);
-    if (background) data.set("background", updateValues.background);
+    if (updatePreviewImage.displayImage) data.set("displayImage", displayImage);
 
-    //optional fields
-    if (header) data.set("header", header);
-    if (ctaText) data.set("ctaText", ctaText);
-    if (ctaLink) data.set("ctaLink", ctaLink);
-    if (logo) data.set("logo", updateValues.logo);
-
-    updateSideBySide("", data)
+    updateBasicPost("", data)
       .then((data) => {
         setLoading({ ...loading, update: false });
         setResponseMessage({
@@ -428,11 +348,11 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
         setUpdateValues({});
 
         //remove old
-        let newList = sideBySideList.filter(
+        let newList = basicPostList.filter(
           (item) => item.slug !== data.data.slug
         );
         //Add new
-        setSideBySideList([data.data, ...newList]);
+        setBasicPostList([data.data, ...newList]);
       })
       .catch((e) => {
         setLoading({
@@ -479,7 +399,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
         isOpen={updateFormModalOpen}
         className="add-portrait-modal"
       >
-        <ModalHeader>Update Data</ModalHeader>
+        <ModalHeader>Update Basic Post</ModalHeader>
         <ModalBody className="py-4">
           {showUpdateErrorMessage()}
           <Row>
@@ -505,19 +425,18 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                   type="text"
                 />
               </FormGroup>
-              {fields.includes("header") && (
-                <FormGroup>
-                  <label className="form-control-label" htmlFor="title">
-                    Header
-                  </label>
-                  <Input
-                    value={updateValues.header}
-                    onChange={handleUpdateTextChange("header")}
-                    type="text"
-                  />
-                </FormGroup>
-              )}
-
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Publish Date
+                </label>
+                <Input
+                  value={moment(updateValues.publishDate).format(
+                    "YYYY-MM-DDTHH:mm"
+                  )}
+                  onChange={handleUpdateTextChange("publishDate")}
+                  type="datetime-local"
+                />
+              </FormGroup>
               <FormGroup>
                 <label className="form-control-label" htmlFor="title">
                   Content
@@ -534,23 +453,23 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
             <Col lg="6">
               <div className="d-flex flex-column align-items-center">
                 <div className="d-flex justify-content-between w-100">
-                  <h3 className="d-inline ">Background Image</h3>
+                  <h3 className="d-inline ">Display Image</h3>
                   <label className="btn btn-default btn-sm">
                     Choose file...
                     <Input
                       type="file"
                       hidden
                       accept="image/*"
-                      onChange={handleUpdateFileChange("background")}
+                      onChange={handleUpdateFileChange("displayImage")}
                     />
                   </label>
                 </div>
                 <img
                   src={
-                    updatePreviewImage.background
-                      ? updatePreviewImage.background
-                      : updateValues.background
-                      ? getLink(updateValues.background)
+                    updatePreviewImage.displayImage
+                      ? updatePreviewImage.displayImage
+                      : updateValues.displayImage
+                      ? getLink(updateValues.displayImage)
                       : ""
                   }
                   style={{
@@ -560,81 +479,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                     backgroundColor: "#ECECEC",
                   }}
                 />
-                {fields.includes("logo") ||
-                  (fields.includes("contentBG") && (
-                    <>
-                      <div className="d-flex justify-content-between w-100">
-                        <h3 className="d-inline ">
-                          {fields.includes("logo") ? "Logo" : "Content Background"} Placement
-                        </h3>
-                        <label className="btn btn-default btn-sm">
-                          Choose file...
-                          <Input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={handleUpdateFileChange("logo")}
-                          />
-                        </label>
-                      </div>
-                      <img
-                        src={
-                          updatePreviewImage.logo
-                            ? updatePreviewImage.logo
-                            : updateValues.logo
-                            ? getLink(updateValues.logo)
-                            : ""
-                        }
-                        style={{
-                          maxWidth: "200px",
-                          width: "100%",
-                          margin: "2rem 0",
-                          backgroundColor: "#ECECEC",
-                        }}
-                      />
-                    </>
-                  ))}
               </div>
-              {fields.includes("cta") && (
-                <>
-                  <h3>Call To Action Button</h3>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Button Label
-                    </label>
-                    <Input
-                      placeholder=""
-                      type="text"
-                      value={updateValues.ctaText}
-                      onChange={handleUpdateTextChange("ctaText")}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Destination
-                    </label>
-                    <Input
-                      placeholder=""
-                      type="text"
-                      value={updateValues.ctaLink}
-                      onChange={handleUpdateTextChange("ctaLink")}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label" htmlFor="title">
-                      Preview
-                    </label>
-                    <div className="cta-preview">
-                      <a href={updateValues.ctaLink} target="_blank">
-                        <button className="cta-button btn btn-block">
-                          <span>{updateValues.ctaText}</span>
-                          <img src="/common/arrow-white.svg" />
-                        </button>
-                      </a>
-                    </div>
-                  </FormGroup>
-                </>
-              )}
             </Col>
           </Row>
         </ModalBody>
@@ -650,11 +495,17 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
           >
             Cancel
           </Button>
-          <Button color="primary" onClick={handleUpdate}>
+          <Button color="dark" outline onClick={handleUpdate("draft")}>
             {loading.update && (
               <Spinner color="white" size="sm" className="mr-2" />
             )}
-            Update Data
+            Save as draft
+          </Button>
+          <Button color="primary" onClick={handleUpdate("publish")}>
+            {loading.update && (
+              <Spinner color="white" size="sm" className="mr-2" />
+            )}
+            Publish Post
           </Button>
         </ModalFooter>
       </Modal>
@@ -706,7 +557,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
       >
         {showDeleteErrorMessage()}
         <div className=" modal-header">
-          <h5 className="modal-title">Delete Portrait</h5>
+          <h5 className="modal-title">Delete Basic Post</h5>
           <button
             aria-label="Close"
             className=" close"
@@ -719,7 +570,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
         <ModalBody className="py-0">
           <FormGroup className="mb-0">
             <span className="text-sm">
-              Type "DANGER" to permanently delete portrait card.
+              Type "DANGER" to permanently delete basic post.
             </span>
             <Input
               placeholder=""
@@ -731,7 +582,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button
+          <Button 
             color="danger"
             disabled={deleteHandler.input == "DANGER" ? false : true}
             onClick={handleRemove(deleteHandler.key)}
@@ -761,7 +612,7 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
       delete: true,
     });
 
-    removeSideBySide("", key)
+    removeBasicPost("", key)
       .then((data) => {
         setLoading({ ...loading, delete: false });
         if (data.status && data.status == "200") {
@@ -770,10 +621,10 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
             ...responseMessage,
             deleteSuccess: data.message,
           });
-          const newList = sideBySideList.filter(
+          const newList = basicPostList.filter(
             (item) => item.slug !== deleteHandler.key
           );
-          setSideBySideList(newList);
+          setBasicPostList(newList);
           setDeleteHandler({
             key: "",
             input: "",
@@ -823,29 +674,43 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
     );
 
   //Component Views
-  const showSideBySideTable = () => {
+  const showBasicPostListTable = () => {
     return (
       <Table className="align-items-center table-flush" responsive>
         <thead className="thead-light">
           <tr>
             <th scope="col">Order</th>
-            <th cope="col">Title</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Status</th>
+            <th scope="col">Publish Date</th>
             <th></th>
           </tr>
         </thead>
-        <tbody className="list">{showSideBySideListData()}</tbody>
+        <tbody className="list">{showBasicPostListData()}</tbody>
       </Table>
     );
   };
 
-  const showSideBySideListData = () => {
-    const sorted = sideBySideList.sort((a, b) => {
+  const showBasicPostListData = () => {
+    const sorted = basicPostList.sort((a, b) => {
       return a.order - b.order;
     });
     return sorted.map((item, index) => (
       <tr key={index}>
         <td>{item.order}</td>
         <td>{item.title}</td>
+        <td
+          style={{
+            textOverflow: "ellipsis",
+            maxWidth: "250px",
+            overflow: "hidden",
+          }}
+        >
+          {item.content}
+        </td>
+        <td>{item.status ? "Published" : "Saved as draft"}</td>
+        <td>{item.publishDate}</td>
         <td className="d-flex justify-content-end">
           <Button
             size="sm"
@@ -891,15 +756,15 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
               setAddFormModalOpen(true);
             }}
           >
-            + Add Data
+            + Add Post
           </Button>
         </CardHeader>
         <CardBody>
           {showSuccessMessage()}
           {showDeleteSuccessMessage()}
           {showUpdateSuccessMessage()}
-          {sideBySideList.length > 0 ? (
-            showSideBySideTable()
+          {basicPostList.length > 0 ? (
+            showBasicPostListTable()
           ) : (
             <div className="mx-auto text-center">No data found</div>
           )}
@@ -909,4 +774,4 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
   );
 };
 
-export default SideBySideComponentForm;
+export default BasicPostComponentForm;

@@ -20,14 +20,14 @@ import {
 import { useState, useEffect } from "react";
 import {
   createPortrait,
-  getPortraitListByGroupLocation,
+  getPortraitListByLocation,
   removePortrait,
   updatePortrait,
 } from "actions/portrait";
 import { getLink } from "actions/media";
 import _ from "lodash";
 
-const PortraitCardForm = ({ label, location, group }) => {
+const PortraitCardForm = ({ label, location }) => {
   //Component States
   const [loading, setLoading] = useState({
     fetch: false,
@@ -52,38 +52,19 @@ const PortraitCardForm = ({ label, location, group }) => {
 
   const [formValues, setFormValues] = useState({
     location: location,
-    group: group,
-    order: "",
-    name: "",
-    description: "",
-    facebookURL: "",
-    twitterURL: "",
-    instagramURL: "",
-    youtubeURL: "",
-    tiktokURL: "",
-    bigoLiveURL: "",
   });
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
-  const [portraitList, setPortraitList] = useState([
-    {
-      order: 1,
-      name: "Fred Elizalde",
-      position: "Chairman",
-    },
-    { order: 2, name: "Juan Elizadle", position: "VP-FM Operations" },
-  ]);
+  const [portraitList, setPortraitList] = useState([]);
 
   //Component Lifecycles
   useEffect(() => {
     setLoading({ ...loading, fetch: true });
-    getPortraitListByGroupLocation({ group: group, location: location }).then(
-      (data) => {
-        setLoading({ ...loading, fetch: false });
-        setPortraitList(data.data);
-      }
-    );
+    getPortraitListByLocation(location).then((data) => {
+      setLoading({ ...loading, fetch: false });
+      setPortraitList(data.data);
+    });
   }, []);
 
   //Input Handlers
@@ -114,13 +95,12 @@ const PortraitCardForm = ({ label, location, group }) => {
     });
 
     //destructure input
-    const { location, group, order, name, position, description, logo, image } =
+    const { location, order, name, position, description, logo, image } =
       formValues;
 
     const data = new FormData();
     //set form fields
     data.set("location", location);
-    data.set("group", group);
 
     //basic fields
     data.set("order", order);
@@ -157,19 +137,7 @@ const PortraitCardForm = ({ label, location, group }) => {
         });
         setAddFormModalOpen(false);
         setResponseMessage({ success: data.message, error: "" });
-        setFormValues({
-          location: location,
-          group: group,
-          order: "",
-          name: "",
-          description: "",
-          facebookURL: "",
-          twitterURL: "",
-          instagramURL: "",
-          youtubeURL: "",
-          tiktokURL: "",
-          bigoLiveURL: "",
-        });
+        setFormValues({ location: location });
         setPreviewImage({
           image: "",
           logo: "",
@@ -456,13 +424,11 @@ const PortraitCardForm = ({ label, location, group }) => {
     setLoading({ ...loading, update: true });
 
     const data = new FormData();
-    const { slug, location, group, order, name, position, description } =
-      updateValues;
+    const { slug, location, order, name, position, description } = updateValues;
 
     //set form fields
     data.set("slug", slug);
     data.set("location", location);
-    data.set("group", group);
 
     //basic fields
     data.set("order", order);
@@ -505,20 +471,7 @@ const PortraitCardForm = ({ label, location, group }) => {
         //reset form
         setUpdatePreviewImage({ image: "", logo: "" });
         setUpdateValues({
-          location: "",
-          group: "",
-          order: "",
-          name: "",
-          description: "",
-          facebookURL: "",
-          twitterURL: "",
-          instagramURL: "",
-          youtubeURL: "",
-          tiktokURL: "",
-          bigoLiveURL: "",
-          logo: "",
-          image: "",
-          slug: "",
+          location: location,
         });
 
         //remove old

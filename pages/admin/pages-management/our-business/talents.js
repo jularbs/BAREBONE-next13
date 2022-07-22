@@ -7,9 +7,15 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import { useState, useEffect } from "react";
-import { HERO_TALENTS, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_TALENTS,
+  HERO_TYPE_BRANDING,
+  OUR_BUSINESS_MBC_TALENTS,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
+import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
+import PortraitCardForm from "components/Forms/PortraitCardForm";
 
 import { readHeroByTypeLocation } from "actions/hero";
 
@@ -41,6 +47,14 @@ function Talents() {
             <BrandingHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
+            />
+            <PortraitCardForm
+              label="MBC Talents Management"
+              location={OUR_BUSINESS_MBC_TALENTS}
+            />
+            <BasicPostComponentForm
+              label="MBC Talents Posts"
+              location={OUR_BUSINESS_MBC_TALENTS}
             />
           </Col>
         </Row>

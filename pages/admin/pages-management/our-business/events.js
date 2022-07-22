@@ -7,10 +7,15 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import { useState, useEffect } from "react";
-import { HERO_EVENTS, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_EVENTS,
+  HERO_TYPE_BRANDING,
+  NETWORK_INITIATED_EVENTS,
+  CLIENT_INITIATED_EVENTS,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
+import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
 import { readHeroByTypeLocation } from "actions/hero";
 
 function Events() {
@@ -41,6 +46,14 @@ function Events() {
             <BrandingHeroComponentForm
               formValues={heroData}
               setFormValues={setHeroData}
+            />
+            <BasicPostComponentForm
+              label="Network Initiated Events Posts"
+              location={NETWORK_INITIATED_EVENTS}
+            />
+            <BasicPostComponentForm
+              label="Client Initiated Events Posts"
+              location={CLIENT_INITIATED_EVENTS}
             />
           </Col>
         </Row>
