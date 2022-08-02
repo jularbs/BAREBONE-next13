@@ -6,32 +6,15 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { useState, useEffect } from "react";
-import { HERO_TV, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_TV,
+  HERO_TYPE_BRANDING,
+  OUR_BUSINESS_MBC_TELEVISION,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
-import { readHeroByTypeLocation } from "actions/hero";
-
+import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 function TV() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_TV,
-    heroType: HERO_TYPE_BRANDING,
-    title: "",
-    content: "",
-    ctaText: "",
-    ctaLink: "",
-    image: "",
-    background: "",
-    videoURL: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
   return (
     <>
       <AlternativeHeader name="Television" parentName="Pages" />
@@ -39,8 +22,13 @@ function TV() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_TV}
+              type={HERO_TYPE_BRANDING}
+            />
+            <SideBySideComponentForm
+              label="Television Posts"
+              location={OUR_BUSINESS_MBC_TELEVISION}
+              fields=""
             />
           </Col>
         </Row>

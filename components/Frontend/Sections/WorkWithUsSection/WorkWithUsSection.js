@@ -3,7 +3,7 @@ import "./styles.scss";
 import { Fa500Px, FaAddressCard, FaGlasses, FaSearch } from "react-icons/fa";
 import { IoChevronDownOutline } from "react-icons/io5";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import Link from "next/link";
 
 import { getFAQbyLocation } from "actions/faq";
@@ -12,7 +12,7 @@ import { WORK_WITH_US_FAQ } from "constants.js";
 import TestimonialCard from "components/Frontend/TestimonialCard";
 import { getTestimonialByLocation } from "actions/testimonial";
 
-const WorkWithUsSection = () => {
+const WorkWithUsSection = forwardRef(({}, myRef) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   const [faqs, setFaqs] = useState([]);
@@ -68,7 +68,7 @@ const WorkWithUsSection = () => {
 
   return (
     <>
-      <div className="workWithUsSection">
+      <div className="workWithUsSection" ref={myRef}>
         <div className="title">Why MBC?</div>
         <div className="core">
           <div className="banner">
@@ -170,6 +170,6 @@ const WorkWithUsSection = () => {
       </div>
     </>
   );
-};
+});
 
 export default WorkWithUsSection;

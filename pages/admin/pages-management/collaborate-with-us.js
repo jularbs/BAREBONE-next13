@@ -7,32 +7,16 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { useState, useEffect } from "react";
-import { HERO_COLLABORATE_WITH_US, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_COLLABORATE_WITH_US,
+  HERO_TYPE_BRANDING,
+  COLLABORATE_WITH_US,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import CollaborationComponentForm from "components/Forms/CollaborationComponentForm";
-import { readHeroByTypeLocation } from "actions/hero";
-
+import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 function CollaborateWithUs() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_COLLABORATE_WITH_US,
-    heroType: HERO_TYPE_BRANDING,
-    title: "",
-    content: "",
-    ctaText: "",
-    ctaLink: "",
-    image: "",
-    background: "",
-    videoURL: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
   return (
     <>
       <AlternativeHeader name="Site Settings" parentName="Pages" />
@@ -40,10 +24,15 @@ function CollaborateWithUs() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_COLLABORATE_WITH_US}
+              type={HERO_TYPE_BRANDING}
             />
             <CollaborationComponentForm />
+            <SideBySideComponentForm
+              label="Collaborate with Us Posts"
+              location={COLLABORATE_WITH_US}
+              fields="cta"
+            />
           </Col>
         </Row>
       </Container>

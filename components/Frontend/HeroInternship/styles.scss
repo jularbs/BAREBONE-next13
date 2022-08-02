@@ -1,0 +1,67 @@
+.hero-internship-container {
+  position: relative;
+  padding: 15rem 2rem;
+  text-align: center;
+  color: white;
+
+  background-size: cover;
+  background-position: center;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .hero-column {
+    flex-basis: 50%;
+    height: 80vh;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    &.main-content {
+      border-right: 1px white solid;
+      padding: 3rem;
+    }
+
+    .title,
+    .pre-title {
+      position: relative;
+      font-size: 3rem;
+      line-height: 3rem;
+      font-weight: 400;
+    }
+
+    .title {
+      margin-bottom: 1.5rem;
+    }
+    .content {
+      position: relative;
+      font-weight: 300;
+      line-height: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      padding: 1rem 5rem;
+      border: 1px white solid;
+      text-transform: uppercase;
+      font-weight: 500;
+      align-items: center;
+      cursor: pointer;
+      span {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .arrow-placement {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

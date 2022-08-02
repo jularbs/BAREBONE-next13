@@ -6,7 +6,6 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { useState, useEffect } from "react";
 import {
   HERO_TALENTS,
   HERO_TYPE_BRANDING,
@@ -17,27 +16,7 @@ import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentFor
 import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
 import PortraitCardForm from "components/Forms/PortraitCardForm";
 
-import { readHeroByTypeLocation } from "actions/hero";
-
 function Talents() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_TALENTS,
-    heroType: HERO_TYPE_BRANDING,
-    title: "",
-    content: "",
-    ctaText: "",
-    ctaLink: "",
-    image: "",
-    background: "",
-    videoURL: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
   return (
     <>
       <AlternativeHeader name="Radio" parentName="Pages" />
@@ -45,8 +24,8 @@ function Talents() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_TALENTS}
+              type={HERO_TYPE_BRANDING}
             />
             <PortraitCardForm
               label="MBC Talents Management"

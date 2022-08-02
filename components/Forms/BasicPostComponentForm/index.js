@@ -61,7 +61,6 @@ const BasicPostComponentForm = ({ label, location }) => {
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
-  const [companyShowcaseList, setCompanyShowcaseList] = useState([]);
   const [basicPostList, setBasicPostList] = useState([]);
 
   //Component Lifecycles

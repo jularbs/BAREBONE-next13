@@ -13,12 +13,14 @@ import {
   UncontrolledAlert,
 } from "reactstrap";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createHero } from "actions/hero";
 import { getLink } from "actions/media";
 import _ from "lodash";
 
-const SimpleHeroComponentForm = ({ formValues, setFormValues }) => {
+import { readHeroByTypeLocation } from "actions/hero";
+
+const SimpleHeroComponentForm = ({ location, type }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -27,6 +29,20 @@ const SimpleHeroComponentForm = ({ formValues, setFormValues }) => {
   const [previewImage, setPreviewImage] = useState({
     background: "",
   });
+
+  const [formValues, setFormValues] = useState({
+    heroLocation: location,
+    heroType: type,
+    title: "",
+    content: "",
+    background: "",
+  });
+
+  useEffect(() => {
+    readHeroByTypeLocation({ type: type, location: location }).then((data) => {
+      if (data.data) setFormValues(data.data);
+    });
+  }, []);
 
   const showSuccessMessage = () =>
     responseMessage.success && (

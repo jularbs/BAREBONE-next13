@@ -6,7 +6,6 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { useState, useEffect } from "react";
 import {
   HERO_PROMOS,
   HERO_TYPE_BRANDING,
@@ -17,27 +16,7 @@ import {
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
 
-import { readHeroByTypeLocation } from "actions/hero";
-
 function Promos() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_PROMOS,
-    heroType: HERO_TYPE_BRANDING,
-    title: "",
-    content: "",
-    ctaText: "",
-    ctaLink: "",
-    image: "",
-    background: "",
-    videoURL: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
   return (
     <>
       <AlternativeHeader name="Digital" parentName="Pages" />
@@ -45,8 +24,8 @@ function Promos() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_PROMOS}
+              type={HERO_TYPE_BRANDING}
             />
             <BasicPostComponentForm
               label="Network Initiated Promos Posts"

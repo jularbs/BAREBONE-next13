@@ -9,7 +9,6 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import PortraitCardForm from "components/Forms/PortraitCardForm";
-import { readHeroByTypeLocation } from "actions/hero";
 
 import {
   HERO_LEADERSHIP,
@@ -19,21 +18,6 @@ import {
 } from "constants.js";
 
 function Leadership() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_LEADERSHIP,
-    heroType: HERO_TYPE_SIMPLE,
-    title: "",
-    content: "",
-    background: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
-
   return (
     <>
       <AlternativeHeader name="Leadership" parentName="Pages" />
@@ -41,8 +25,8 @@ function Leadership() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <SimpleHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_LEADERSHIP}
+              type={HERO_TYPE_SIMPLE}
             />
             <PortraitCardForm
               label="Board of Directors Management"

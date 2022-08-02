@@ -7,33 +7,21 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
+import SamaSamaHeroComponentForm from "components/Forms/SamaSamaHeroComponentForm";
 
-import { readHeroByTypeLocation } from "actions/hero";
 
 import {
   HERO_OUR_STORY,
   HERO_TYPE_SIMPLE,
   HERO_THEN_VALUES,
   HERO_NOW_VALUES,
+  HERO_OUR_STORY_SECONDARY,
+  HERO_TYPE_SAMA_SAMA,
 } from "constants.js";
+
 import ThenNowHeroComponentForm from "components/Forms/ThenNowHeroComponentForm";
 
 function OurStory() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_OUR_STORY,
-    heroType: HERO_TYPE_SIMPLE,
-    title: "",
-    content: "",
-    background: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
-
   return (
     <>
       <AlternativeHeader name="Our Story" parentName="Pages" />
@@ -41,8 +29,8 @@ function OurStory() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <SimpleHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_OUR_STORY}
+              type={HERO_TYPE_SIMPLE}
             />
             <Row>
               <Col>
@@ -58,6 +46,14 @@ function OurStory() {
                 />
               </Col>
             </Row>
+            <SimpleHeroComponentForm
+              location={HERO_OUR_STORY_SECONDARY}
+              type={HERO_TYPE_SIMPLE}
+            />
+            <SamaSamaHeroComponentForm
+              location={HERO_OUR_STORY}
+              type={HERO_TYPE_SAMA_SAMA}
+            />
           </Col>
         </Row>
       </Container>

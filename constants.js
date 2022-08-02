@@ -34,6 +34,7 @@ export const sizeCategory = [
 //HERO LOCATIONS
 export const HERO_HOMEPAGE = "hero-homepage";
 export const HERO_OUR_STORY = "hero-our-story";
+export const HERO_OUR_STORY_SECONDARY = "hero-our-story-secondary";
 export const HERO_HISTORY = "hero-history";
 export const HERO_VISION_CULTURE = "hero-vision-culture";
 export const HERO_LEADERSHIP = "hero-leadership";
@@ -75,6 +76,9 @@ export const CLIENT_INITIATED_EVENTS = "CLIENT-INITIATED_EVENTS";
 export const NETWORK_INITIATED_PROMOS = "NETWORK-INITIATED_PROMOS";
 export const CLIENT_INITIATED_PROMOS = "CLIENT-INITIATED_PROMOS";
 export const OUR_BUSINESS_MBC_TALENTS = "OUR-BUSINESS_MBC-TALENTS";
+export const OUR_BUSINESS_MBC_DIGITAL = "our-business-mbc-digital";
+export const OUR_BUSINESS_MBC_TELEVISION = "our-business-mbc-television";
+export const COLLABORATE_WITH_US = "collaborate-with-us";
 
 //FAQ LOCATIONS
 export const WORK_WITH_US_FAQ = "WORK-WITH-US-FAQ";

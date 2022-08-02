@@ -1,17 +1,19 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
 
 import Navigation from "components/Frontend/Navigation";
 import WorkWithUsSection from "components/Frontend/Sections/WorkWithUsSection/WorkWithUsSection";
-import HeroBasic from "components/Frontend/HeroBasic";
+import HeroWhyMBC from "components/Frontend/HeroWhyMBC";
+import { useRef } from "react";
 
 function ContactUsPage() {
+  const workWithUsSection = useRef(null);
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBasic
-          //   next={visionRef}
+        <HeroWhyMBC
+          next={workWithUsSection}
           blue
           black
           data={{
@@ -21,7 +23,7 @@ function ContactUsPage() {
             bgLocation: "/bg/vnc.png",
           }}
         />
-        <WorkWithUsSection />
+        <WorkWithUsSection ref={workWithUsSection} />
       </div>
     </>
   );

@@ -17,23 +17,6 @@ import { OUR_COMPANY_CSR } from "constants.js";
 import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 
 function CSR() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_CSR,
-    heroType: HERO_TYPE_SAMA_SAMA,
-    title: "",
-    content: "",
-    image: "",
-    background: "",
-    mobileBackground: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
-
   return (
     <>
       <AlternativeHeader
@@ -44,8 +27,8 @@ function CSR() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <SamaSamaHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_CSR}
+              type={HERO_TYPE_SAMA_SAMA}
             />
             <SideBySideComponentForm
               location={OUR_COMPANY_CSR}

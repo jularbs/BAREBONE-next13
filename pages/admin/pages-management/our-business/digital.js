@@ -6,32 +6,17 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { useState, useEffect } from "react";
-import { HERO_DIGITAL, HERO_TYPE_BRANDING } from "constants.js";
+import {
+  HERO_DIGITAL,
+  HERO_TYPE_BRANDING,
+  OUR_BUSINESS_MBC_DIGITAL,
+} from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
-
-import { readHeroByTypeLocation } from "actions/hero";
+import CompanyShowcaseComponentForm from "components/Forms/CompanyShowcaseComponentForm";
+import BasicPostComponentForm from "components/Forms/BasicPostComponentForm";
 
 function Digital() {
-  const [heroData, setHeroData] = useState({
-    heroLocation: HERO_DIGITAL,
-    heroType: HERO_TYPE_BRANDING,
-    title: "",
-    content: "",
-    ctaText: "",
-    ctaLink: "",
-    image: "",
-    background: "",
-    videoURL: "",
-  });
-
-  useEffect(() => {
-    const data = { type: heroData.heroType, location: heroData.heroLocation };
-    readHeroByTypeLocation(data).then((data) => {
-      if (data.data) setHeroData(data.data);
-    });
-  }, []);
   return (
     <>
       <AlternativeHeader name="Digital" parentName="Pages" />
@@ -39,8 +24,16 @@ function Digital() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
-              formValues={heroData}
-              setFormValues={setHeroData}
+              location={HERO_DIGITAL}
+              type={HERO_TYPE_BRANDING}
+            />
+            <CompanyShowcaseComponentForm
+              label="Digital Showcase Data"
+              location={OUR_BUSINESS_MBC_DIGITAL}
+            />
+            <BasicPostComponentForm
+              label="Digital Posts"
+              location={OUR_BUSINESS_MBC_DIGITAL}
             />
           </Col>
         </Row>
