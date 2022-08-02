@@ -46,6 +46,7 @@ export default class MyApp extends App {
         </Head>
         <Layout>
           <Component {...pageProps} />
+          <p>{`${process.env.API}`}</p>
 
           <Footer></Footer>
         </Layout>
