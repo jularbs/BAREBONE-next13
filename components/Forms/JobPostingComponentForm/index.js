@@ -26,9 +26,8 @@ import {
   getJobPostingList,
   updateJobPosting,
   removeJobPosting,
-} from "actions/JobPosting";
+} from "actions/jobPosting";
 
-import { getLink } from "actions/media";
 import _ from "lodash";
 
 const JobPostingComponentForm = ({ label, location, fields }) => {
