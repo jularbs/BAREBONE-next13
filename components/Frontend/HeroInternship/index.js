@@ -29,9 +29,7 @@ const HeroInternship = forwardRef(({ data, black, blue, next }, myRef) => {
           </div>
         </div>
         <div className="hero-column">
-          <div className="pre-title">Together We Build Dreams</div>
-          <div className="title">{data.title}</div>
-          <div className="content">{data.content}</div>
+     
         </div>
 
         <div className="arrow-placement">
