@@ -1,0 +1,105 @@
+@import "assets/scss/breakpoints.scss";
+
+.collab-tiles-section {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  color: rgba(55, 52, 53, 1);
+
+  .content-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .header {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .description {
+      font-weight: 300;
+      line-height: 2.5rem;
+    }
+  }
+
+  .tiles-grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+
+    @include for-tablet-landscape-up {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .tile-item {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      padding-top: 80%;
+      .tile-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 1rem;
+        background-image: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.5)
+        );
+        cursor: pointer;
+
+        .company-wrapper {
+          font-size: 1.2rem;
+          line-height: 1.2rem;
+          font-weight: 600;
+        }
+      }
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(9),
+      &:nth-child(10) {
+        grid-row: span 2;
+      }
+    }
+  }
+}
+
+.collab-details-container {
+  padding: 2rem;
+  color: rgba(55, 52, 53, 1);
+  .video-container {
+    margin-top: 2rem;
+  }
+  .content-container {
+    .company-wrapper {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .campaign-wrapper {
+      font-size: 2.5rem;
+      line-height: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-wrapper {
+      line-height: 2rem;
+      font-weight: 300;
+    }
+  }
+}

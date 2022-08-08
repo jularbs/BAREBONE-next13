@@ -3,12 +3,10 @@ import { Row, Col } from "reactstrap";
 
 import Navigation from "components/Frontend/Navigation";
 import HeroBranding from "components/Frontend/HeroBranding";
-import SideBySide from "components/Frontend/SideBySide";
 import GenericCard from "components/Frontend/GenericCard";
-import OurBusinessesSection from "components/Frontend/Sections/OurBusinessesSection";
 import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
 
-import CarouselHero from "components/Frontend/CarouselHero";
+import TalentsShowcase from "components/Frontend/TalentsShowcase";
 
 import { useRef } from "react";
 
@@ -30,9 +28,16 @@ function TalentsPage() {
       <Navigation />
       <div className="main">
         <HeroBranding next={carouselRef} data={data} />
-        <CarouselHero ref={carouselRef} next={ourBusinessRef} />
-        <OurBusinessesSection ref={ourBusinessRef} />
-        <div className="posts-section" style={{ overflowX: "hidden" }}>
+        <TalentsShowcase ref={carouselRef} next={ourBusinessRef} />
+        <div
+          className="posts-section"
+          ref={ourBusinessRef}
+          style={{
+            overflowX: "hidden",
+            paddingTop: "90px",
+            marginTop: "-70px",
+          }}
+        >
           <Row className="px-3">
             <Col lg={3}>
               <GenericCard />
@@ -44,21 +49,10 @@ function TalentsPage() {
               <GenericCard />
             </Col>
             <Col lg={3}>
-              <GenericCard />
-            </Col>
-          </Row>
-          <Row className="px-3">
-            <Col lg={6}>
-              <GenericCard />
-            </Col>
-            <Col lg={6}>
               <GenericCard />
             </Col>
           </Row>
         </div>
-        <SideBySide />
-        <SideBySide reverse />
-        <SideBySide />
         <ContactUsSection />
       </div>
     </>

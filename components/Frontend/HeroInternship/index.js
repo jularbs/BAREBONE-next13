@@ -2,7 +2,6 @@ import "./styles.scss";
 
 import { forwardRef } from "react";
 import { IoHappy, IoPeople, IoRibbon, IoBook } from "react-icons/io5";
-import Link from "next/link";
 
 const HeroInternship = forwardRef(({ data, black, blue, next }, myRef) => {
   const scrollNext = () => {
