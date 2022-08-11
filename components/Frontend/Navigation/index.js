@@ -134,7 +134,7 @@ const Navigation = () => {
                   Corporate Social Responsibility
                 </div>
               </Link>
-              <Link href="/our-company/investor-relations">
+              <Link href="/investor-relations">
                 <div className="dropdown-item">Investor Relations</div>
               </Link>
             </div>
