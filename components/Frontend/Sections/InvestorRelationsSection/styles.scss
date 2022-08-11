@@ -1,3 +1,5 @@
+@import "assets/scss/breakpoints.scss";
+
 .investorRelationsSectionContainer {
   .tabsContainer {
     .header {
@@ -80,37 +82,89 @@
   }
 
   .pdfViewerContainer {
+    position: relative;
     padding: 1rem;
     padding-top: 0;
     background-color: rgba(229, 229, 229, 1);
+    overflow: hidden;
+
+    .btn-pdfNav {
+      display: flex;
+      padding: 0;
+      background-color: grey;
+      border: 0;
+      position: absolute;
+      top: 50%;
+      z-index: 1000;
+      opacity: 0.6;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+
+      .__icon {
+        font-size: 34px;
+        position: absolute;
+        top: 20px;
+      }
+
+      &.prev {
+        left: -20px;
+
+        .__icon {
+          left: 30px;
+        }
+      }
+
+      &.next {
+        right: -20px;
+        .__icon {
+          right: 30px;
+        }
+      }
+    }
 
     .pdfNavigator {
       padding: 1rem 0;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
 
-      .pdfSelector > select {
-        padding: .225rem 3rem .225rem .225rem;
-        background-color: transparent;
+      .pdfSelector {
+        width: 100%;
+        @include for-tablet-portrait-up {
+          min-width: 300px;
+          width: auto;
+        }
+
+        select {
+          width: 100%;
+          height: 100%;
+          padding: 0.225rem 3rem 0.225rem 0.225rem;
+          background-color: transparent;
+        }
       }
 
-      div {
+      .pdfSelector,
+      .pdfPagination,
+      .magnifyer,
+      .tools {
         display: flex;
         align-items: center;
-        padding: 0 2.5rem;
-        border-right: 1px rgba(55, 52, 53, 0.3) solid;
+        @include for-tablet-portrait-up {
+        }
       }
 
       .tools {
         .download,
         .print {
-          padding: 0 5px;
+          padding: 0 10px;
           .icon {
-            width: 25px;
+            width: 24px;
           }
         }
       }
     }
+
     .pdfWrapper {
       margin: 0 auto;
 

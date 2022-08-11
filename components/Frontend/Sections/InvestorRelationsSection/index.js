@@ -5,6 +5,8 @@ import "./styles.scss";
 import { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import {
+  IoCaretBackOutline,
+  IoCaretForwardOutline,
   IoChevronForwardOutline,
   IoDownloadOutline,
   IoPrintOutline,
@@ -20,12 +22,15 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 const InvestorRelationsSection = () => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(10);
+  const [pageNumber, setPageNumber] = useState(null);
   const [activeHeading, setActiveHeading] = useState(null);
   const [activeChild, setActiveChild] = useState(null);
   const [activeFile, setActiveFile] = useState("");
+  const [activePdfNav, setActivePdfNav] = useState(false);
 
   function onDocumentLoadSuccess({ numPages }) {
+    setPageNumber(1);
+    setActivePdfNav(true);
     setNumPages(numPages);
   }
 
@@ -44,6 +49,7 @@ const InvestorRelationsSection = () => {
     getFileListByCategory(activeChild).then((data) => {
       setFiles(data.data);
     });
+    setActivePdfNav(false);
   }, [activeChild]);
 
   useEffect(() => {
@@ -51,6 +57,11 @@ const InvestorRelationsSection = () => {
       setActiveFile(getLink(files[0].file));
     }
   }, [files]);
+
+  useEffect(() => {
+    setNumPages(null);
+    setPageNumber(null);
+  }, [activeFile]);
 
   const showHeadings = () => {
     const sorted = categories
@@ -113,9 +124,14 @@ const InvestorRelationsSection = () => {
   };
 
   const handleFileChange = (e) => {
+    setActivePdfNav(false);
     let item = JSON.parse(e.target.value);
     setActiveFile(getLink(item.file));
-    console.log(JSON.parse(e.target.value));
+  };
+
+  const handlePageChange = (direction) => () => {
+    if (pageNumber + direction > 0 && pageNumber + direction <= numPages)
+      setPageNumber(pageNumber + direction);
   };
 
   return (
@@ -135,22 +151,42 @@ const InvestorRelationsSection = () => {
           </Col>
           <Col lg="8">
             <div className="pdfViewerContainer">
+              {activePdfNav && (
+                <>
+                  <button
+                    onClick={handlePageChange(-1)}
+                    className="btn-pdfNav prev"
+                  >
+                    <IoCaretBackOutline className="__icon" />
+                  </button>
+                  <button
+                    onClick={handlePageChange(1)}
+                    className="btn-pdfNav next"
+                  >
+                    <IoCaretForwardOutline className="__icon" />
+                  </button>
+                </>
+              )}
               <div className="pdfNavigator">
                 <div className="pdfSelector">
                   <select onChange={handleFileChange}>{showFiles()}</select>
                 </div>
-                <div className="pdfPagination">
-                  {pageNumber} / {numPages}
-                </div>
-                <div className="magnifyer">100%</div>
-                <div className="tools">
-                  <span className="download">
-                    <IoDownloadOutline className="icon" />
-                  </span>
-                  <span className="print">
-                    <IoPrintOutline className="icon" />
-                  </span>
-                </div>
+                {activePdfNav && (
+                  <>
+                    <div className="pdfPagination">
+                      {pageNumber} / {numPages}
+                    </div>
+                    <div className="magnifyer">100%</div>
+                    <div className="tools">
+                      <span className="download">
+                        <IoDownloadOutline className="icon" />
+                      </span>
+                      <span className="print">
+                        <IoPrintOutline className="icon" />
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
               <Document
                 file={activeFile}
