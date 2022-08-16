@@ -22,7 +22,6 @@ import { getPendingUsers, processApproval, getCookie } from "actions/auth";
 import {
   ADMIN_ROLE,
   CONTENT_MANAGER_ROLE,
-  ECOMMERCE_MANAGER_ROLE,
 } from "constants.js";
 
 import moment from "moment";

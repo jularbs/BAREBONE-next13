@@ -31,7 +31,7 @@ function CollaborateWithUs() {
             <SideBySideComponentForm
               label="Collaborate with Us Posts"
               location={COLLABORATE_WITH_US}
-              fields="cta"
+              fields="cta logo"
             />
           </Col>
         </Row>

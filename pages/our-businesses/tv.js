@@ -28,30 +28,6 @@ function TelevisionPage() {
       <div className="main">
         <HeroBranding next={beforeAfterRef} data={data} />
         <OurBusinessesSection />
-        <div className="posts-section" style={{ overflowX: "hidden" }}>
-          <Row className="px-3">
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-          </Row>
-          <Row className="px-3">
-            <Col lg={6}>
-              <GenericCard />
-            </Col>
-            <Col lg={6}>
-              <GenericCard />
-            </Col>
-          </Row>
-        </div>
         <SideBySide />
         <SideBySide reverse />
         <SideBySide />
