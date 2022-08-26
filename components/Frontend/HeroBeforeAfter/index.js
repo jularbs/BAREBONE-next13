@@ -26,6 +26,7 @@ const HeroBeforeAfter = forwardRef(({ next, then, now }, myRef) => {
               <div className="header">NOW</div>
               <div className="excerpt">{now.value}</div>
             </div>
+            <div className="black-gradient-overlay-to-left"></div>
           </div>
         </div>
         <div className="hero-ba-item foreground" style={{ width: `${width}%` }}>
