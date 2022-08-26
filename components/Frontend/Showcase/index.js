@@ -28,7 +28,7 @@ const Showcase = forwardRef(({ next, data }, myRef) => {
             >
               <div className="black-gradient-overlay" />
               <div className="logo">
-                <img src={getLink(item.logo)} height="50px" alt="" />
+                <img src={getLink(item.logo)} height="30px" alt="" />
               </div>
               <CustomArrow className="reverse arrow-icon" />
             </div>
