@@ -3,10 +3,12 @@ import React from "react";
 import Navigation from "components/Frontend/Navigation";
 import HeroBasic from "components/Frontend/HeroBasic";
 import HeroBeforeAfter from "components/Frontend/HeroBeforeAfter";
+import GalleryTile from "components/Frontend/GalleryTile";
 
 import { useRef } from "react";
 import SamasamaHero from "components/Frontend/SamasamaHero";
 import { readOption } from "actions/option";
+
 import { HERO_THEN_VALUES, HERO_NOW_VALUES } from "constants.js";
 
 const OurStoryPage = ({ then, now }) => {
@@ -46,6 +48,7 @@ const OurStoryPage = ({ then, now }) => {
             bgLocation: "/bg/our-leadership.png",
           }}
         />
+        <GalleryTile />
 
         <SamasamaHero
           ref={samasamaRef}
