@@ -10,6 +10,8 @@ import {
   IoChevronForwardOutline,
   IoDownloadOutline,
   IoPrintOutline,
+  IoDownloadSharp,
+  IoPrintSharp
 } from "react-icons/io5";
 
 import { getCategoryList } from "actions/categoryIR";
@@ -167,6 +169,7 @@ const InvestorRelationsSection = () => {
                   </button>
                 </>
               )}
+
               <div className="pdfNavigator">
                 <div className="pdfSelector">
                   <select onChange={handleFileChange}>{showFiles()}</select>
@@ -176,13 +179,13 @@ const InvestorRelationsSection = () => {
                     <div className="pdfPagination">
                       {pageNumber} / {numPages}
                     </div>
-                    <div className="magnifyer">100%</div>
+                    {/* <div className="magnifyer">100%</div> */}
                     <div className="tools">
                       <span className="download">
-                        <IoDownloadOutline className="icon" />
+                        <IoDownloadSharp className="icon" />
                       </span>
                       <span className="print">
-                        <IoPrintOutline className="icon" />
+                        <IoPrintSharp className="icon" />
                       </span>
                     </div>
                   </>
