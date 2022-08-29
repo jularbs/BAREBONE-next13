@@ -32,6 +32,7 @@ function Index({ heroBranding, ourBusiness, metric }) {
     ctaLink: heroBranding.ctaLink,
     videoLink: heroBranding.videoURL,
   };
+  
   return (
     <>
       <Navigation />
