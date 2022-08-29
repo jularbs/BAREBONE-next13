@@ -6,7 +6,7 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { HERO_HOMEPAGE, HERO_TYPE_BRANDING } from "constants.js";
+import { HERO_HOMEPAGE } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import OurBusinessComponentForm from "components/Forms/OurBusinessComponentForm";
@@ -21,8 +21,8 @@ function Homepage() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
+              formTitle="Top Fold Component"
               location={HERO_HOMEPAGE}
-              type={HERO_TYPE_BRANDING}
             />
             <OurBusinessComponentForm />
             <MetricsComponentForm />

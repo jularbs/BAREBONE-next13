@@ -18,7 +18,7 @@ import { createHero } from "actions/hero";
 import { getLink } from "actions/media";
 import _ from "lodash";
 
-import { readHeroByTypeLocation } from "actions/hero";
+import { readByLocation } from "actions/hero";
 const SamaSamaHeroComponentForm = ({ location, type }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
@@ -35,7 +35,7 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
   const [formValues, setFormValues] = useState({});
 
   useEffect(() => {
-    readHeroByTypeLocation({ type: type, location: location }).then((data) => {
+    readByLocation(location).then((data) => {
       if (data.data) setFormValues(data.data);
     });
   }, []);

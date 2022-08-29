@@ -17,9 +17,9 @@ import { useState, useEffect } from "react";
 import { createHero } from "actions/hero";
 import { getLink } from "actions/media";
 import _ from "lodash";
-import { readHeroByTypeLocation } from "actions/hero";
+import { readByLocation } from "actions/hero";
 
-const BrandingHeroComponentForm = ({ location, type }) => {
+const BrandingHeroComponentForm = ({ formTitle, location, type }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -33,7 +33,7 @@ const BrandingHeroComponentForm = ({ location, type }) => {
   const [formValues, setFormValues] = useState({});
 
   useEffect(() => {
-    readHeroByTypeLocation({ type: type, location: location }).then((data) => {
+    readByLocation(location).then((data) => {
       if (data.data) setFormValues(data.data);
     });
   }, []);
@@ -131,7 +131,7 @@ const BrandingHeroComponentForm = ({ location, type }) => {
   return (
     <Card>
       <CardHeader>
-        <h2 className="mb-0">Hero Component</h2>
+        <h2 className="mb-0">{formTitle}</h2>
       </CardHeader>
       <CardBody>
         <Row>
@@ -212,7 +212,7 @@ const BrandingHeroComponentForm = ({ location, type }) => {
           <Col lg="6">
             <div className="d-flex flex-column align-items-center">
               <div className="d-flex justify-content-between w-100">
-                <h3 className="d-inline ">Image Placement</h3>
+                <h3 className="d-inline ">Logo Placement</h3>
                 <label className="btn btn-default btn-sm">
                   Choose file...
                   <Input

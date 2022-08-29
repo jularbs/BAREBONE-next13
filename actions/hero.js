@@ -36,3 +36,13 @@ export const readHeroByTypeLocation = (data) => {
     return res.data;
   });
 };
+
+
+export const readByLocation = (location) => {
+  return axios({
+    method: "GET",
+    url: `${process.env.API}/v1/hero/${location}`,
+  }).then((res) => {
+    return res.data;
+  });
+};

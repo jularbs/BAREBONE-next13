@@ -554,7 +554,8 @@ const MetricsComponentForm = () => {
             <th cope="col">Label</th>
             <th scope="col">Figures</th>
             <th scope="col">Suffix</th>
-            <th></th>
+            <th>
+            </th>
           </tr>
         </thead>
         <tbody className="list">{showMetricData()}</tbody>
@@ -616,6 +617,7 @@ const MetricsComponentForm = () => {
             onClick={() => {
               setAddFormModalOpen(true);
             }}
+            style={{ float: "right" }}
           >
             + Add Metric
           </Button>
@@ -624,6 +626,22 @@ const MetricsComponentForm = () => {
           {showSuccessMessage()}
           {showDeleteSuccessMessage()}
           {showUpdateSuccessMessage()}
+          <div className="mb-4">
+            <label className="form-control-label" htmlFor="title">
+              Title
+            </label>
+            <Input type="text" className="mb-3"></Input>
+            <label className="form-control-label" htmlFor="title">
+              Description
+            </label>
+            <Input type="textarea" rows="4"></Input>
+            <Button color="primary" className="my-2 float-right">
+              Update
+            </Button>
+          </div>
+          <label className="form-control-label" htmlFor="title">
+            Data
+          </label>
           {metricList.length > 0 ? (
             showMetricList()
           ) : (
