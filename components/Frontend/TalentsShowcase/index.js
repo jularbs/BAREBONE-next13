@@ -145,34 +145,9 @@ const TalentsShowcase = forwardRef(({ next }, myRef) => {
     <>
       {modalDetails()}
       <div className="talents-hero-container" ref={myRef}>
-        <Row noGutters>
-          <Col lg={6}>
-            <div className="talents-tile-container">
-              <div className="talents-tile-wrapper">{showTalentTiles()}</div>
-            </div>
-          </Col>
-          <Col lg={6}>
-            <div className="carousel-hero-container">
-              <AutoplaySlider
-                play={true}
-                cancelOnInteraction={false} // should stop playing on user interaction
-                interval={6000}
-              >
-                {media.map((item, i) => (
-                  <div
-                    className="slider-item"
-                    key={i}
-                    style={{
-                      backgroundImage: `url(${item.source})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div>
-                ))}
-              </AutoplaySlider>
-            </div>
-          </Col>
-        </Row>
+        <div className="talents-tile-container">
+          <div className="talents-tile-wrapper">{showTalentTiles()}</div>
+        </div>
         <div className="arrow-placement">
           <div className="arrow-wrapper bg-black" onClick={scrollNext} />
         </div>
