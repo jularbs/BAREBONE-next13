@@ -9,14 +9,12 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import SamaSamaHeroComponentForm from "components/Forms/SamaSamaHeroComponentForm";
 
-
 import {
   HERO_OUR_STORY,
-  HERO_TYPE_SIMPLE,
   HERO_THEN_VALUES,
   HERO_NOW_VALUES,
   HERO_OUR_STORY_SECONDARY,
-  HERO_TYPE_SAMA_SAMA,
+  HERO_OUR_STORY_SAMASAMA,
 } from "constants.js";
 
 import ThenNowHeroComponentForm from "components/Forms/ThenNowHeroComponentForm";
@@ -30,7 +28,7 @@ function OurStory() {
           <Col className="card-wrapper" lg="9">
             <SimpleHeroComponentForm
               location={HERO_OUR_STORY}
-              type={HERO_TYPE_SIMPLE}
+              formTitle="Topfold Component Form"
             />
             <Row>
               <Col>
@@ -48,11 +46,12 @@ function OurStory() {
             </Row>
             <SimpleHeroComponentForm
               location={HERO_OUR_STORY_SECONDARY}
-              type={HERO_TYPE_SIMPLE}
+              formTitle="Secondary Hero Form"
             />
             <SamaSamaHeroComponentForm
-              location={HERO_OUR_STORY}
-              type={HERO_TYPE_SAMA_SAMA}
+              location={HERO_OUR_STORY_SAMASAMA}
+              formTitle="Sama Sama Hero Component Form"
+              fields="cta"
             />
           </Col>
         </Row>

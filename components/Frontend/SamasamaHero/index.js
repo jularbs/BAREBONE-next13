@@ -1,9 +1,10 @@
 import "./styles.scss";
 
 import { forwardRef } from "react";
-
+import Link from "next/link";
+import CustomArrow from "../CustomArrow";
 const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
-  const { imgLocation, content } = data;
+  const { imgLocation, content, ctaLink, ctaText } = data;
 
   const scrollNext = () => {
     if (next && next.current) {
@@ -25,6 +26,13 @@ const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
           )}
 
           {content && <div className="excerpt">{content}</div>}
+          {ctaLink && ctaText && (
+            <Link href={data.ctaLink}>
+              <button className="btn btn-cta py-3">
+                {data.ctaText} <img src="/common/arrow-black.svg" className="ml-3"/>
+              </button>
+            </Link>
+          )}
         </div>
         <img
           src={

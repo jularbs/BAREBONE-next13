@@ -37,6 +37,8 @@ export const HERO_HOMEPAGE_CTA = "hero-homepage-cta";
 
 export const HERO_OUR_STORY = "hero-our-story";
 export const HERO_OUR_STORY_SECONDARY = "hero-our-story-secondary";
+export const HERO_OUR_STORY_SAMASAMA = "hero-our-story-samasama";
+
 export const HERO_HISTORY = "hero-history";
 export const HERO_VISION_CULTURE = "hero-vision-culture";
 export const HERO_LEADERSHIP = "hero-leadership";

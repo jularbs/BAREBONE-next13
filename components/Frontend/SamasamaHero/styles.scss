@@ -51,6 +51,7 @@
     }
 
     .logo-img {
+      align-self: flex-start;
       width: 50vw;
       max-width: 350px;
     }
@@ -59,6 +60,23 @@
       padding-top: 2rem;
       line-height: 2rem;
       color: black;
+    }
+
+    .btn-cta {
+      align-self: flex-start;
+      margin-top: 2rem;
+      color: navy;
+      border-color: navy;
+      border-radius: 0;
+      max-width: 100%;
+      min-width: 350px;
+      white-space: nowrap;
+      font-weight: 400;
+      text-transform: uppercase;
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

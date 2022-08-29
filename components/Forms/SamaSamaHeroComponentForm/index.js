@@ -19,7 +19,7 @@ import { getLink } from "actions/media";
 import _ from "lodash";
 
 import { readByLocation } from "actions/hero";
-const SamaSamaHeroComponentForm = ({ location, type }) => {
+const SamaSamaHeroComponentForm = ({ location, formTitle, fields }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -91,15 +91,7 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
 
   const handleSubmit = () => {
     setLoading(true);
-    const {
-      title,
-      content,
-      heroLocation,
-      heroType,
-      image,
-      background,
-      mobileBackground,
-    } = formValues;
+    const { title, content, image, ctaText, ctaLink } = formValues;
 
     //init FormValues to form data;
     const data = new FormData();
@@ -107,13 +99,12 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
     //set form fields
     data.set("title", title);
     data.set("content", content);
-    data.set("heroLocation", heroLocation);
-    data.set("heroType", heroType);
+    data.set("heroLocation", location);
 
     //set form files
+    if (ctaText) data.set("ctaText", ctaText);
+    if (ctaLink) data.set("ctaLink", ctaLink);
     if (image) data.set("image", image);
-    if (background) data.set("background", background);
-    if (mobileBackground) data.set("mobileBackground", mobileBackground);
 
     createHero("", data)
       .then((data) => {
@@ -129,7 +120,7 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
   return (
     <Card>
       <CardHeader>
-        <h2 className="mb-0">Hero Component</h2>
+        <h2 className="mb-0">{formTitle}</h2>
       </CardHeader>
       <CardBody>
         <Row>
@@ -158,6 +149,46 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
                 onChange={handleTextChange("content")}
               />
             </FormGroup>
+            {fields.includes("cta") && (
+              <>
+                <h3>Call To Action Button</h3>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Button Label
+                  </label>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    value={formValues.ctaText}
+                    onChange={handleTextChange("ctaText")}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Destination
+                  </label>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    value={formValues.ctaLink}
+                    onChange={handleTextChange("ctaLink")}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Preview
+                  </label>
+                  <div className="cta-preview">
+                    <a href={formValues.ctaLink} target="_blank">
+                      <button className="cta-button btn btn-block">
+                        <span>{formValues.ctaText}</span>
+                        <img src="/common/arrow-white.svg" />
+                      </button>
+                    </a>
+                  </div>
+                </FormGroup>
+              </>
+            )}
           </Col>
           <Col lg="6">
             <div className="d-flex flex-column align-items-center">
@@ -188,7 +219,7 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
                   backgroundColor: "#ECECEC",
                 }}
               />
-              <div className="d-flex justify-content-between w-100">
+              {/* <div className="d-flex justify-content-between w-100">
                 <h3 className="d-inline ">Desktop Background Image</h3>
                 <label className="btn btn-default btn-sm">
                   Choose file...
@@ -241,7 +272,7 @@ const SamaSamaHeroComponentForm = ({ location, type }) => {
                   margin: "2rem 0",
                   backgroundColor: "#ECECEC",
                 }}
-              />
+              /> */}
             </div>
           </Col>
         </Row>

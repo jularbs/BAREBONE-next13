@@ -20,7 +20,7 @@ import _ from "lodash";
 
 import { readByLocation } from "actions/hero";
 
-const SimpleHeroComponentForm = ({ location, type }) => {
+const SimpleHeroComponentForm = ({ location, formTitle }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -32,7 +32,6 @@ const SimpleHeroComponentForm = ({ location, type }) => {
 
   const [formValues, setFormValues] = useState({
     heroLocation: location,
-    heroType: type,
     title: "",
     content: "",
     background: "",
@@ -95,7 +94,7 @@ const SimpleHeroComponentForm = ({ location, type }) => {
 
   const handleSubmit = () => {
     setLoading(true);
-    const { title, content, heroLocation, heroType, background } = formValues;
+    const { title, content, heroLocation, background } = formValues;
 
     //init FormValues to form data;
     const data = new FormData();
@@ -104,7 +103,6 @@ const SimpleHeroComponentForm = ({ location, type }) => {
     data.set("title", title);
     data.set("content", content);
     data.set("heroLocation", heroLocation);
-    data.set("heroType", heroType);
 
     //set form files
     if (background) data.set("background", background);
@@ -123,7 +121,7 @@ const SimpleHeroComponentForm = ({ location, type }) => {
   return (
     <Card>
       <CardHeader>
-        <h2 className="mb-0">Simple Hero Component</h2>
+        <h2 className="mb-0">{formTitle}</h2>
       </CardHeader>
       <CardBody>
         <Row>

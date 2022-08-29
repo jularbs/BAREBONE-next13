@@ -8,9 +8,8 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import HistoryComponentForm from "components/Forms/HistoryComponentForm";
-import { readHeroByTypeLocation } from "actions/hero";
 
-import { HERO_HISTORY, HERO_TYPE_SIMPLE } from "constants.js";
+import { HERO_HISTORY } from "constants.js";
 
 function History() {
   return (
@@ -19,10 +18,7 @@ function History() {
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
-            <SimpleHeroComponentForm
-              location={HERO_HISTORY}
-              type={HERO_TYPE_SIMPLE}
-            />
+            <SimpleHeroComponentForm location={HERO_HISTORY} />
             <HistoryComponentForm />
           </Col>
         </Row>
