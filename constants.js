@@ -59,6 +59,9 @@ export const HERO_TYPE_SAMA_SAMA = "hero-sama-sama";
 //OPTION INDICES
 export const HERO_THEN_VALUES = "hero-then-values";
 export const HERO_NOW_VALUES = "hero-now-values";
+export const HERO_METRIC_HEADER = "hero-metric-header";
+export const HERO_METRIC_SUBTEXT = "hero-metric-subtext";
+
 
 //SIDE-BY-SIDE LOCATIONS
 export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";

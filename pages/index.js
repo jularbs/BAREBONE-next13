@@ -58,7 +58,6 @@ export async function getServerSideProps() {
   const businesses = await getSimpleBusinessList();
   const metrics = await getMetricList();
   const cta = await readByLocation(HERO_HOMEPAGE_CTA);
-  console.log(cta);
 
   // Pass data to the page via props
   return {

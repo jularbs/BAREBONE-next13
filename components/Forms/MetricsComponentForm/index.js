@@ -26,8 +26,11 @@ import {
   removeMetric,
 } from "actions/metric";
 
+import { createOption, readOption } from "actions/option";
+
 import _ from "lodash";
 
+import { HERO_METRIC_HEADER, HERO_METRIC_SUBTEXT } from "constants.js";
 const MetricsComponentForm = () => {
   //Component States
   const [loading, setLoading] = useState({
@@ -36,6 +39,8 @@ const MetricsComponentForm = () => {
     update: false,
     delete: false,
     update: false,
+    headertext: false,
+    headerSubtext: false,
   });
 
   const [responseMessage, setResponseMessage] = useState({
@@ -47,17 +52,15 @@ const MetricsComponentForm = () => {
     updateSuccess: "",
   });
 
-  const [previewImage, setPreviewImage] = useState({
-    background: "",
-    logo: "",
-  });
-
   const [formValues, setFormValues] = useState({
     order: "",
     label: "",
     figures: "",
     URL: "",
   });
+
+  const [headerText, setHeaderText] = useState("");
+  const [headerSubtext, setHeaderSubtext] = useState("");
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
@@ -69,6 +72,14 @@ const MetricsComponentForm = () => {
     getMetricList().then((data) => {
       setLoading({ ...loading, fetch: false });
       setMetricList(data.data);
+    });
+
+    readOption(HERO_METRIC_HEADER).then((data) => {
+      if (data.data) setHeaderText(data.data.value);
+    });
+
+    readOption(HERO_METRIC_SUBTEXT).then((data) => {
+      if (data.data) setHeaderSubtext(data.data.value);
     });
   }, []);
 
@@ -554,8 +565,7 @@ const MetricsComponentForm = () => {
             <th cope="col">Label</th>
             <th scope="col">Figures</th>
             <th scope="col">Suffix</th>
-            <th>
-            </th>
+            <th></th>
           </tr>
         </thead>
         <tbody className="list">{showMetricData()}</tbody>
@@ -603,6 +613,46 @@ const MetricsComponentForm = () => {
     ));
   };
 
+  const handleHeaderSubmit = (index) => (e) => {
+    e.preventDefault();
+    if (index == HERO_METRIC_HEADER) {
+      setLoading({ ...loading, headerText: true });
+    } else if (index == HERO_METRIC_SUBTEXT) {
+      setLoading({ ...loading, headerSubtext: true });
+    }
+
+    //init FormValues to form data;
+    const data = new FormData();
+
+    //set form fields
+    data.set("index", index);
+
+    if (index == HERO_METRIC_HEADER) {
+      data.set("value", headerText);
+    } else if (index == HERO_METRIC_SUBTEXT) {
+      data.set("value", headerSubtext);
+    }
+
+    createOption("", data)
+      .then((data) => {
+        if (index == HERO_METRIC_HEADER) {
+          setLoading({ ...loading, headerText: false });
+        } else if (index == HERO_METRIC_SUBTEXT) {
+          setLoading({ ...loading, headerSubtext: false });
+        }
+
+        setResponseMessage({ success: data.message, error: "" });
+      })
+      .catch((e) => {
+        if (index == HERO_METRIC_HEADER) {
+          setLoading({ ...loading, headerText: false });
+        } else if (index == HERO_METRIC_SUBTEXT) {
+          setLoading({ ...loading, headerSubtext: false });
+        }
+        setResponseMessage({ success: "", error: e.response.data.message });
+      });
+  };
+
   return (
     <>
       {showAddForm()}
@@ -628,16 +678,57 @@ const MetricsComponentForm = () => {
           {showUpdateSuccessMessage()}
           <div className="mb-4">
             <label className="form-control-label" htmlFor="title">
-              Title
+              Header Text
             </label>
-            <Input type="text" className="mb-3"></Input>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Metric Header"
+                value={headerText}
+                onChange={(e) => {
+                  setHeaderText(e.target.value);
+                }}
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  onClick={handleHeaderSubmit(HERO_METRIC_HEADER)}
+                >
+                  {loading.headerText && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                  )}
+                  Update
+                </button>
+              </div>
+            </div>
             <label className="form-control-label" htmlFor="title">
-              Description
+              Header Subtext
             </label>
-            <Input type="textarea" rows="4"></Input>
-            <Button color="primary" className="my-2 float-right">
-              Update
-            </Button>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Content"
+                value={headerSubtext}
+                onChange={(e) => {
+                  setHeaderSubtext(e.target.value);
+                }}
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  onClick={handleHeaderSubmit(HERO_METRIC_SUBTEXT)}
+                >
+                  {loading.headerSubtext && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                  )}
+                  Update
+                </button>
+              </div>
+            </div>
           </div>
           <label className="form-control-label" htmlFor="title">
             Data

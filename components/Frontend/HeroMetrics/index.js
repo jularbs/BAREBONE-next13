@@ -1,49 +1,11 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import "./styles.scss";
+import { readOption } from "actions/option";
+import { HERO_METRIC_HEADER, HERO_METRIC_SUBTEXT } from "constants.js";
 
 import VisibilitySensor from "react-visibility-sensor";
-import { forEach } from "lodash";
 
 const HeroMetrics = forwardRef(({ next, data }, myRef) => {
-  const [metrics, setMetrics] = useState([
-    {
-      figures: "0",
-      suffix: "",
-      label: "Number of Years",
-      id: "number-of-years-odo",
-    },
-    {
-      figures: "0",
-      suffix: "K",
-      label: "Awards",
-      id: "awards-odo",
-    },
-    {
-      figures: "0",
-      suffix: "M",
-      label: "Stations Reach",
-      id: "stations-reach-odo",
-    },
-    {
-      figures: "0",
-      suffix: "M",
-      label: "Facebook",
-      id: "fb-odo",
-    },
-    {
-      figures: "0",
-      suffix: "M",
-      label: "Twitter",
-      id: "twitter-odo",
-    },
-    {
-      figures: "0",
-      suffix: "M",
-      label: "Youtube",
-      id: "yt-odo",
-    },
-  ]);
-
   const scrollNext = () => {
     if (next && next.current) {
       next.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -57,7 +19,20 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
       });
     }
   };
-  
+
+  const [headerText, setHeaderText] = useState("");
+  const [headerSubtext, setHeaderSubtext] = useState("");
+
+  useEffect(() => {
+    readOption(HERO_METRIC_HEADER).then((data) => {
+      if (data.data) setHeaderText(data.data.value);
+    });
+
+    readOption(HERO_METRIC_SUBTEXT).then((data) => {
+      if (data.data) setHeaderSubtext(data.data.value);
+    });
+  }, []);
+
   const showMetrics = () => {
     return data.map((item, key) => {
       return (
@@ -81,11 +56,8 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
     <>
       <div className="hero-metrics-container" ref={myRef}>
         <div className="header-container">
-          <div className="title">Measuring Impact</div>
-          <div className="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
+          <div className="title">{headerText}</div>
+          <div className="content">{headerSubtext}</div>
         </div>
         <VisibilitySensor onChange={onMetricsVisibility}>
           <div className="metrics-container">{showMetrics()}</div>
