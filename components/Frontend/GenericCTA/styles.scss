@@ -30,6 +30,13 @@
       width: 80%;
       font-weight: 300;
       text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      .arrow {
+        margin-left: 15px;
+      }
     }
   }
 }

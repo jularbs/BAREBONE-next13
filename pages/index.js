@@ -8,16 +8,16 @@ import GenericCTA from "components/Frontend/GenericCTA";
 import LogoShowcase from "components/Frontend/LogoShowcase/LogoShowcase";
 import Navigation from "components/Frontend/Navigation";
 import { useRef } from "react";
-import { HERO_TYPE_BRANDING, HERO_HOMEPAGE } from "constants.js";
+import { HERO_HOMEPAGE, HERO_HOMEPAGE_CTA } from "constants.js";
 
-import { readHeroByTypeLocation } from "actions/hero";
+import { readByLocation } from "actions/hero";
 import { getSimpleBusinessList } from "actions/simpleBusiness";
 import { getMetricList } from "actions/metric";
 import { getLink } from "actions/media";
 
 //TEST
 
-function Index({ heroBranding, ourBusiness, metric }) {
+function Index({ heroBranding, ourBusiness, metric, cta }) {
   const showcaseRef = useRef(null);
   const genericCtaRef = useRef(null);
   const heroMetricsRef = useRef(null);
@@ -32,7 +32,7 @@ function Index({ heroBranding, ourBusiness, metric }) {
     ctaLink: heroBranding.ctaLink,
     videoLink: heroBranding.videoURL,
   };
-  
+
   return (
     <>
       <Navigation />
@@ -43,8 +43,8 @@ function Index({ heroBranding, ourBusiness, metric }) {
           data={branding}
         />
         <Showcase ref={showcaseRef} next={heroMetricsRef} data={ourBusiness} />
-        <HeroMetrics ref={heroMetricsRef} next={genericCtaRef} data={metric}/>
-        <GenericCTA ref={genericCtaRef} />
+        <HeroMetrics ref={heroMetricsRef} next={genericCtaRef} data={metric} />
+        <GenericCTA ref={genericCtaRef} data={cta} />
         <LogoShowcase />
       </div>
     </>
@@ -54,17 +54,19 @@ function Index({ heroBranding, ourBusiness, metric }) {
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
-  const index = { type: HERO_TYPE_BRANDING, location: HERO_HOMEPAGE };
-  const res = await readHeroByTypeLocation(index);
+  const topfold = await readByLocation(HERO_HOMEPAGE);
   const businesses = await getSimpleBusinessList();
   const metrics = await getMetricList();
+  const cta = await readByLocation(HERO_HOMEPAGE_CTA);
+  console.log(cta);
 
   // Pass data to the page via props
   return {
     props: {
-      heroBranding: res.data,
+      heroBranding: topfold.data,
       ourBusiness: businesses.data,
       metric: metrics.data,
+      cta: cta.data,
     },
   };
 }

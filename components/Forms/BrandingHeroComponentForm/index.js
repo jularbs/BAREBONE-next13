@@ -19,7 +19,7 @@ import { getLink } from "actions/media";
 import _ from "lodash";
 import { readByLocation } from "actions/hero";
 
-const BrandingHeroComponentForm = ({ formTitle, location, type }) => {
+const BrandingHeroComponentForm = ({ formTitle, location, fields }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -89,17 +89,8 @@ const BrandingHeroComponentForm = ({ formTitle, location, type }) => {
 
   const handleSubmit = () => {
     setLoading(true);
-    const {
-      title,
-      content,
-      ctaText,
-      ctaLink,
-      videoURL,
-      heroLocation,
-      heroType,
-      image,
-      background,
-    } = formValues;
+    const { title, content, ctaText, ctaLink, videoURL, image, background } =
+      formValues;
 
     //init FormValues to form data;
     const data = new FormData();
@@ -109,13 +100,12 @@ const BrandingHeroComponentForm = ({ formTitle, location, type }) => {
     data.set("content", content);
     data.set("ctaText", ctaText);
     data.set("ctaLink", ctaLink);
-    data.set("videoURL", videoURL);
-    data.set("heroLocation", heroLocation);
-    data.set("heroType", heroType);
+    data.set("heroLocation", location);
 
     //set form files
     if (image) data.set("image", image);
     if (background) data.set("background", background);
+    if (videoURL) data.set("videoURL", videoURL);
 
     createHero("", data)
       .then((data) => {
@@ -196,48 +186,56 @@ const BrandingHeroComponentForm = ({ formTitle, location, type }) => {
                 </a>
               </div>
             </FormGroup>
-            <h3>Media Player</h3>
-            <FormGroup>
-              <label className="form-control-label" htmlFor="title">
-                Video URL Source
-              </label>
-              <Input
-                placeholder=""
-                type="text"
-                value={formValues.videoURL}
-                onChange={handleTextChange("videoURL")}
-              />
-            </FormGroup>
+            {fields.includes("video") && (
+              <>
+                <h3>Media Player</h3>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Video URL Source
+                  </label>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    value={formValues.videoURL}
+                    onChange={handleTextChange("videoURL")}
+                  />
+                </FormGroup>
+              </>
+            )}
           </Col>
           <Col lg="6">
             <div className="d-flex flex-column align-items-center">
-              <div className="d-flex justify-content-between w-100">
-                <h3 className="d-inline ">Logo Placement</h3>
-                <label className="btn btn-default btn-sm">
-                  Choose file...
-                  <Input
-                    type="file"
-                    hidden
-                    accept="image/*"
-                    onChange={handleFileChange("image")}
+              {fields.includes("logo") && (
+                <>
+                  <div className="d-flex justify-content-between w-100">
+                    <h3 className="d-inline ">Logo Placement</h3>
+                    <label className="btn btn-default btn-sm">
+                      Choose file...
+                      <Input
+                        type="file"
+                        hidden
+                        accept="image/*"
+                        onChange={handleFileChange("image")}
+                      />
+                    </label>
+                  </div>
+                  <img
+                    src={
+                      previewImage.image
+                        ? previewImage.image
+                        : formValues.image
+                        ? getLink(formValues.image)
+                        : ""
+                    }
+                    style={{
+                      maxWidth: "200px",
+                      width: "100%",
+                      margin: "2rem 0",
+                      backgroundColor: "#ECECEC",
+                    }}
                   />
-                </label>
-              </div>
-              <img
-                src={
-                  previewImage.image
-                    ? previewImage.image
-                    : formValues.image
-                    ? getLink(formValues.image)
-                    : ""
-                }
-                style={{
-                  maxWidth: "200px",
-                  width: "100%",
-                  margin: "2rem 0",
-                  backgroundColor: "#ECECEC",
-                }}
-              />
+                </>
+              )}
               <div className="d-flex justify-content-between w-100">
                 <h3 className="d-inline ">Background Image</h3>
                 <label className="btn btn-default btn-sm">

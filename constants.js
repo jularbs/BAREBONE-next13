@@ -33,6 +33,8 @@ export const sizeCategory = [
 
 //HERO LOCATIONS
 export const HERO_HOMEPAGE = "hero-homepage";
+export const HERO_HOMEPAGE_CTA = "hero-homepage-cta";
+
 export const HERO_OUR_STORY = "hero-our-story";
 export const HERO_OUR_STORY_SECONDARY = "hero-our-story-secondary";
 export const HERO_HISTORY = "hero-history";

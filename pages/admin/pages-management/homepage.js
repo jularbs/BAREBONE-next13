@@ -6,7 +6,7 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { HERO_HOMEPAGE } from "constants.js";
+import { HERO_HOMEPAGE, HERO_HOMEPAGE_CTA } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import OurBusinessComponentForm from "components/Forms/OurBusinessComponentForm";
@@ -23,9 +23,15 @@ function Homepage() {
             <BrandingHeroComponentForm
               formTitle="Top Fold Component"
               location={HERO_HOMEPAGE}
+              fields="logo video"
             />
             <OurBusinessComponentForm />
             <MetricsComponentForm />
+            <BrandingHeroComponentForm
+              formTitle="CTA Banner"
+              location={HERO_HOMEPAGE_CTA}
+              fields=""
+            />
             <LogoShowcaseComponentForm />
           </Col>
         </Row>
