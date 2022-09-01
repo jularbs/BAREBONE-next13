@@ -24,10 +24,7 @@ function Leadership() {
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
-            <SimpleHeroComponentForm
-              location={HERO_LEADERSHIP}
-              type={HERO_TYPE_SIMPLE}
-            />
+            <SimpleHeroComponentForm location={HERO_LEADERSHIP} formTitle="Topfold Management" />
             <PortraitCardForm
               label="Board of Directors Management"
               location={OUR_LEADERSHIP_BOARD_OF_DIRECTORS}

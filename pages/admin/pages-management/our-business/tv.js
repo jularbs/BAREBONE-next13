@@ -6,11 +6,7 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import {
-  HERO_TV,
-  HERO_TYPE_BRANDING,
-  OUR_BUSINESS_MBC_TELEVISION,
-} from "constants.js";
+import { HERO_TV, OUR_BUSINESS_MBC_TELEVISION } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
@@ -23,7 +19,8 @@ function TV() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_TV}
-              type={HERO_TYPE_BRANDING}
+              fields="logo video"
+              formTitle="Topfold Management"
             />
             <SideBySideComponentForm
               label="Television Posts"

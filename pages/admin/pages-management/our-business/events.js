@@ -8,7 +8,6 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import {
   HERO_EVENTS,
-  HERO_TYPE_BRANDING,
   NETWORK_INITIATED_EVENTS,
   CLIENT_INITIATED_EVENTS,
 } from "constants.js";
@@ -25,7 +24,8 @@ function Events() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_EVENTS}
-              type={HERO_TYPE_BRANDING}
+              fields="video logo"
+              formTitle="Topfold Management"
             />
             <BasicPostComponentForm
               label="Network Initiated Events Posts"

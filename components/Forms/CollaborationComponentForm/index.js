@@ -19,7 +19,8 @@ import {
 
 import { useState, useEffect } from "react";
 
-import { removeSimpleBusiness } from "actions/simpleBusiness";
+import { createOption, readOption } from "actions/option";
+import { COLLAB_HEADER_TEXT, COLLAB_SUB_TEXT } from "constants.js";
 
 import {
   createCollaboration,
@@ -27,13 +28,6 @@ import {
   getCollaborationList,
   removeCollaboration,
 } from "actions/collaboration";
-
-import {
-  createLogoShowcase,
-  getLogoShowcaseList,
-  updateLogoShowcase,
-  removeLogoShowcase,
-} from "actions/logoShowcase";
 
 import { getLink } from "actions/media";
 import _ from "lodash";
@@ -46,6 +40,8 @@ const CollaborationComponentForm = () => {
     update: false,
     delete: false,
     update: false,
+    headerText: false,
+    headerSubtext: false,
   });
   const [responseMessage, setResponseMessage] = useState({
     error: "",
@@ -62,8 +58,10 @@ const CollaborationComponentForm = () => {
 
   const [addFormModalOpen, setAddFormModalOpen] = useState(false);
 
-  const [logoShowcaseList, setLogoShowcaseList] = useState([]);
   const [collaborationList, setCollaborationList] = useState([]);
+
+  const [headerText, setHeaderText] = useState("");
+  const [subText, setSubText] = useState("");
 
   //Component Lifecycles
   useEffect(() => {
@@ -71,6 +69,14 @@ const CollaborationComponentForm = () => {
     getCollaborationList().then((data) => {
       setLoading({ ...loading, fetch: false });
       setCollaborationList(data.data);
+    });
+
+    readOption(COLLAB_HEADER_TEXT).then((data) => {
+      if (data.data) setHeaderText(data.data.value);
+    });
+
+    readOption(COLLAB_SUB_TEXT).then((data) => {
+      if (data.data) setSubText(data.data.value);
     });
   }, []);
 
@@ -133,6 +139,46 @@ const CollaborationComponentForm = () => {
           ...loading,
           create: false,
         });
+        setResponseMessage({ success: "", error: e.response.data.message });
+      });
+  };
+
+  const handleHeaderSubmit = (index) => (e) => {
+    e.preventDefault();
+    if (index == COLLAB_HEADER_TEXT) {
+      setLoading({ ...loading, headerText: true });
+    } else if (index == COLLAB_SUB_TEXT) {
+      setLoading({ ...loading, headerSubtext: true });
+    }
+
+    //init FormValues to form data;
+    const data = new FormData();
+
+    //set form fields
+    data.set("index", index);
+
+    if (index == COLLAB_HEADER_TEXT) {
+      data.set("value", headerText);
+    } else if (index == COLLAB_SUB_TEXT) {
+      data.set("value", subText);
+    }
+
+    createOption("", data)
+      .then((data) => {
+        if (index == COLLAB_HEADER_TEXT) {
+          setLoading({ ...loading, headerText: false });
+        } else if (index == COLLAB_SUB_TEXT) {
+          setLoading({ ...loading, headerSubtext: false });
+        }
+
+        setResponseMessage({ success: data.message, error: "" });
+      })
+      .catch((e) => {
+        if (index == COLLAB_HEADER_TEXT) {
+          setLoading({ ...loading, headerText: false });
+        } else if (index == COLLAB_SUB_TEXT) {
+          setLoading({ ...loading, headerSubtext: false });
+        }
         setResponseMessage({ success: "", error: e.response.data.message });
       });
   };
@@ -730,6 +776,63 @@ const CollaborationComponentForm = () => {
           {showSuccessMessage()}
           {showDeleteSuccessMessage()}
           {showUpdateSuccessMessage()}
+          <div className="mb-4">
+            <label className="form-control-label" htmlFor="title">
+              Header Text
+            </label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Metric Header"
+                value={headerText}
+                onChange={(e) => {
+                  setHeaderText(e.target.value);
+                }}
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  onClick={handleHeaderSubmit(COLLAB_HEADER_TEXT)}
+                >
+                  {loading.headerText && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                  )}
+                  Update
+                </button>
+              </div>
+            </div>
+            <label className="form-control-label" htmlFor="title">
+              Header Subtext
+            </label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Content"
+                value={subText}
+                onChange={(e) => {
+                  setSubText(e.target.value);
+                }}
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  onClick={handleHeaderSubmit(COLLAB_SUB_TEXT)}
+                >
+                  {loading.headerSubtext && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                  )}
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+          <label className="form-control-label" htmlFor="title">
+            Data
+          </label>
           {collaborationList.length > 0 ? (
             showCollaborationList()
           ) : (

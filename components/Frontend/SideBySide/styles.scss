@@ -18,10 +18,11 @@
   .content-container {
     display: flex;
     flex-direction: column;
-    padding: 100px 2rem;
+    padding: 100px 4rem;
     justify-content: center;
     .logo {
-      max-width: 600px;
+      max-width: 350px;
+
       width: 80%;
       margin-bottom: 2rem;
     }

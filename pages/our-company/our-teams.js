@@ -4,18 +4,15 @@ import Navigation from "components/Frontend/Navigation";
 import HeroBasic from "components/Frontend/HeroBasic";
 import OurTeamCard from "components/Frontend/OurTeamCard";
 
-import { OUR_COMPANY_OUR_TEAMS } from "constants.js";
+import { OUR_COMPANY_OUR_TEAMS, HERO_OUR_TEAMS } from "constants.js";
 
 import { getSideBySideByLocation } from "actions/sideBySide";
+import { readByLocation } from "actions/hero";
+
 import { getLink } from "actions/media";
-import { createRef } from "react";
+import { createRef, useState } from "react";
 
-import { useRef } from "react";
-
-const OurTeamsPage = ({ sideBySide }) => {
-  const orgSection = useRef(null);
-  const ourteam1 = useRef(null);
-  const ourteam2 = useRef(null);
+const OurTeamsPage = ({ sideBySide, hero }) => {
   const refs = sideBySide.map((item) => createRef());
 
   const showSideBySide = () => {
@@ -37,20 +34,17 @@ const OurTeamsPage = ({ sideBySide }) => {
     });
   };
 
+  const [heroData, setHeroData] = useState({
+    bgLocation: getLink(hero.background),
+    title: hero.title,
+    content: hero.content,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBasic
-          next={orgSection}
-          black
-          data={{
-            title: "Our Teams",
-            content:
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient.",
-            bgLocation: "/bg/our-leadership.png",
-          }}
-        />
+        <HeroBasic next={refs[0]} black data={heroData} />
         {showSideBySide()}
       </div>
     </>
@@ -60,9 +54,12 @@ const OurTeamsPage = ({ sideBySide }) => {
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await getSideBySideByLocation(OUR_COMPANY_OUR_TEAMS);
+  const hero = await readByLocation(HERO_OUR_TEAMS);
+
   // Pass data to the page via props
   return {
     props: {
+      hero: hero.data,
       sideBySide: res.data,
     },
   };

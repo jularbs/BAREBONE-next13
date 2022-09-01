@@ -1,16 +1,22 @@
 import React from "react";
 import SideBySide from "components/Frontend/SideBySide";
 import Navigation from "components/Frontend/Navigation";
-import HeroBasic from "components/Frontend/HeroBasic";
 import SamasamaHero from "components/Frontend/SamasamaHero";
 
-import { OUR_COMPANY_CSR } from "constants.js";
+import { OUR_COMPANY_CSR, HERO_CSR } from "constants.js";
+import { readByLocation } from "actions/hero";
 
 import { getSideBySideByLocation } from "actions/sideBySide";
 import { getLink } from "actions/media";
-import { createRef } from "react";
-const csrPage = ({ sideBySide }) => {
+import { createRef, useState } from "react";
+const csrPage = ({ sideBySide, hero }) => {
   const refs = sideBySide.map((item) => createRef());
+
+  const [heroData, setHeroData] = useState({
+    imgLocation: getLink(hero.image),
+    title: hero.title,
+    content: hero.content,
+  });
 
   const showSideBySide = () => {
     return sideBySide.map((item, key) => {
@@ -34,15 +40,7 @@ const csrPage = ({ sideBySide }) => {
     <>
       <Navigation />
       <div className="main">
-        <SamasamaHero
-          next={refs[0]}
-          withLogo
-          data={{
-            content:
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient.",
-            imgLocation: "/logos/main-color.png",
-          }}
-        />
+        <SamasamaHero next={refs[0]} withLogo data={heroData} />
         {showSideBySide()}
       </div>
     </>
@@ -52,9 +50,12 @@ const csrPage = ({ sideBySide }) => {
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await getSideBySideByLocation(OUR_COMPANY_CSR);
+  const hero = await readByLocation(HERO_CSR);
+
   // Pass data to the page via props
   return {
     props: {
+      hero: hero.data,
       sideBySide: res.data,
     },
   };

@@ -1,5 +1,5 @@
 .generic-card-container {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
   .img-wrapper {
     width: 100%;
     aspect-ratio: 16/9;
@@ -13,10 +13,12 @@
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
+    color: rgba(55, 52, 53, 1);
   }
 
   .excerpt {
     font-weight: 300;
     padding: 0 1rem;
+    color: rgba(55, 52, 53, 1);
   }
 }

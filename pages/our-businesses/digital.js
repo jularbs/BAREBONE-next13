@@ -3,62 +3,60 @@ import { Row, Col } from "reactstrap";
 
 import Navigation from "components/Frontend/Navigation";
 import HeroBranding from "components/Frontend/HeroBranding";
-import SideBySide from "components/Frontend/SideBySide";
-import GenericCard from "components/Frontend/GenericCard";
 import OurBusinessesSection from "components/Frontend/Sections/OurBusinessesSection";
 import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { HERO_DIGITAL, OUR_BUSINESS_MBC_DIGITAL } from "constants.js";
+import { getLink } from "actions/media";
+import { readByLocation } from "actions/hero";
 
-function DigitalPage() {
-  const beforeAfterRef = useRef(null);
-  const data = {
-    logoLocation: "/logos/mbc-digital-white.svg",
-    bgLocation: "/bg/index-branding-bg.svg",
-    title: "",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    ctaText: "learn about us",
-    ctaLink: "/",
-    videoLink: "https://www.youtube.com/watch?v=6fWU0e6W8QY",
-  };
+import BasicPostViewer from "components/Frontend/BasicPostViewer";
+
+const DigitalPage = ({ hero }) => {
+  const postsRef = useRef(null);
+
+  const [heroData, setHeroData] = useState({
+    logoLocation: getLink(hero.image),
+    bgLocation: getLink(hero.background),
+    content: hero.content,
+    ctaText: hero.ctaText,
+    ctaLink: hero.ctaLink,
+    videoLink: hero.videoURL,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBranding next={beforeAfterRef} data={data} />
-        <OurBusinessesSection />
-        <div className="posts-section" style={{ overflowX: "hidden" }}>
-          <Row className="px-3">
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-          </Row>
-          <Row className="px-3">
-            <Col lg={6}>
-              <GenericCard />
-            </Col>
-            <Col lg={6}>
-              <GenericCard />
-            </Col>
-          </Row>
-        </div>
-        <SideBySide />
-        <SideBySide reverse />
-        <SideBySide />
+        <HeroBranding next={postsRef} data={heroData} />
+        <OurBusinessesSection
+          location={OUR_BUSINESS_MBC_DIGITAL}
+          ref={postsRef}
+        />
+        <BasicPostViewer
+          location={OUR_BUSINESS_MBC_DIGITAL}
+          lg={3}
+          md={6}
+          sm={12}
+        />
         <ContactUsSection />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const hero = await readByLocation(HERO_DIGITAL);
+  // const sbsList = await getSideBySideByLocation(OUR_BUSINESS_MBC_TELEVISION);
+  // Pass data to the page via props
+  return {
+    props: {
+      hero: hero.data,
+      // sbsList: sbsList.data,
+    },
+  };
 }
 
 export default DigitalPage;

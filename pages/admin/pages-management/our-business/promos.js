@@ -8,7 +8,6 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import {
   HERO_PROMOS,
-  HERO_TYPE_BRANDING,
   NETWORK_INITIATED_PROMOS,
   CLIENT_INITIATED_PROMOS,
 } from "constants.js";
@@ -25,7 +24,8 @@ function Promos() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_PROMOS}
-              type={HERO_TYPE_BRANDING}
+              fields="video logo"
+              formTitle="Topfold Management"
             />
             <BasicPostComponentForm
               label="Network Initiated Promos Posts"

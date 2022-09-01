@@ -6,7 +6,7 @@ import { Container, Row, Col } from "reactstrap";
 import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
-import { OUR_COMPANY_OUR_TEAMS, HERO_TYPE_SIMPLE } from "constants.js";
+import { OUR_COMPANY_OUR_TEAMS, HERO_OUR_TEAMS } from "constants.js";
 import SideBySideComponentForm from "components/Forms/SideBySideComponentForm";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 
@@ -21,8 +21,8 @@ function OurTeamsPage() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <SimpleHeroComponentForm
-              location={OUR_COMPANY_OUR_TEAMS}
-              type={HERO_TYPE_SIMPLE}
+              location={HERO_OUR_TEAMS}
+              formTitle="Topfold Management"
             />
             <SideBySideComponentForm
               location={OUR_COMPANY_OUR_TEAMS}

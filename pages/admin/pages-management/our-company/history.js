@@ -18,7 +18,7 @@ function History() {
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
-            <SimpleHeroComponentForm location={HERO_HISTORY} />
+            <SimpleHeroComponentForm location={HERO_HISTORY} formTitle="Topfold Management" />
             <HistoryComponentForm />
           </Col>
         </Row>

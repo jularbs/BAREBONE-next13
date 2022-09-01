@@ -3,42 +3,49 @@ import { Row, Col } from "reactstrap";
 
 import Navigation from "components/Frontend/Navigation";
 import HeroBranding from "components/Frontend/HeroBranding";
-import SideBySide from "components/Frontend/SideBySide";
-import GenericCard from "components/Frontend/GenericCard";
 import OurBusinessesSection from "components/Frontend/Sections/OurBusinessesSection";
 import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { readByLocation } from "actions/hero";
 
-import {
-  HERO_RADIO,
-  OUR_BUSINESS_RADIO,
-} from "constants.js";
+import { HERO_RADIO, OUR_BUSINESS_RADIO } from "constants.js";
+import { getLink } from "actions/media";
 
-
-function RadioPage() {
+const RadioPage = ({ hero }) => {
   const stationsRef = useRef(null);
 
-  const data = {
-    logoLocation: "/logos/mbc-radio-white.svg",
-    bgLocation: "/bg/index-branding-bg.svg",
-    title: "",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    ctaText: "learn about us",
-    ctaLink: "/",
-    videoLink: "https://www.youtube.com/watch?v=6fWU0e6W8QY",
-  };
+  const [heroData, setHeroData] = useState({
+    logoLocation: getLink(hero.image),
+    bgLocation: getLink(hero.background),
+    content: hero.content,
+    ctaText: hero.ctaText,
+    ctaLink: hero.ctaLink,
+    videoLink: hero.videoURL,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBranding next={stationsRef} data={data} />
+        <HeroBranding next={stationsRef} data={heroData} />
         <OurBusinessesSection location={OUR_BUSINESS_RADIO} ref={stationsRef} />
         <ContactUsSection />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const hero = await readByLocation(HERO_RADIO);
+
+  // Pass data to the page via props
+  return {
+    props: {
+      hero: hero.data,
+    },
+  };
 }
 
 export default RadioPage;

@@ -40,8 +40,13 @@ export const HERO_OUR_STORY_SECONDARY = "hero-our-story-secondary";
 export const HERO_OUR_STORY_SAMASAMA = "hero-our-story-samasama";
 
 export const HERO_HISTORY = "hero-history";
+
 export const HERO_VISION_CULTURE = "hero-vision-culture";
+
 export const HERO_LEADERSHIP = "hero-leadership";
+
+export const HERO_OUR_TEAMS = "hero-our-teams";
+
 export const HERO_CSR = "hero-csr";
 export const HERO_INVESTOR_RELATIONS = "hero-ir";
 export const HERO_RADIO = "hero-radio";
@@ -63,7 +68,8 @@ export const HERO_THEN_VALUES = "hero-then-values";
 export const HERO_NOW_VALUES = "hero-now-values";
 export const HERO_METRIC_HEADER = "hero-metric-header";
 export const HERO_METRIC_SUBTEXT = "hero-metric-subtext";
-
+export const COLLAB_HEADER_TEXT = "collab-header-text";
+export const COLLAB_SUB_TEXT = "collab-sub-text";
 
 //SIDE-BY-SIDE LOCATIONS
 export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";

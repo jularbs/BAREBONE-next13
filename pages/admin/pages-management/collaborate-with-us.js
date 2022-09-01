@@ -9,7 +9,6 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import {
   HERO_COLLABORATE_WITH_US,
-  HERO_TYPE_BRANDING,
   COLLABORATE_WITH_US,
 } from "constants.js";
 
@@ -25,7 +24,7 @@ function CollaborateWithUs() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_COLLABORATE_WITH_US}
-              type={HERO_TYPE_BRANDING}
+              fields=""
             />
             <CollaborationComponentForm />
             <SideBySideComponentForm

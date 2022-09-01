@@ -8,7 +8,6 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import {
   HERO_TALENTS,
-  HERO_TYPE_BRANDING,
   OUR_BUSINESS_MBC_TALENTS,
 } from "constants.js";
 
@@ -25,7 +24,8 @@ function Talents() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_TALENTS}
-              type={HERO_TYPE_BRANDING}
+              fields="video logo"
+              formTitle="Topfold Management"
             />
             <PortraitCardForm
               label="MBC Talents Management"

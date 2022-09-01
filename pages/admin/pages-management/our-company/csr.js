@@ -28,7 +28,8 @@ function CSR() {
           <Col className="card-wrapper" lg="9">
             <SamaSamaHeroComponentForm
               location={HERO_CSR}
-              type={HERO_TYPE_SAMA_SAMA}
+              fields=""
+              formTitle="Topfold Management"
             />
             <SideBySideComponentForm
               location={OUR_COMPANY_CSR}

@@ -8,7 +8,6 @@ import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import {
   HERO_RADIO,
-  HERO_TYPE_BRANDING,
   OUR_BUSINESS_RADIO,
 } from "constants.js";
 
@@ -24,7 +23,8 @@ function Radio() {
           <Col className="card-wrapper" lg="12" md="12">
             <BrandingHeroComponentForm
               location={HERO_RADIO}
-              type={HERO_TYPE_BRANDING}
+              fields="logo video"
+              formTitle="Topfold Management"
             />
             <CompanyShowcaseComponentForm
               label="Company Showcase Component"

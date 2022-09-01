@@ -105,7 +105,7 @@ const SimpleHeroComponentForm = ({ location, formTitle }) => {
     data.set("heroLocation", heroLocation);
 
     //set form files
-    if (background) data.set("background", background);
+    if (previewImage.background) data.set("background", background);
 
     createHero("", data)
       .then((data) => {

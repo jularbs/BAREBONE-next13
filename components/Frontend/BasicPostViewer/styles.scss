@@ -1,0 +1,19 @@
+.basic-post-viewer-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 2rem 1rem;
+
+  .header {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: rgba(55, 52, 53, 1);
+    font-weight: 500;
+    margin-bottom: 2rem;
+
+  }
+}

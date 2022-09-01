@@ -7,14 +7,17 @@ import HeroBasic from "components/Frontend/HeroBasic";
 
 import SideBySide from "components/Frontend/SideBySide";
 
-import { OUR_BRAND_VISION_AND_CULTURE } from "constants.js";
+import {
+  OUR_BRAND_VISION_AND_CULTURE,
+  HERO_VISION_CULTURE,
+} from "constants.js";
 
 import { getSideBySideByLocation } from "actions/sideBySide";
+import { readByLocation } from "actions/hero";
 import { getLink } from "actions/media";
-import { createRef } from "react";
+import { createRef, useState } from "react";
 
-
-const VisionAndCulturePage = ({ sideBySide }) => {
+const VisionAndCulturePage = ({ sideBySide, hero }) => {
   const refs = sideBySide.map((item) => createRef());
 
   const showSideBySide = () => {
@@ -34,21 +37,18 @@ const VisionAndCulturePage = ({ sideBySide }) => {
       );
     });
   };
+
+  const [heroData, setHeroData] = useState({
+    bgLocation: getLink(hero.background),
+    title: hero.title,
+    content: hero.content,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBasic
-          next={refs[0]}
-          blue
-          black
-          data={{
-            title: "Our brand vision and culture",
-            content:
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient.",
-            bgLocation: "/bg/vnc.png",
-          }}
-        />
+        <HeroBasic next={refs[0]} blue black data={heroData} />
 
         {showSideBySide()}
       </div>
@@ -59,10 +59,13 @@ const VisionAndCulturePage = ({ sideBySide }) => {
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await getSideBySideByLocation(OUR_BRAND_VISION_AND_CULTURE);
+  const hero = await readByLocation(HERO_VISION_CULTURE);
+
   // Pass data to the page via props
   return {
     props: {
       sideBySide: res.data,
+      hero: hero.data,
     },
   };
 }

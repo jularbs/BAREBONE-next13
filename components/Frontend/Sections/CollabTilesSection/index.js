@@ -6,7 +6,10 @@ import ReactPlayer from "react-player/lazy";
 import { getCollaborationList } from "actions/collaboration";
 import { getLink } from "actions/media";
 
-const CollabTilesSection = forwardRef(({ data, next }, myRef) => {
+import { readOption } from "actions/option";
+import { COLLAB_HEADER_TEXT, COLLAB_SUB_TEXT } from "constants.js";
+
+const CollabTilesSection = forwardRef(({ next }, myRef) => {
   const scrollNext = () => {
     if (next && next.current) {
       next.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -17,9 +20,20 @@ const CollabTilesSection = forwardRef(({ data, next }, myRef) => {
   const [activeCollabData, setActiveCollabData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [headerText, setHeaderText] = useState("");
+  const [subText, setSubText] = useState("");
+
   useEffect(() => {
     getCollaborationList().then((data) => {
       if (data.data) setCollaborationList(data.data);
+    });
+
+    readOption(COLLAB_HEADER_TEXT).then((data) => {
+      if (data.data) setHeaderText(data.data.value);
+    });
+
+    readOption(COLLAB_SUB_TEXT).then((data) => {
+      if (data.data) setSubText(data.data.value);
     });
   }, []);
 
@@ -28,7 +42,7 @@ const CollabTilesSection = forwardRef(({ data, next }, myRef) => {
       <Modal
         toggle={() => setModalOpen(!modalOpen)}
         isOpen={modalOpen}
-        className="portait-modal"
+        className="collab-modal"
       >
         <ModalBody>
           <div className="collab-details-container">
@@ -102,12 +116,8 @@ const CollabTilesSection = forwardRef(({ data, next }, myRef) => {
       <div className="collab-tiles-section" ref={myRef}>
         <Col lg={4} md={12} className="px-0">
           <div className="content-wrapper">
-            <div className="header">collaborations</div>
-            <div className="description">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            </div>
+            <div className="header">{headerText}</div>
+            <div className="description">{subText}</div>
           </div>
         </Col>
         <Col lg={8} md={12} className="px-0">

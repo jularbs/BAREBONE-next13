@@ -1,8 +1,40 @@
 import "./styles.scss";
-import { forwardRef } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import PortraitCard from "components/Frontend/PortraitCard";
+
+import { getPortraitListByLocation } from "actions/portrait";
+
+import {
+  OUR_LEADERSHIP_BOARD_OF_DIRECTORS,
+  OUR_LEADERSHIP_KEY_OFFICERS,
+} from "constants.js";
 const OrgChartSection = forwardRef(({}, myRef) => {
+  const [boardList, setBoardList] = useState([]);
+  const [officersList, setOfficersList] = useState([]);
+
+  useEffect(() => {
+    getPortraitListByLocation(OUR_LEADERSHIP_BOARD_OF_DIRECTORS).then(
+      (data) => {
+        console.log(data.data);
+        setBoardList(data.data);
+      }
+    );
+
+    getPortraitListByLocation(OUR_LEADERSHIP_KEY_OFFICERS).then((data) => {
+      setOfficersList(data.data);
+    });
+  }, []);
+
+  const showMembers = (list, lg, def) => {
+    return list.map((item, key) => {
+      return (
+        <Col lg={lg} sm={def} xs={def} className="px-0" key={key}>
+          <PortraitCard data={item} />
+        </Col>
+      );
+    });
+  };
   return (
     <>
       <div className="orgchart-section" ref={myRef}>
@@ -14,27 +46,7 @@ const OrgChartSection = forwardRef(({}, myRef) => {
             board of directors
           </h2>
           <Row className="justify-content-center">
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={4} sm={6} xs={6} className="px-0">
-              <PortraitCard />
-            </Col>
+            {showMembers(boardList, 4, 6)}
           </Row>
         </div>
         <div
@@ -45,27 +57,7 @@ const OrgChartSection = forwardRef(({}, myRef) => {
             Key officers
           </h2>
           <Row className="justify-content-center">
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
-            <Col lg={3} sm={4} xs={4} className="px-0">
-              <PortraitCard />
-            </Col>
+            {showMembers(officersList, 3, 4)}
           </Row>
         </div>
       </div>

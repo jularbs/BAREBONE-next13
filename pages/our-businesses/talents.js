@@ -8,55 +8,57 @@ import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
 
 import TalentsShowcase from "components/Frontend/TalentsShowcase";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { HERO_TALENTS, OUR_BUSINESS_MBC_TALENTS } from "constants.js";
 
-function TalentsPage() {
+import { getLink } from "actions/media";
+import { readByLocation } from "actions/hero";
+import BasicPostViewer from "components/Frontend/BasicPostViewer";
+
+const TalentsPage = ({ hero }) => {
   const ourBusinessRef = useRef(null);
   const carouselRef = useRef(null);
-  const data = {
-    logoLocation: "/logos/mbc-talents-white.svg",
-    bgLocation: "/bg/index-branding-bg.svg",
-    title: "",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    ctaText: "learn about us",
-    ctaLink: "/",
-    videoLink: "https://www.youtube.com/watch?v=6fWU0e6W8QY",
-  };
+
+  const [heroData, setHeroData] = useState({
+    logoLocation: getLink(hero.image),
+    bgLocation: getLink(hero.background),
+    content: hero.content,
+    ctaText: hero.ctaText,
+    ctaLink: hero.ctaLink,
+    videoLink: hero.videoURL,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBranding next={carouselRef} data={data} />
+        <HeroBranding next={carouselRef} data={heroData} />
         <TalentsShowcase ref={carouselRef} next={ourBusinessRef} />
-        <div
-          className="posts-section"
-          ref={ourBusinessRef}
-          style={{
-            overflowX: "hidden",
-            paddingTop: "90px",
-            marginTop: "-70px",
-          }}
-        >
-          <Row className="px-3">
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-            <Col lg={3}>
-              <GenericCard />
-            </Col>
-          </Row>
-        </div>
+        <BasicPostViewer
+          location={OUR_BUSINESS_MBC_TALENTS}
+          xl={3}
+          lg={4}
+          md={6}
+          sm={12}
+          header="MBC Talents"
+        />
         <ContactUsSection />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const hero = await readByLocation(HERO_TALENTS);
+  // const sbsList = await getSideBySideByLocation(OUR_BUSINESS_MBC_TELEVISION);
+  // Pass data to the page via props
+  return {
+    props: {
+      hero: hero.data,
+      // sbsList: sbsList.data,
+    },
+  };
 }
 
 export default TalentsPage;

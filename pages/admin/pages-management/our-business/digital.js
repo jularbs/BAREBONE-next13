@@ -25,7 +25,8 @@ function Digital() {
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
               location={HERO_DIGITAL}
-              type={HERO_TYPE_BRANDING}
+              fields="video logo"
+              formTitle="Topfold Management"
             />
             <CompanyShowcaseComponentForm
               label="Digital Showcase Data"

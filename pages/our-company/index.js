@@ -5,9 +5,13 @@ import HeroBasic from "components/Frontend/HeroBasic";
 
 import StoryCard from "components/Frontend/StoryCard/exp";
 
-import { useRef, createRef } from "react";
+import { createRef, useState } from "react";
 import { getHistoryList } from "actions/history";
-const HistoryPage = ({ historyList }) => {
+import { readByLocation } from "actions/hero";
+import { getLink } from "actions/media";
+import { HERO_HISTORY } from "constants.js";
+
+const HistoryPage = ({ historyList, hero }) => {
   const refs = historyList.map((item) => createRef());
 
   const showHistories = () => {
@@ -23,6 +27,13 @@ const HistoryPage = ({ historyList }) => {
       );
     });
   };
+
+  const [heroData, setHeroData] = useState({
+    bgLocation: getLink(hero.background),
+    title: hero.title,
+    content: hero.content,
+  });
+
   return (
     <>
       <Navigation />
@@ -31,12 +42,7 @@ const HistoryPage = ({ historyList }) => {
           next={refs[0]}
           // black
           blue
-          data={{
-            title: "our history",
-            content:
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient.",
-            bgLocation: "/bg/our-leadership.png",
-          }}
+          data={heroData}
         />
         {showHistories()}
       </div>
@@ -47,10 +53,12 @@ const HistoryPage = ({ historyList }) => {
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await getHistoryList();
+  const hero = await readByLocation(HERO_HISTORY);
   // Pass data to the page via props
   return {
     props: {
       historyList: res.data,
+      hero: hero.data,
     },
   };
 }
