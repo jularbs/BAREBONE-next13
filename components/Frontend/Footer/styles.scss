@@ -1,6 +1,7 @@
 @import "assets/scss/breakpoints.scss";
 
 .footer-container {
+  // width: 100vw;
   display: flex;
   align-items: center;
   color: black;
@@ -9,7 +10,7 @@
   margin-top: auto;
 
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 2rem;
 
   @include for-tablet-landscape-up {

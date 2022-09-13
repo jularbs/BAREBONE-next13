@@ -8,6 +8,7 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import SamaSamaHeroComponentForm from "components/Forms/SamaSamaHeroComponentForm";
+import OurStoryGalleryForm from "components/Forms/OurStoryGalleryForm";
 
 import {
   HERO_OUR_STORY,
@@ -48,6 +49,7 @@ function OurStory() {
               location={HERO_OUR_STORY_SECONDARY}
               formTitle="Secondary Hero Form"
             />
+            <OurStoryGalleryForm />
             <SamaSamaHeroComponentForm
               location={HERO_OUR_STORY_SAMASAMA}
               formTitle="Sama Sama Hero Component Form"

@@ -22,6 +22,17 @@ export const readOption = (index) => {
   });
 };
 
+export const readOptions = (indices) => {
+  return axios({
+    method: "GET",
+    url: `${process.env.API}/v1/options/?${indices
+      .map((value, index) => `indices[${index}]=${value}`)
+      .join("&")}`,
+  }).then((res) => {
+    return res.data;
+  });
+};
+
 export const removeOption = (token, slug) => {
   return axios({
     method: "DELETE",

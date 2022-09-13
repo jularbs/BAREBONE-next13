@@ -95,3 +95,11 @@ export const COLLABORATE_WITH_US = "collaborate-with-us";
 
 //FAQ LOCATIONS
 export const WORK_WITH_US_FAQ = "WORK-WITH-US-FAQ";
+
+//GALERY TILES INDEX
+export const OUR_STORY_GALLERY_TILES_1 = "our-story-gallery-tiles-1";
+export const OUR_STORY_GALLERY_TILES_2 = "our-story-gallery-tiles-2";
+export const OUR_STORY_GALLERY_TILES_3 = "our-story-gallery-tiles-3";
+export const OUR_STORY_GALLERY_TILES_4 = "our-story-gallery-tiles-4";
+export const OUR_STORY_GALLERY_TILES_5 = "our-story-gallery-tiles-5";
+export const OUR_STORY_GALLERY_TILES_6 = "our-story-gallery-tiles-6";

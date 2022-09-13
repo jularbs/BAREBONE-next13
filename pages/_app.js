@@ -45,8 +45,10 @@ export default class MyApp extends App {
           <title>MBC Media Group</title>
         </Head>
         <Layout>
-          <Component {...pageProps} />
-          <Footer></Footer>
+          <div className="container-min-h">
+            <Component {...pageProps} />
+            <Footer></Footer>
+          </div>
         </Layout>
       </React.Fragment>
     );
