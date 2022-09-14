@@ -89,8 +89,17 @@ const BrandingHeroComponentForm = ({ formTitle, location, fields }) => {
 
   const handleSubmit = () => {
     setLoading(true);
-    const { title, content, ctaText, ctaLink, videoURL, image, background } =
-      formValues;
+    const {
+      title,
+      content,
+      ctaText,
+      ctaLink,
+      secondaryCtaText,
+      secondaryCtaLink,
+      videoURL,
+      image,
+      background,
+    } = formValues;
 
     //init FormValues to form data;
     const data = new FormData();
@@ -106,6 +115,8 @@ const BrandingHeroComponentForm = ({ formTitle, location, fields }) => {
     if (image) data.set("image", image);
     if (background) data.set("background", background);
     if (videoURL) data.set("videoURL", videoURL);
+    if (secondaryCtaText) data.set("secondaryCtaText", secondaryCtaText);
+    if (secondaryCtaLink) data.set("secondaryCtaLink", secondaryCtaLink);
 
     createHero("", data)
       .then((data) => {
@@ -149,42 +160,6 @@ const BrandingHeroComponentForm = ({ formTitle, location, fields }) => {
                 value={formValues.content}
                 onChange={handleTextChange("content")}
               />
-            </FormGroup>
-            <h3>Call To Action Button</h3>
-            <FormGroup>
-              <label className="form-control-label" htmlFor="title">
-                Button Label
-              </label>
-              <Input
-                placeholder=""
-                type="text"
-                value={formValues.ctaText}
-                onChange={handleTextChange("ctaText")}
-              />
-            </FormGroup>
-            <FormGroup>
-              <label className="form-control-label" htmlFor="title">
-                Destination
-              </label>
-              <Input
-                placeholder=""
-                type="text"
-                value={formValues.ctaLink}
-                onChange={handleTextChange("ctaLink")}
-              />
-            </FormGroup>
-            <FormGroup>
-              <label className="form-control-label" htmlFor="title">
-                Preview
-              </label>
-              <div className="cta-preview">
-                <a href={formValues.ctaLink} target="_blank">
-                  <button className="cta-button btn btn-block">
-                    <span>{formValues.ctaText}</span>
-                    <img src="/common/arrow-white.svg" />
-                  </button>
-                </a>
-              </div>
             </FormGroup>
             {fields.includes("video") && (
               <>
@@ -264,6 +239,88 @@ const BrandingHeroComponentForm = ({ formTitle, location, fields }) => {
                 }}
               />
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="6">
+            <h3>Call To Action Button</h3>
+            <FormGroup>
+              <label className="form-control-label" htmlFor="title">
+                Button Label
+              </label>
+              <Input
+                placeholder=""
+                type="text"
+                value={formValues.ctaText}
+                onChange={handleTextChange("ctaText")}
+              />
+            </FormGroup>
+            <FormGroup>
+              <label className="form-control-label" htmlFor="title">
+                Destination
+              </label>
+              <Input
+                placeholder=""
+                type="text"
+                value={formValues.ctaLink}
+                onChange={handleTextChange("ctaLink")}
+              />
+            </FormGroup>
+            <FormGroup>
+              <label className="form-control-label" htmlFor="title">
+                Preview
+              </label>
+              <div className="cta-preview">
+                <a href={formValues.ctaLink} target="_blank">
+                  <button className="cta-button btn btn-block">
+                    <span>{formValues.ctaText}</span>
+                    <img src="/common/arrow-white.svg" />
+                  </button>
+                </a>
+              </div>
+            </FormGroup>
+          </Col>
+          <Col lg="6">
+            {fields.includes("secondaryCTA") && (
+              <>
+                <h3>Call To Action Button</h3>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Button Label
+                  </label>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    value={formValues.secondaryCtaText}
+                    onChange={handleTextChange("secondaryCtaText")}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Destination
+                  </label>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    value={formValues.secondaryCtaLink}
+                    onChange={handleTextChange("secondaryCtaLink")}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label className="form-control-label" htmlFor="title">
+                    Preview
+                  </label>
+                  <div className="cta-preview">
+                    <a href={formValues.secondaryCtaLink} target="_blank">
+                      <button className="cta-button btn btn-block">
+                        <span>{formValues.secondaryCtaText}</span>
+                        <img src="/common/arrow-white.svg" />
+                      </button>
+                    </a>
+                  </div>
+                </FormGroup>
+              </>
+            )}
           </Col>
         </Row>
       </CardBody>

@@ -7,10 +7,7 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import {
-  HERO_COLLABORATE_WITH_US,
-  COLLABORATE_WITH_US,
-} from "constants.js";
+import { HERO_COLLABORATE_WITH_US, COLLABORATE_WITH_US } from "constants.js";
 
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import CollaborationComponentForm from "components/Forms/CollaborationComponentForm";
@@ -23,6 +20,7 @@ function CollaborateWithUs() {
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
             <BrandingHeroComponentForm
+              formTitle="Topfold Management"
               location={HERO_COLLABORATE_WITH_US}
               fields=""
             />

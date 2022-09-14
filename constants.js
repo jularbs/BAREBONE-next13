@@ -56,6 +56,7 @@ export const HERO_EVENTS = "hero-events";
 export const HERO_PROMOS = "hero-promos";
 export const HERO_TALENTS = "hero-talents";
 export const HERO_COLLABORATE_WITH_US = "hero-cwu";
+export const HERO_WORK_WITH_US = "hero-work-with-us";
 export const HERO_CONTACT_US = "hero-contact-us";
 
 //HERO TYPES

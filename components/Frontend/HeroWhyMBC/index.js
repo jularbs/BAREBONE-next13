@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import { forwardRef } from "react";
 import Link from "next/link";
+import { getLink } from "actions/media";
 
 const HeroWhyMBC = forwardRef(({ data, black, blue, next }, myRef) => {
   const scrollNext = () => {
@@ -14,20 +15,19 @@ const HeroWhyMBC = forwardRef(({ data, black, blue, next }, myRef) => {
     <>
       <div
         className="hero-why-mbc-container"
-        style={{ backgroundImage: `url(${data.bgLocation})` }}
+        style={{ backgroundImage: `url(${getLink(data.background)})` }}
         ref={myRef}
       >
         {black && <div className="bg-overlay-black" />}
         {blue && <div className="bg-overlay-blue" />}
-        <div className="pre-title">Together We Build Dreams</div>
         <div className="title">{data.title}</div>
         <div className="content">{data.content}</div>
         <div className="cta-container">
-          <Link href="/work-with-us/careers">
-            <div className="cta-button">Search Job Postings</div>
+          <Link href={data.ctaLink}>
+            <div className="cta-button">{data.ctaText}</div>
           </Link>
-          <Link href="/work-with-us/internship">
-            <div className="cta-button">Apply for Internship</div>
+          <Link href={data.secondaryCtaLink}>
+            <div className="cta-button">{data.secondaryCtaText}</div>
           </Link>
         </div>
         <div className="arrow-placement">

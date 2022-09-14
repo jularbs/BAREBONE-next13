@@ -5,28 +5,33 @@ import WorkWithUsSection from "components/Frontend/Sections/WorkWithUsSection/Wo
 import HeroWhyMBC from "components/Frontend/HeroWhyMBC";
 import { useRef } from "react";
 
-function ContactUsPage() {
+import { readByLocation } from "actions/hero";
+
+import { WORK_WITH_US_FAQ, HERO_WORK_WITH_US } from "constants.js";
+
+const ContactUsPage = ({ topfold }) => {
   const workWithUsSection = useRef(null);
 
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroWhyMBC
-          next={workWithUsSection}
-          blue
-          black
-          data={{
-            title: "Are you ready to have a rewarding career with us?",
-            content:
-              "Working at MBC Media Group is fun and fulfilling! We are the longest-running and pioneering broadcasting company in the Philippines and recognized as an industry leader in content creation. We are always on the lookout for innovative people to help grow our brands, including -- Love Radio, Yes the Best, Easy Rock, DZRH, Radyo Natin, Aksyon Radyo, MBC Talents, MBC Digital etc.",
-            bgLocation: "/bg/vnc.png",
-          }}
-        />
+        <HeroWhyMBC next={workWithUsSection} blue black data={topfold} />
         <WorkWithUsSection ref={workWithUsSection} />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const topfold = await readByLocation(HERO_WORK_WITH_US);
+  // Pass data to the page via props
+  return {
+    props: {
+      topfold: topfold.data,
+    },
+  };
 }
 
 export default ContactUsPage;
