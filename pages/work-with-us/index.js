@@ -7,16 +7,20 @@ import { useRef } from "react";
 
 import { readByLocation } from "actions/hero";
 
-import { WORK_WITH_US_FAQ, HERO_WORK_WITH_US } from "constants.js";
-
+import { HERO_WORK_WITH_US } from "constants.js";
+import ValuesHero from "components/Frontend/ValuesHero";
+import BenefitsSection from "components/Frontend/Sections/BenefitsSection";
 const ContactUsPage = ({ topfold }) => {
   const workWithUsSection = useRef(null);
-
+  const valuesSection = useRef(null);
+  const benefitsSection = useRef(null);
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroWhyMBC next={workWithUsSection} blue black data={topfold} />
+        <HeroWhyMBC next={valuesSection} blue black data={topfold} />
+        <ValuesHero ref={valuesSection} next={benefitsSection} />
+        <BenefitsSection ref={benefitsSection} />
         <WorkWithUsSection ref={workWithUsSection} />
       </div>
     </>

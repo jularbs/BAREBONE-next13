@@ -39,7 +39,7 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
         <div className="metric-item" key={key}>
           <div className="d-flex justify-content-center">
             <span className="odometer figures" id={`${item.slug}-odo`}>
-              {/* {item.figures} */}0
+              0
             </span>
             <div className="figures" style={{ paddingTop: "3px" }}>
               {item.suffix}

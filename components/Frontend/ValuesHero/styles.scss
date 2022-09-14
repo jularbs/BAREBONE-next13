@@ -1,0 +1,86 @@
+@import "assets/scss/breakpoints.scss";
+
+.values-section-container {
+  position: relative;
+  padding-top: 70px;
+  margin-top: -70px;
+
+  .arrow-placement {
+    position: absolute;
+    left: 50%;
+    bottom: 2.5rem;
+    transform: translateX(-50%);
+  }
+  .title {
+    padding: 2rem;
+    font-weight: 500;
+
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    font-size: 2rem;
+    color: rgba(55, 52, 53, 1);
+  }
+
+  .core {
+    display: flex;
+    flex-wrap: wrap;
+
+    .banner,
+    .content {
+      color: white;
+      padding: 3rem 2rem;
+      width: 100vw;
+
+      p {
+        white-space: pre-line;
+      }
+
+      @include for-tablet-landscape-up {
+        width: 50vw;
+        padding: 5rem 2rem;
+        padding-bottom: 150px;
+      }
+    }
+
+    .banner {
+      background-color: black;
+      text-align: center;
+      background-size: cover;
+
+      @include for-tablet-landscape-up {
+        text-align: end;
+      }
+
+      .header {
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0.5rem 0 1.5rem 0;
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.2;
+        font-weight: 300;
+      }
+    }
+
+    .content {
+      background-color: rgba(0, 146, 221, 1);
+      padding-bottom: 7rem;
+      @include for-tablet-landscape-up {
+        padding-bottom: 5rem;
+      }
+      .header {
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0.5rem 0 1.5rem 0;
+      }
+
+      p {
+        font-weight: 300;
+      }
+    }
+  }
+}

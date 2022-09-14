@@ -3,75 +3,7 @@
 .workWithUsSection {
   display: flex;
   flex-direction: column;
-  .title {
-    display: block;
-    width: 100%;
-    text-align: center;
-
-    font-size: 2rem;
-    color: rgba(55, 52, 53, 1);
-    font-weight: 600;
-    padding: 1rem 0;
-  }
-
-  .core {
-    display: flex;
-    flex-wrap: wrap;
-
-    .banner,
-    .content {
-      color: white;
-      padding: 3rem 2rem;
-      width: 100vw;
-
-      @include for-tablet-landscape-up {
-        width: 50vw;
-        padding: 3rem 2rem;
-      }
-    }
-
-    .banner {
-      background-color: black;
-      text-align: center;
-
-      @include for-tablet-landscape-up {
-        text-align: end;
-      }
-
-      .header {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        font-weight: 500;
-      }
-
-      ul {
-        padding-left: 0;
-      }
-      ul > li {
-        list-style-type: none;
-        padding: 10px 0;
-        font-size: 1.2rem;
-        font-weight: 300;
-      }
-    }
-
-    .content {
-      background-color: rgba(0, 146, 221, 1);
-
-      .header {
-        text-transform: uppercase;
-        font-weight: 600;
-        margin: 0.5rem 0 1.5rem 0;
-      }
-
-      p {
-        font-weight: 300;
-        line-height: 2rem;
-      }
-    }
-  }
-
+  
   .faqs {
     .topbar {
       padding: 1rem 2rem;

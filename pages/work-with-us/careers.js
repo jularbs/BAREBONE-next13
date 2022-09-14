@@ -1,30 +1,43 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+
+import { useState, useEffect } from "react";
+import { getLink } from "actions/media";
+import { readByLocation } from "actions/hero";
 
 import Navigation from "components/Frontend/Navigation";
 import JobsSection from "components/Frontend/Sections/JobsSection/JobsSection";
 import HeroBasic from "components/Frontend/HeroBasic";
+import { HERO_CAREERS } from "constants.js";
 
-function ContactUsPage() {
+const CareersPage = ({ hero }) => {
+  const [heroData, setHeroData] = useState({
+    bgLocation: getLink(hero.background),
+    title: hero.title,
+    content: hero.content,
+    ctaText: hero.ctaText,
+    ctaLink: hero.ctaLink,
+  });
+
   return (
     <>
       <Navigation />
       <div className="main">
-        <HeroBasic
-        //   next={visionRef}
-          blue
-          black
-          data={{
-            title: "Job postings & Career Opportunities",
-            content:
-              "Working at MBC Media Group is fun and fulfilling! We are the longest-running and pioneering broadcasting company in the Philippines and recognized as an industry leader in content creation. We are always on the lookout for innovative people to help grow our brands, including -- Love Radio, Yes the Best, Easy Rock, DZRH, Radyo Natin, Aksyon Radyo, MBC Talents, MBC Digital etc.",
-            bgLocation: "/bg/vnc.png",
-          }}
-        />
+        <HeroBasic data={heroData} blue black />
         <JobsSection />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const hero = await readByLocation(HERO_CAREERS);
+  // Pass data to the page via props
+  return {
+    props: {
+      hero: hero.data,
+    },
+  };
 }
 
-export default ContactUsPage;
+export default CareersPage;

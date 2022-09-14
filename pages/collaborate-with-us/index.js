@@ -17,6 +17,7 @@ const cwuPage = ({ hero, sideBySide }) => {
   const refs =
     sideBySide.length > 0 ? sideBySide.map((item) => createRef()) : null;
   const tilesRef = useRef(null);
+
   const [heroData, setHeroData] = useState({
     bgLocation: getLink(hero.background),
     title: hero.title,

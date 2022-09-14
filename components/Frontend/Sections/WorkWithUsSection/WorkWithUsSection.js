@@ -12,12 +12,12 @@ import { WORK_WITH_US_FAQ } from "constants.js";
 import TestimonialCard from "components/Frontend/TestimonialCard";
 import { getTestimonialByLocation } from "actions/testimonial";
 
-import BenefitsSection from "../BenefitsSection";
 const WorkWithUsSection = forwardRef(({}, myRef) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   const [faqs, setFaqs] = useState([]);
   const [testimonialList, setTestimonialList] = useState([]);
+  
   useEffect(() => {
     getTestimonialByLocation(WORK_WITH_US_FAQ).then((data) => {
       console.log(data);
@@ -70,42 +70,6 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
   return (
     <>
       <div className="workWithUsSection" ref={myRef}>
-        <div className="title">Why MBC?</div>
-        <div className="core">
-          <div className="banner">
-            <div className="header">Company Values</div>
-            <ul>
-              <li>Teamwork</li>
-              <li>Integrity</li>
-              <li>Creativity</li>
-              <li>Loyalty</li>
-              <li>Leadership</li>
-              <li>Dedication</li>
-            </ul>
-          </div>
-          <div className="content">
-            <div className="header">our core values</div>
-            <p>
-              In the spirit of entrepreneurship and innovation, we nurture a
-              corporate culture that encourages and empowers organization
-              members from all levels to make decisions, act proactively, and
-              provide feedback on how to improve our policies and processes.{" "}
-            </p>
-            <p>
-              We recognize that our people are our most important asset and so
-              we nurture a meritocratic environment that emphasizes the value of
-              leadership, career growth, teamwork, dedication, and loyalty.
-            </p>
-            <p>
-              We build strong, lasting relationships with business partners that
-              share our vision and values and our commitment to being a socially
-              and environmentally-responsible corporate citizen in every
-              community that we serve.
-            </p>
-          </div>
-        </div>
-
-        <BenefitsSection />
         <div className="faqs">
           <div className="topbar">
             <div className="searchContainer">
@@ -125,6 +89,7 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
           <div className="header">What our employees say about us</div>
           <div className="testimonial-list-container">{showTestimonials()}</div>
         </div>
+
         <div className="ctaButtons">
           <Link href="work-with-us/careers">
             <button>search job postings</button>

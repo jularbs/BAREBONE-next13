@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 
 import { getBenefitList } from "actions/benefit";
 import { getLink } from "actions/media";
@@ -8,7 +8,7 @@ import { getLink } from "actions/media";
 import { readOption } from "actions/option";
 import { BENEFIT_HEADER_TEXT, BENEFIT_SUB_TEXT } from "constants.js";
 
-const BenefitsSection = () => {
+const BenefitsSection = forwardRef(({}, myRef) => {
   const [benefitList, setBenefitList] = useState([]);
   const [headerText, setHeaderText] = useState("");
   const [headerSubtext, setHeaderSubtext] = useState("");
@@ -37,19 +37,19 @@ const BenefitsSection = () => {
           height="auto"
           src={getLink(item.icon)}
         />
-        {item.title}
+        <span>{item.title}</span>
       </div>
     ));
   };
   return (
     <>
-      <div className="benefitsSectionContainer">
+      <div className="benefitsSectionContainer" ref={myRef}>
         <div className="header">{headerText}</div>
         <div className="subHeading">{headerSubtext}</div>
         <div className="content">{showBenefits()}</div>
       </div>
     </>
   );
-};
+});
 
 export default BenefitsSection;

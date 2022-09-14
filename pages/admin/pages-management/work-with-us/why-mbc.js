@@ -6,12 +6,18 @@ import Admin from "layouts/Admin.js";
 // core components
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
-import { WORK_WITH_US_FAQ, HERO_WORK_WITH_US } from "constants.js";
+import {
+  WORK_WITH_US_FAQ,
+  HERO_WORK_WITH_US,
+  WHY_MBC_COMPANY_VALUES,
+  WHY_MBC_CORE_VALUES,
+} from "constants.js";
 
 import FaqComponentForm from "components/Forms/FaqComponentForm";
 import TestimonialComponentForm from "components/Forms/TestimonialComponentForm";
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
 import BenefitsComponentForm from "components/Forms/BenefitsComponentForm";
+import ValuesComponentForm from "components/Forms/ValuesComponentForm";
 function WhyMBCPage() {
   return (
     <>
@@ -24,6 +30,22 @@ function WhyMBCPage() {
               location={HERO_WORK_WITH_US}
               fields="secondaryCTA"
             />
+            <Row>
+              <Col>
+                <ValuesComponentForm
+                  label="Company Values"
+                  index={WHY_MBC_COMPANY_VALUES}
+                  fields="bg"
+                />
+              </Col>
+              <Col>
+                <ValuesComponentForm
+                  label="Our Core Values"
+                  index={WHY_MBC_CORE_VALUES}
+                  // fields=""
+                />
+              </Col>
+            </Row>
             <BenefitsComponentForm />
             <FaqComponentForm location={WORK_WITH_US_FAQ} />
             <TestimonialComponentForm location={WORK_WITH_US_FAQ} />
