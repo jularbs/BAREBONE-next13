@@ -11,6 +11,7 @@ import { WORK_WITH_US_FAQ, HERO_WORK_WITH_US } from "constants.js";
 import FaqComponentForm from "components/Forms/FaqComponentForm";
 import TestimonialComponentForm from "components/Forms/TestimonialComponentForm";
 import BrandingHeroComponentForm from "components/Forms/BrandingHeroComponentForm";
+import BenefitsComponentForm from "components/Forms/BenefitsComponentForm";
 function WhyMBCPage() {
   return (
     <>
@@ -23,6 +24,7 @@ function WhyMBCPage() {
               location={HERO_WORK_WITH_US}
               fields="secondaryCTA"
             />
+            <BenefitsComponentForm />
             <FaqComponentForm location={WORK_WITH_US_FAQ} />
             <TestimonialComponentForm location={WORK_WITH_US_FAQ} />
           </Col>

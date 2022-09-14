@@ -12,6 +12,7 @@ import { WORK_WITH_US_FAQ } from "constants.js";
 import TestimonialCard from "components/Frontend/TestimonialCard";
 import { getTestimonialByLocation } from "actions/testimonial";
 
+import BenefitsSection from "../BenefitsSection";
 const WorkWithUsSection = forwardRef(({}, myRef) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
@@ -104,42 +105,7 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
           </div>
         </div>
 
-        <div className="benefits">
-          <div className="header">MBC Benefits</div>
-          <div className="subHeading">
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and Consonantia, there live the blind texts. A small river
-            named Duden flows by their place and supplies.
-          </div>
-
-          <div className="content">
-            <div className="gridItem">
-              <Fa500Px className="icon" />
-              Personal Medical
-            </div>
-            <div className="gridItem">
-              <FaAddressCard className="icon" />
-              Life Insurance
-            </div>
-            <div className="gridItem">
-              <FaGlasses className="icon" />
-              Optical Allowance
-            </div>
-            <div className="gridItem">
-              <FaGlasses className="icon" />
-              Optical Allowance
-            </div>
-            <div className="gridItem">
-              <FaGlasses className="icon" />
-              Optical Allowance
-            </div>
-            <div className="gridItem">
-              <FaGlasses className="icon" />
-              Optical Allowance
-            </div>
-          </div>
-        </div>
-
+        <BenefitsSection />
         <div className="faqs">
           <div className="topbar">
             <div className="searchContainer">

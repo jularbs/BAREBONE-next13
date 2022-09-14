@@ -71,6 +71,8 @@ export const HERO_METRIC_HEADER = "hero-metric-header";
 export const HERO_METRIC_SUBTEXT = "hero-metric-subtext";
 export const COLLAB_HEADER_TEXT = "collab-header-text";
 export const COLLAB_SUB_TEXT = "collab-sub-text";
+export const BENEFIT_HEADER_TEXT = "benefit-header-text";
+export const BENEFIT_SUB_TEXT = "benefit-sub-text";
 
 //SIDE-BY-SIDE LOCATIONS
 export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";
