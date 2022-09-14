@@ -21,7 +21,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { getLink } from "actions/media";
-import { readOptions, createOption } from "actions/option";
+import { readOptions, createOption, readOption } from "actions/option";
 import _ from "lodash";
 
 import {
@@ -31,7 +31,9 @@ import {
   OUR_STORY_GALLERY_TILES_4,
   OUR_STORY_GALLERY_TILES_5,
   OUR_STORY_GALLERY_TILES_6,
+  OUR_STORY_GALLERY_DESCRIPTION,
 } from "constants.js";
+
 const OurStoryGalleryForm = ({}) => {
   //Component States
   const [loading, setLoading] = useState({
@@ -67,6 +69,7 @@ const OurStoryGalleryForm = ({}) => {
   ]);
 
   const [optionValues, setOptionValues] = useState([]);
+  const [description, setDescription] = useState({});
 
   //Component Lifecycles
   useEffect(() => {
@@ -74,7 +77,10 @@ const OurStoryGalleryForm = ({}) => {
     readOptions(optionIndex).then((data) => {
       setLoading({ ...loading, fetch: false });
       setOptionValues(data.data);
-      console.log(data.data);
+    });
+
+    readOption(OUR_STORY_GALLERY_DESCRIPTION).then((data) => {
+      setDescription(data.data);
     });
   }, []);
 
@@ -118,6 +124,28 @@ const OurStoryGalleryForm = ({}) => {
       })
       .catch((e) => {
         setLoading(false);
+        setResponseMessage({ success: "", error: e.response.data.message });
+      });
+  };
+
+  const handleDescription = () => {
+    setLoading({ ...loading, update: true });
+    const { value } = description;
+    //init FormValues to form data;
+    const data = new FormData();
+
+    // set form fields
+    data.set("index", OUR_STORY_GALLERY_DESCRIPTION);
+    data.set("value", value);
+
+    createOption("", data)
+      .then((data) => {
+        setLoading({ ...loading, update: false });
+        setResponseMessage({ success: data.message, error: "" });
+      })
+
+      .catch((e) => {
+        setLoading({ ...loading, update: false });
         setResponseMessage({ success: "", error: e.response.data.message });
       });
   };
@@ -229,6 +257,33 @@ const OurStoryGalleryForm = ({}) => {
           <h2 className="mb-0">Gallery Tile Management</h2>
         </CardHeader>
         <CardBody>
+          <Row>
+            <Col>
+              <FormGroup>
+                <label className="form-control-label" htmlFor="title">
+                  Description
+                </label>
+                <Input
+                  type="textarea"
+                  rows="5"
+                  value={description?.value}
+                  onChange={(e) => {
+                    setDescription({ ...description, value: e.target.value });
+                  }}
+                />
+                <Button
+                  color="primary"
+                  onClick={handleDescription}
+                  className="my-2 mb-4 float-right"
+                >
+                  {loading.update && (
+                    <Spinner color="white" size="sm" className="mr-2" />
+                  )}
+                  Save Changes
+                </Button>
+              </FormGroup>
+            </Col>
+          </Row>
           <div className="OurStoryGalleryFormContainer">
             <div className="tile-container">{showTiles()}</div>
           </div>

@@ -103,3 +103,4 @@ export const OUR_STORY_GALLERY_TILES_3 = "our-story-gallery-tiles-3";
 export const OUR_STORY_GALLERY_TILES_4 = "our-story-gallery-tiles-4";
 export const OUR_STORY_GALLERY_TILES_5 = "our-story-gallery-tiles-5";
 export const OUR_STORY_GALLERY_TILES_6 = "our-story-gallery-tiles-6";
+export const OUR_STORY_GALLERY_DESCRIPTION = "our-story-gallery-description";
