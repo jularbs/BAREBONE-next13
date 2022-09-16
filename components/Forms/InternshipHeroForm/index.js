@@ -154,7 +154,7 @@ const InternshipHeroForm = ({ formTitle, location, fields }) => {
   const showShowcaseTiles = () => {
     return showcaseIndex.map((item, key) => {
       return (
-        <div className="showcase-item">
+        <div className="showcase-item" key={key}>
           {getShowcaseTile(item) && (
             <img
               src={getLink(getShowcaseTile(item)?.media)}

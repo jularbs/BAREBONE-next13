@@ -29,7 +29,7 @@ import {
 import { createFile } from "actions/fileIR";
 
 import _ from "lodash";
-
+import FilesHandler from "./FilesHandler";
 const InvestorRelationsCategoryForm = () => {
   //Component States
   const [loading, setLoading] = useState({
@@ -598,7 +598,7 @@ const InvestorRelationsCategoryForm = () => {
                   As of
                 </label>
                 <Input
-                value={fileUploadValues.asOf}
+                  value={fileUploadValues.asOf}
                   onChange={handleFileUploadTextChange("asOf")}
                   type="text"
                 />
@@ -688,7 +688,15 @@ const InvestorRelationsCategoryForm = () => {
     return sorted.map((item, index) => (
       <>
         <tr key={index}>
-          <td style={{ paddingLeft: "45px" }}>{item.label}</td>
+          <td
+            style={{ paddingLeft: "45px", cursor: "pointer" }}
+            onClick={() => {
+              setFilesModalOpen(true);
+              setFilesCatPicker(item._id);
+            }}
+          >
+            {item.label}
+          </td>
           <td className="d-flex justify-content-end">
             <Button
               size="sm"
@@ -758,13 +766,8 @@ const InvestorRelationsCategoryForm = () => {
               size="sm"
               color="secondary"
               onClick={() => {
-                setFileUploadModalOpen(true);
-                setFileUploadCategoryDisplay(item.label);
-                setFileUploadValues({
-                  ...fileUploadValues,
-                  category: item._id,
-                  asOf: new Date().toISOString().split("T")[0],
-                });
+                setAddFormModalOpen(true);
+                setFormValues({ ...formValues, parent: item._id });
               }}
             >
               Add child
@@ -800,12 +803,20 @@ const InvestorRelationsCategoryForm = () => {
     ));
   };
 
+  const [filesModalOpen, setFilesModalOpen] = useState(false);
+  const [filesCatPicker, setFilesCatPicker] = useState("");
+  
   return (
     <>
       {showAddForm()}
       {showUpdateForm()}
       {showDeleteConfirmation()}
       {showFileUploadingForm()}
+      <FilesHandler
+        isOpen={filesModalOpen}
+        setIsOpen={setFilesModalOpen}
+        category={filesCatPicker}
+      />
       <Card>
         <CardHeader className="d-flex align-items-center justify-content-between">
           <h2 className="mb-0 d-inline-block">Categories</h2>
@@ -814,6 +825,7 @@ const InvestorRelationsCategoryForm = () => {
             color="primary"
             onClick={() => {
               setAddFormModalOpen(true);
+              setFormValues({});
             }}
           >
             + Add Category
