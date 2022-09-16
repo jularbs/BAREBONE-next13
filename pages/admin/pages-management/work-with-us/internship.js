@@ -7,14 +7,7 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import InternshipHeroForm from "components/Forms/InternshipHeroForm";
-import JobPostingComponentForm from "components/Forms/JobPostingComponentForm";
-import {
-  HERO_INTERNSHIP,
-  INTERNSHIP_SHOWCASE_TILE_1,
-  INTERNSHIP_SHOWCASE_TILE_2,
-  INTERNSHIP_SHOWCASE_TILE_3,
-  INTERNSHIP_SHOWCASE_TILE_4,
-} from "constants.js";
+import { HERO_INTERNSHIP } from "constants.js";
 
 function InternshipPage() {
   return (
@@ -28,7 +21,6 @@ function InternshipPage() {
               location={HERO_INTERNSHIP}
               fields=""
             />
-            <JobPostingComponentForm />
           </Col>
         </Row>
       </Container>
