@@ -244,7 +244,12 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                 {(fields.includes("logo") || fields.includes("contentBG")) && (
                   <>
                     <div className="d-flex justify-content-between w-100">
-                      <h3 className="d-inline ">{fields.includes("logo") ? "Logo" : "Content Background"} Placement</h3>
+                      <h3 className="d-inline ">
+                        {fields.includes("logo")
+                          ? "Logo"
+                          : "Content Background"}{" "}
+                        Placement
+                      </h3>
                       <label className="btn btn-default btn-sm">
                         Choose file...
                         <Input
@@ -560,40 +565,42 @@ const SideBySideComponentForm = ({ label, location, fields }) => {
                     backgroundColor: "#ECECEC",
                   }}
                 />
-                {fields.includes("logo") ||
-                  (fields.includes("contentBG") && (
-                    <>
-                      <div className="d-flex justify-content-between w-100">
-                        <h3 className="d-inline ">
-                          {fields.includes("logo") ? "Logo" : "Content Background"} Placement
-                        </h3>
-                        <label className="btn btn-default btn-sm">
-                          Choose file...
-                          <Input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={handleUpdateFileChange("logo")}
-                          />
-                        </label>
-                      </div>
-                      <img
-                        src={
-                          updatePreviewImage.logo
-                            ? updatePreviewImage.logo
-                            : updateValues.logo
-                            ? getLink(updateValues.logo)
-                            : ""
-                        }
-                        style={{
-                          maxWidth: "200px",
-                          width: "100%",
-                          margin: "2rem 0",
-                          backgroundColor: "#ECECEC",
-                        }}
-                      />
-                    </>
-                  ))}
+                {(fields.includes("logo") || fields.includes("contentBG")) && (
+                  <>
+                    <div className="d-flex justify-content-between w-100">
+                      <h3 className="d-inline ">
+                        {fields.includes("logo")
+                          ? "Logo"
+                          : "Content Background"}{" "}
+                        Placement
+                      </h3>
+                      <label className="btn btn-default btn-sm">
+                        Choose file...
+                        <Input
+                          type="file"
+                          hidden
+                          accept="image/*"
+                          onChange={handleUpdateFileChange("logo")}
+                        />
+                      </label>
+                    </div>
+                    <img
+                      src={
+                        updatePreviewImage.logo
+                          ? updatePreviewImage.logo
+                          : updateValues.logo
+                          ? getLink(updateValues.logo)
+                          : ""
+                      }
+                      style={{
+                        maxWidth: "200px",
+                        width: "100%",
+                        margin: "2rem 0",
+                        backgroundColor: "#ECECEC",
+                      }}
+                    />
+                  </>
+                )}
               </div>
               {fields.includes("cta") && (
                 <>
