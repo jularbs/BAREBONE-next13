@@ -124,12 +124,12 @@ const routes = [
         miniName: "W",
         layout: "/admin",
       },
-      // {
-      //   path: "/pages-management/work-with-us/internship",
-      //   name: "Internship Program",
-      //   miniName: "U",
-      //   layout: "/admin",
-      // },
+      {
+        path: "/pages-management/work-with-us/internship",
+        name: "Internship Program",
+        miniName: "U",
+        layout: "/admin",
+      },
       {
         path: "/pages-management/work-with-us/careers",
         name: "Career Opportunities",
