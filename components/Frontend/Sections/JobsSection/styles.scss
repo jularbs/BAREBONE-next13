@@ -1,10 +1,10 @@
 .jobsSectionContainer {
   display: flex;
   flex-direction: column;
-
+  padding-top: 70px;
   .header {
     text-align: center;
-    padding: 1rem 0;
+    // padding: 1rem 0;
     text-transform: uppercase;
     font-weight: 600;
     color: rgba(55, 52, 53, 1);
@@ -67,9 +67,9 @@
     border: 1px rgba(22, 37, 112, 1) solid;
     cursor: pointer;
 
-    &:hover{
-       background-color: rgba(22, 37, 112, 1); 
-       color: white;
+    &:hover {
+      background-color: rgba(22, 37, 112, 1);
+      color: white;
     }
   }
 }

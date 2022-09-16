@@ -9,26 +9,6 @@ const JobsSection = () => {
   const [loading, setLoading] = useState({
     fetch: false,
   });
-  const [openings, setOpening] = useState([
-    {
-      title: "Sales Executive",
-      requirements: "At Least 1 Year Experience",
-      company: "MBC",
-      link: "https://jobstreet.com",
-    },
-    {
-      title: "Reporter",
-      requirements: "At Least 1 Year Experience, Degree in Journalism",
-      company: "DZRH",
-      link: "https://jobstreet.com",
-    },
-    {
-      title: "Radio DJ",
-      requirements: "At Least 3 Years Experience",
-      company: "Love Radio",
-      link: "https://jobstreet.com",
-    },
-  ]);
 
   useEffect(() => {
     setLoading({ ...loading, fetch: true });

@@ -1,91 +1,127 @@
+@import "assets/scss/breakpoints.scss";
+
 .hero-internship-container {
   position: relative;
-  padding: 15rem 2rem;
   text-align: center;
   color: white;
 
   background-size: cover;
   background-position: center;
 
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 70px;
+
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  .content-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
 
-  .hero-column {
-    flex-basis: 50%;
-    min-height: 70vh;
-    padding: 1.5rem;
-    display: flex;
-
-    &.main-content {
-      border-right:2px white solid;
-      padding: 3rem;
-      flex-direction: column;
-      justify-content: center;
-      align-items: start;
+    @include for-tablet-landscape-up {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .title,
-    .pre-title {
-      position: relative;
-      font-size: 3rem;
-      line-height: 3rem;
-      font-weight: 400;
-    }
-
-    .title {
-      margin-bottom: 1.5rem;
-    }
-    .content {
-      position: relative;
-      font-weight: 300;
-      line-height: 1.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .cta-button {
-      padding: 1rem 5rem;
-      border: 1px white solid;
-      text-transform: uppercase;
-      font-weight: 500;
-      align-items: center;
-      cursor: pointer;
-      span {
-        margin-right: 1rem;
-      }
-    }
-
-    .showcase {
+    .hero-column {
+      padding: 1.5rem;
       display: flex;
-      flex-wrap: wrap;
-      padding-left: 3rem;
-      height: 100%;
-      margin: auto 0;
-      
-      .showcase-item {
-        position: relative;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        padding: 0 2rem;
-        margin-bottom: 70px;
 
-        .title {
-          font-size: 1rem;
-          line-height: 2rem;
-          margin-bottom: 10px;
-          text-transform: uppercase;
-          font-weight: 700;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      &.main-content {
+        padding: 3rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        @include for-tablet-landscape-up {
+          border-right: 2px white solid;
+          min-height: 60vh;
         }
 
-        .description {
-          font-size: 1rem;
+        .title,
+        .pre-title {
+          position: relative;
+          font-size: 2.5rem;
+          line-height: 2.5rem;
+          font-weight: 400;
+
+          @include for-tablet-portrait-up {
+            font-size: 3rem;
+            line-height: 3rem;
+          }
+        }
+
+        .title {
+          text-align: left;
+          white-space: nowrap;
+          margin-bottom: 1.5rem;
+          white-space: pre-line;
+        }
+
+        .content {
+          position: relative;
           font-weight: 300;
+          line-height: 1.75rem;
+          margin-bottom: 2rem;
+        }
+      }
+
+      .cta-button {
+        padding: 1rem 5rem;
+        border: 1px white solid;
+        text-transform: uppercase;
+        font-weight: 500;
+        align-items: center;
+        cursor: pointer;
+        span {
+          margin-right: 1rem;
+        }
+      }
+
+      .showcase {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        height: 100%;
+        margin: auto 0;
+        padding: 1rem;
+
+        @include for-tablet-portrait-up {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 3rem 0;
+          padding-left: 1rem;
+        }
+
+        .showcase-item {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          padding: 0 1.5rem;
+          margin-bottom: 50px;
+
+          .showcase-icon {
+            width: 50px;
+            margin: 0 auto;
+            margin-bottom: 0.5rem;
+          }
+
+          .title {
+            font-size: 1rem;
+            line-height: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .description {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 300;
+
+            @include for-tablet-portrait-up {
+              text-align: start;
+            }
+          }
         }
       }
     }

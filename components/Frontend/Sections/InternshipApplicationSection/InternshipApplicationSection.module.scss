@@ -1,10 +1,11 @@
-.InternshipApplicationSectionContainer {
-  display: flex;
-  flex-direction: row;
+@import "assets/scss/breakpoints.scss";
 
-  .requirements,
-  .internshipForm {
-    flex-basis: 50%;
+.InternshipApplicationSectionContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include for-tablet-landscape-up {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .requirements {

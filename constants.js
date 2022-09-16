@@ -57,6 +57,7 @@ export const HERO_PROMOS = "hero-promos";
 export const HERO_TALENTS = "hero-talents";
 export const HERO_COLLABORATE_WITH_US = "hero-cwu";
 export const HERO_WORK_WITH_US = "hero-work-with-us";
+export const HERO_INTERNSHIP = "hero-internship";
 export const HERO_CAREERS = "hero-careers";
 export const HERO_CONTACT_US = "hero-contact-us";
 
@@ -110,3 +111,9 @@ export const OUR_STORY_GALLERY_TILES_4 = "our-story-gallery-tiles-4";
 export const OUR_STORY_GALLERY_TILES_5 = "our-story-gallery-tiles-5";
 export const OUR_STORY_GALLERY_TILES_6 = "our-story-gallery-tiles-6";
 export const OUR_STORY_GALLERY_DESCRIPTION = "our-story-gallery-description";
+
+//INTERNSHIP SHOWCASE INDEX
+export const INTERNSHIP_SHOWCASE_TILE_1 = "internship-showcase-tile-1";
+export const INTERNSHIP_SHOWCASE_TILE_2 = "internship-showcase-tile-2";
+export const INTERNSHIP_SHOWCASE_TILE_3 = "internship-showcase-tile-3";
+export const INTERNSHIP_SHOWCASE_TILE_4 = "internship-showcase-tile-4";

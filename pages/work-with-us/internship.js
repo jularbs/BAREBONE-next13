@@ -4,7 +4,19 @@ import Navigation from "components/Frontend/Navigation";
 import HeroInternship from "components/Frontend/HeroInternship";
 import InternshipApplicationSection from "components/Frontend/Sections/InternshipApplicationSection/InternshipApplicationSection";
 
-function ContactUsPage() {
+import { readByLocation } from "actions/hero";
+
+import { readOptions } from "actions/option";
+
+import {
+  HERO_INTERNSHIP,
+  INTERNSHIP_SHOWCASE_TILE_1,
+  INTERNSHIP_SHOWCASE_TILE_2,
+  INTERNSHIP_SHOWCASE_TILE_3,
+  INTERNSHIP_SHOWCASE_TILE_4,
+} from "constants.js";
+
+const InternshipPage = ({ hero, showcaseList }) => {
   return (
     <>
       <Navigation />
@@ -13,17 +25,31 @@ function ContactUsPage() {
           // next={workWithUsSection}
           blue
           black
-          data={{
-            title: "Are you ready to have a rewarding career with us?",
-            content:
-              "Working at MBC Media Group is fun and fulfilling! We are the longest-running and pioneering broadcasting company in the Philippines and recognized as an industry leader in content creation. We are always on the lookout for innovative people to help grow our brands, including -- Love Radio, Yes the Best, Easy Rock, DZRH, Radyo Natin, Aksyon Radyo, MBC Talents, MBC Digital etc.",
-            bgLocation: "/bg/vnc.png",
-          }}
+          hero={hero}
+          showcaseList={showcaseList}
         />
         <InternshipApplicationSection />
       </div>
     </>
   );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const hero = await readByLocation(HERO_INTERNSHIP);
+  const showcaseList = await readOptions([
+    INTERNSHIP_SHOWCASE_TILE_1,
+    INTERNSHIP_SHOWCASE_TILE_2,
+    INTERNSHIP_SHOWCASE_TILE_3,
+    INTERNSHIP_SHOWCASE_TILE_4,
+  ]);
+  // Pass data to the page via props
+  return {
+    props: {
+      hero: hero.data,
+      showcaseList: showcaseList.data,
+    },
+  };
 }
 
-export default ContactUsPage;
+export default InternshipPage;
