@@ -11,7 +11,7 @@
     margin: 0;
     padding: 0;
     // width: 120px;
-    min-width: 50px;
+    min-width: 10px;
     width: var(--arrow-width);
     height: 1px;
     background-color: white;
@@ -24,12 +24,12 @@
     display: block;
     margin: 0;
     padding: 0;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-top: 1px solid white;
     border-right: 1px solid white;
     transform: rotate(-135deg);
-    margin-top: -5px;
+    margin-top: -4px;
     margin-left: 1px;
     border-radius: 1px;
   }
@@ -42,6 +42,16 @@
     &::after {
       border-top: 1px solid black;
       border-right: 1px solid black;
+    }
+  }
+
+  &.navy {
+    &::before {
+      background-color: navy;
+    }
+    &::after {
+      border-top: 1px solid navy;
+      border-right: 1px solid navy;
     }
   }
 }

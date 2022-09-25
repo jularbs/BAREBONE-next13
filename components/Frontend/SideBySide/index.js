@@ -2,6 +2,7 @@ import "./styles.scss";
 import { forwardRef } from "react";
 import Link from "next/link";
 import { Col, Row } from "reactstrap";
+import CustomArrow from "components/Frontend/CustomArrow";
 
 const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
   const scrollNext = () => {
@@ -34,7 +35,10 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
             )}
             {data && data.ctaLabel && data.ctaLink && (
               <Link href={data.ctaLink}>
-                <button className="btn btn-cta py-3">{data.ctaLabel}</button>
+                <button className="btn btn-cta py-3">
+                  {data.ctaLabel}
+                  <CustomArrow className="navy reverse ml-3" width="20px" />
+                </button>
               </Link>
             )}
           </div>

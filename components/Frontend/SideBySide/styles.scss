@@ -4,6 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
+
   &.reverse {
     flex-direction: row-reverse;
   }
@@ -40,15 +41,19 @@
     }
 
     .btn-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       align-self: flex-start;
       margin-top: 2rem;
       color: navy;
       border-color: navy;
       border-radius: 0;
-      max-width: 100%;
-      padding: 2rem 5rem 2rem 3rem;
+      width: 100%;
+      max-width: 400px; 
+      padding: 2rem 2rem 2rem 3rem;
       white-space: nowrap;
-      font-weight: 400;
+      font-weight: 500;
       text-transform: uppercase;
     }
   }

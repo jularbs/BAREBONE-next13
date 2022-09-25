@@ -4,20 +4,28 @@ import Navigation from "components/Frontend/Navigation";
 import HeroBasic from "components/Frontend/HeroBasic";
 import OrgChartSection from "components/Frontend/Sections/OrgChartSection";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import { readByLocation } from "actions/hero";
 import { getLink } from "actions/media";
-import { HERO_LEADERSHIP } from "constants.js";
+import { HERO_LEADERSHIP, ORG_CHART_IMAGE } from "constants.js";
+
+import { readOption } from "actions/option";
 
 const LeadershipPage = ({ hero }) => {
   const orgSection = useRef(null);
-
+  const [orgChartSrc, setOrgChartSrc] = useState({});
   const [heroData, setHeroData] = useState({
     bgLocation: getLink(hero.background),
     title: hero.title,
     content: hero.content,
   });
+
+  useEffect(() => {
+    readOption(ORG_CHART_IMAGE).then((data) => {
+      if (data.data) setOrgChartSrc(data.data);
+    });
+  }, []);
 
   return (
     <>
@@ -25,7 +33,9 @@ const LeadershipPage = ({ hero }) => {
       <div className="main">
         <HeroBasic next={orgSection} black data={heroData} />
         <OrgChartSection ref={orgSection} />
-        <img src="/bg/org-chart.svg" width="100%" />
+        {orgChartSrc.media && (
+          <img src={getLink(orgChartSrc.media)} width="100%" />
+        )}
       </div>
     </>
   );

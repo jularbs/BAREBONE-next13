@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 
 // layout for this page
@@ -9,10 +8,10 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 import SimpleHeroComponentForm from "components/Forms/SimpleHeroComponentForm";
 import PortraitCardForm from "components/Forms/PortraitCardForm";
-
+import OrgChartComponentForm from "components/Forms/OrgChartComponentForm";
 import {
   HERO_LEADERSHIP,
-  HERO_TYPE_SIMPLE,
+  ORG_CHART_IMAGE,
   OUR_LEADERSHIP_BOARD_OF_DIRECTORS,
   OUR_LEADERSHIP_KEY_OFFICERS,
 } from "constants.js";
@@ -24,7 +23,10 @@ function Leadership() {
       <Container className="mt--6" fluid>
         <Row className="justify-content-center">
           <Col className="card-wrapper" lg="9">
-            <SimpleHeroComponentForm location={HERO_LEADERSHIP} formTitle="Topfold Management" />
+            <SimpleHeroComponentForm
+              location={HERO_LEADERSHIP}
+              formTitle="Topfold Management"
+            />
             <PortraitCardForm
               label="Board of Directors Management"
               location={OUR_LEADERSHIP_BOARD_OF_DIRECTORS}
@@ -32,6 +34,10 @@ function Leadership() {
             <PortraitCardForm
               label="Key Officers Management"
               location={OUR_LEADERSHIP_KEY_OFFICERS}
+            />
+            <OrgChartComponentForm
+              index={ORG_CHART_IMAGE}
+              label="Org Chart Management"
             />
           </Col>
         </Row>
