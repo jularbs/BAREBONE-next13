@@ -6,7 +6,7 @@ import InternshipApplicationSection from "components/Frontend/Sections/Internshi
 
 import { readByLocation } from "actions/hero";
 
-import { readOptions } from "actions/option";
+import { readOptions, readOption } from "actions/option";
 
 import {
   HERO_INTERNSHIP,
@@ -14,9 +14,10 @@ import {
   INTERNSHIP_SHOWCASE_TILE_2,
   INTERNSHIP_SHOWCASE_TILE_3,
   INTERNSHIP_SHOWCASE_TILE_4,
+  INTERNSHIP_REQUIREMENTS,
 } from "constants.js";
 
-const InternshipPage = ({ hero, showcaseList }) => {
+const InternshipPage = ({ hero, showcaseList, requirements }) => {
   return (
     <>
       <Navigation />
@@ -28,7 +29,7 @@ const InternshipPage = ({ hero, showcaseList }) => {
           hero={hero}
           showcaseList={showcaseList}
         />
-        <InternshipApplicationSection />
+        <InternshipApplicationSection requirements={requirements} />
       </div>
     </>
   );
@@ -43,11 +44,13 @@ export async function getServerSideProps() {
     INTERNSHIP_SHOWCASE_TILE_3,
     INTERNSHIP_SHOWCASE_TILE_4,
   ]);
+  const requirements = await readOption(INTERNSHIP_REQUIREMENTS);
   // Pass data to the page via props
   return {
     props: {
       hero: hero.data,
       showcaseList: showcaseList.data,
+      requirements: requirements.data.value,
     },
   };
 }

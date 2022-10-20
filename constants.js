@@ -78,6 +78,8 @@ export const BENEFIT_SUB_TEXT = "benefit-sub-text";
 export const WHY_MBC_CORE_VALUES = "why-mbc-core-values";
 export const WHY_MBC_COMPANY_VALUES = "why-mbc-company-values";
 export const ORG_CHART_IMAGE = "org-chart-image";
+export const INTERNSHIP_REQUIREMENTS = "internship-requirements";
+
 
 //SIDE-BY-SIDE LOCATIONS
 export const OUR_BRAND_VISION_AND_CULTURE = "OUR-BRAND-VISION-AND-CULTURE";

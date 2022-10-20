@@ -7,9 +7,12 @@ import Admin from "layouts/Admin.js";
 import AlternativeHeader from "components/Headers/AlternativeHeader.js";
 
 import InternshipHeroForm from "components/Forms/InternshipHeroForm";
-import { HERO_INTERNSHIP } from "constants.js";
+import HtmlEditorForm from "components/Forms/HtmlEditorForm";
+import { readOption } from "actions/option";
 
-function InternshipPage() {
+import { HERO_INTERNSHIP, INTERNSHIP_REQUIREMENTS } from "constants.js";
+
+function InternshipPage({ requirements }) {
   return (
     <>
       <AlternativeHeader name="Careers" parentName="Work with us" />
@@ -21,11 +24,29 @@ function InternshipPage() {
               location={HERO_INTERNSHIP}
               fields=""
             />
+            <HtmlEditorForm
+              label="Internship Requirements Management"
+              index={INTERNSHIP_REQUIREMENTS}
+              initValue={requirements}
+            />
           </Col>
         </Row>
       </Container>
     </>
   );
+}
+
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const requirements = await readOption(INTERNSHIP_REQUIREMENTS);
+
+  // Pass data to the page via props
+  return {
+    props: {
+      requirements: requirements.data?.value ? requirements.data.value : "",
+    },
+  };
 }
 
 InternshipPage.layout = Admin;

@@ -15,6 +15,7 @@ module.exports = withFonts(
           env: {
             API: process.env.API,
             RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
+            TINY_KEY: process.env.TINY_KEY,
           },
           webpack5: false,
           webpack(config, options) {

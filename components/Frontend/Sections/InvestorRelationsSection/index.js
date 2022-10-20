@@ -11,7 +11,7 @@ import {
   IoDownloadOutline,
   IoPrintOutline,
   IoDownloadSharp,
-  IoPrintSharp
+  IoPrintSharp,
 } from "react-icons/io5";
 
 import { getCategoryList } from "actions/categoryIR";
@@ -47,11 +47,13 @@ const InvestorRelationsSection = () => {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    setActiveFile("");
-    getFileListByCategory(activeChild).then((data) => {
-      setFiles(data.data);
-    });
-    setActivePdfNav(false);
+    if (activeChild) {
+      setActiveFile("");
+      getFileListByCategory(activeChild).then((data) => {
+        setFiles(data.data);
+      });
+      setActivePdfNav(false);
+    }
   }, [activeChild]);
 
   useEffect(() => {
@@ -119,7 +121,7 @@ const InvestorRelationsSection = () => {
     return files.map((item, key) => {
       return (
         <option value={JSON.stringify(item)} key={key}>
-          As of: {item.asOf}
+          {item.asOf}
         </option>
       );
     });
@@ -140,7 +142,7 @@ const InvestorRelationsSection = () => {
     <>
       <div className="investorRelationsSectionContainer">
         <Row noGutters>
-          <Col lg="4">
+          <Col className="tabsRow">
             <div className="tabsContainer">
               <div className="header">
                 <div className="title">
@@ -151,9 +153,9 @@ const InvestorRelationsSection = () => {
               <div className="tabsWrapper">{showHeadings()}</div>
             </div>
           </Col>
-          <Col lg="8">
-            <div className="pdfViewerContainer">
-              {activePdfNav && (
+          <Col className="pdfRow">
+            <div className={`pdfViewerContainer ${activeChild ? "show" : ""}`}>
+              {/* {activePdfNav && (
                 <>
                   <button
                     onClick={handlePageChange(-1)}
@@ -168,11 +170,19 @@ const InvestorRelationsSection = () => {
                     <IoCaretForwardOutline className="__icon" />
                   </button>
                 </>
-              )}
+              )} */}
 
               <div className="pdfNavigator">
                 <div className="pdfSelector">
                   <select onChange={handleFileChange}>{showFiles()}</select>
+                  <div
+                    className="btn btn-default ml-2 close-control"
+                    onClick={() => {
+                      setActiveChild("");
+                    }}
+                  >
+                    CLOSE
+                  </div>
                 </div>
                 {activePdfNav && (
                   <>
@@ -181,23 +191,39 @@ const InvestorRelationsSection = () => {
                     </div>
                     {/* <div className="magnifyer">100%</div> */}
                     <div className="tools">
-                      <span className="download">
-                        <IoDownloadSharp className="icon" />
-                      </span>
-                      <span className="print">
-                        <IoPrintSharp className="icon" />
+                      <a className="download" target="_blank" href={activeFile}>
+                        <IoDownloadOutline className="icon" />
+                      </a>
+                      <span
+                        className="print"
+                        onClick={() => {
+                          window.open(
+                            activeFile,
+                            "PRINT",
+                            "height=400,width=600"
+                          );
+                        }}
+                      >
+                        <IoPrintOutline className="icon" />
                       </span>
                     </div>
                   </>
                 )}
               </div>
-              <Document
-                file={activeFile}
-                onLoadSuccess={onDocumentLoadSuccess}
-                className="pdfWrapper"
-              >
-                <Page pageNumber={pageNumber} />
-              </Document>
+              <div className="pdfWindow">
+                <Document
+                  file={activeFile}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  className="pdfWrapper"
+                >
+                  {/* <Page pageNumber={pageNumber} /> */}
+                  {Array.apply(null, Array(numPages))
+                    .map((x, i) => i + 1)
+                    .map((page) => (
+                      <Page pageNumber={page} />
+                    ))}
+                </Document>
+              </div>
             </div>
           </Col>
         </Row>
