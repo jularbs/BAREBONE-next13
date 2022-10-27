@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./Footer.module.scss";
 
 import {
   IoLogoFacebook,
@@ -9,25 +9,25 @@ import {
 const Footer = () => {
   return (
     <>
-      <div className="footer-container">
-        <div className="copyright">Copyright 2021 MBC MEDIA GROUP</div>
-        <div className="link-wrapper">
-          <div className="pages">
-            <div className="page-item">Privacy Policy</div>
-            <div className="page-item">Terms and Condition</div>
-            <div className="page-item"></div>
+      <div className={styles["footer-container"]}>
+        <div className={styles["copyright"]}>Copyright 2021 MBC MEDIA GROUP</div>
+        <div className={styles["link-wrapper"]}>
+          <div className={styles["pages"]}>
+            <div className={styles["page-item"]}>Privacy Policy</div>
+            <div className={styles["page-item"]}>Terms and Condition</div>
+            <div className={styles["page-item"]}></div>
           </div>
-          <div className="socmed">
-            <div className="socmed-item">
+          <div className={styles["socmed"]}>
+            <div className={styles["socmed-item"]}>
               <IoLogoFacebook />
             </div>
-            <div className="socmed-item">
+            <div className={styles["socmed-item"]}>
               <IoLogoTwitter />
             </div>
-            <div className="socmed-item">
+            <div className={styles["socmed-item"]}>
               <IoLogoInstagram />
             </div>
-            <div className="socmed-item">
+            <div className={styles["socmed-item"]}>
               <IoLogoYoutube />
             </div>
           </div>

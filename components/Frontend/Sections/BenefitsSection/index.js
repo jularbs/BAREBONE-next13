@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./BenefitsSection.module.scss";
 
 import { useState, useEffect, forwardRef } from "react";
 
@@ -29,7 +29,7 @@ const BenefitsSection = forwardRef(({}, myRef) => {
 
   const showBenefits = () => {
     return benefitList.map((item, key) => (
-      <div className="gridItem" key={key}>
+      <div className={styles["gridItem"]} key={key}>
         <img
           className="mr-2"
           alt="icon"
@@ -43,10 +43,10 @@ const BenefitsSection = forwardRef(({}, myRef) => {
   };
   return (
     <>
-      <div className="benefitsSectionContainer" ref={myRef}>
-        <div className="header">{headerText}</div>
-        <div className="subHeading">{headerSubtext}</div>
-        <div className="content">{showBenefits()}</div>
+      <div className={styles["benefitsSectionContainer"]} ref={myRef}>
+        <div className={styles["header"]}>{headerText}</div>
+        <div className={styles["subHeading"]}>{headerSubtext}</div>
+        <div className={styles["content"]}>{showBenefits()}</div>
       </div>
     </>
   );

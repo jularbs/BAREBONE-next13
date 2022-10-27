@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./PortraitCard.module.scss";
 
 import { Modal, ModalBody } from "reactstrap";
 import { useState } from "react";
@@ -32,10 +32,10 @@ const PortraitCard = ({ data }) => {
       <Modal
         toggle={() => setModalOpen(!modalOpen)}
         isOpen={modalOpen}
-        className="portait-modal"
+        className={styles["portait-modal"]}
       >
         <ModalBody>
-          <div className="portrait-details-container">
+          <div className={styles["portrait-details-container"]}>
             <button
               type="button"
               class="close-button-circle"
@@ -51,39 +51,39 @@ const PortraitCard = ({ data }) => {
                   style={{
                     backgroundImage: `url(${portraitData.imgLocation})`,
                   }}
-                  className="img-details"
+                  className={styles["img-details"]}
                   alt=""
                 />
               </Col>
               <Col lg={8} className="px-0">
-                <div className="content">
-                  <div className="name">{portraitData.name}</div>
-                  <div className="position">{portraitData.position}</div>
-                  <div className="writeup">{portraitData.description}</div>
-                  <div className="socmed-icons">
+                <div className={styles["content"]}>
+                  <div className={styles["name"]}>{portraitData.name}</div>
+                  <div className={styles["position"]}>{portraitData.position}</div>
+                  <div className={styles["writeup"]}>{portraitData.description}</div>
+                  <div className={styles["socmed-icons"]}>
                     {portraitData.facebookURL && (
                       <a href={portraitData.facebookURL} target="_blank">
-                        <IoLogoFacebook className="socmed-item" />
+                        <IoLogoFacebook className={styles["socmed-item"]} />
                       </a>
                     )}
                     {portraitData.tiktokURL && (
                       <a href={portraitData.tiktokURL} target="_blank">
-                        <IoLogoTiktok className="socmed-item" />
+                        <IoLogoTiktok className={styles["socmed-item"]} />
                       </a>
                     )}
                     {portraitData.instagramURL && (
                       <a href={portraitData.instagramURL} target="_blank">
-                        <IoLogoInstagram className="socmed-item" />
+                        <IoLogoInstagram className={styles["socmed-item"]} />
                       </a>
                     )}
                     {portraitData.twitterURL && (
                       <a href={portraitData.twitterURL} target="_blank">
-                        <IoLogoTwitter className="socmed-item" />
+                        <IoLogoTwitter className={styles["socmed-item"]} />
                       </a>
                     )}
                     {portraitData.youtubeURL && (
                       <a href={portraitData.youtubeURL} target="_blank">
-                        <IoLogoYoutube className="socmed-item" />
+                        <IoLogoYoutube className={styles["socmed-item"]} />
                       </a>
                     )}
                   </div>
@@ -97,18 +97,18 @@ const PortraitCard = ({ data }) => {
   };
   return (
     <>
-      <div className="portrait-card-container">
+      <div className={styles["portrait-card-container"]}>
         {modalDetails()}
 
         <div
-          className="portrait-img"
+          className={styles["portrait-img"]}
           style={{ backgroundImage: `url(${portraitData.imgLocation}` }}
           onClick={() => {
             setModalOpen(true);
           }}
         />
-        <div className="name">{portraitData.name}</div>
-        <div className="position">{portraitData.position}</div>
+        <div className={styles["name"]}>{portraitData.name}</div>
+        <div className={styles["position"]}>{portraitData.position}</div>
       </div>
     </>
   );

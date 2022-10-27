@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./OrgChartSection.module.scss";
 import { forwardRef, useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import PortraitCard from "components/Frontend/PortraitCard";
@@ -37,9 +37,9 @@ const OrgChartSection = forwardRef(({}, myRef) => {
   };
   return (
     <>
-      <div className="orgchart-section" ref={myRef}>
+      <div className={styles["orgchart-section"]} ref={myRef}>
         <div
-          className="org-chart"
+          className={styles["org-chart"]}
           style={{ maxWidth: "1300px", margin: "0 auto", padding: "5rem 1rem" }}
         >
           <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>
@@ -50,7 +50,7 @@ const OrgChartSection = forwardRef(({}, myRef) => {
           </Row>
         </div>
         <div
-          className="org-chart"
+          className={styles["org-chart"]}
           style={{ maxWidth: "1300px", margin: "0 auto", padding: "5rem 1rem" }}
         >
           <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>

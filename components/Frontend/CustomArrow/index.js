@@ -1,9 +1,9 @@
-import "./styles.scss";
+import styles from "./CustomArrow.module.scss";
 
 const CustomArrow = ({ className, width }) => {
   return (
     <div
-      className={`arrow-down ${className}`}
+      className={`${styles["arrow-down"]} ${className}`}
       style={{ "--arrow-width": `${width ? width : "60px"}` }}
     />
   );

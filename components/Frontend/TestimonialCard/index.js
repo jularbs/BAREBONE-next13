@@ -1,23 +1,21 @@
-import "./styles.scss";
+import styles from "./TestimonialCard.module.scss";
 
-import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { forwardRef } from "react";
-import { Row, Col } from "reactstrap";
 import { getLink } from "actions/media";
 const TestimonialCard = forwardRef(({ data }, myRef) => {
   return (
     <>
-      <div className="testimonial-wrapper" ref={myRef}>
-        <div className="profile-wrapper">
-          <div className="image-wrapper">
+      <div className={styles["testimonial-wrapper"]} ref={myRef}>
+        <div className={styles["profile-wrapper"]}>
+          <div className={styles["image-wrapper"]}>
             <img src={getLink(data.image)} alt="" />
           </div>
-          <div className="profile-details">
-            <div className="name">{data.name}</div>
-            <div className="position">{data.position}</div>
+          <div className={styles["profile-details"]}>
+            <div className={styles["name"]}>{data.name}</div>
+            <div className={styles["position"]}>{data.position}</div>
           </div>
         </div>
-        <div className="blurb">{data.blurb}</div>
+        <div className={styles["blurb"]}>{data.blurb}</div>
       </div>
     </>
   );

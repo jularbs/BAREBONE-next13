@@ -1,5 +1,5 @@
 import { forwardRef, useState, useEffect } from "react";
-import "./styles.scss";
+import styles from "./HeroMetrics.module.scss";
 import { readOption } from "actions/option";
 import { HERO_METRIC_HEADER, HERO_METRIC_SUBTEXT } from "constants.js";
 
@@ -36,17 +36,20 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
   const showMetrics = () => {
     return data.map((item, key) => {
       return (
-        <div className="metric-item" key={key}>
+        <div className={styles["metric-item"]} key={key}>
           <div className="d-flex justify-content-center">
-            <span className="odometer figures" id={`${item.slug}-odo`}>
+            <span
+              className={`${styles["figures"]} odometer`}
+              id={`${item.slug}-odo`}
+            >
               0
             </span>
-            <div className="figures" style={{ paddingTop: "3px" }}>
+            <div className={styles["figures"]} style={{ paddingTop: "3px" }}>
               {item.suffix}
             </div>
           </div>
 
-          <div className="label">{item.label}</div>
+          <div className={styles["label"]}>{item.label}</div>
         </div>
       );
     });
@@ -54,15 +57,15 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
 
   return (
     <>
-      <div className="hero-metrics-container" ref={myRef}>
-        <div className="header-container">
-          <div className="title">{headerText}</div>
-          <div className="content">{headerSubtext}</div>
+      <div className={styles["hero-metrics-container"]} ref={myRef}>
+        <div className={styles["header-container"]}>
+          <div className={styles["title"]}>{headerText}</div>
+          <div className={styles["content"]}>{headerSubtext}</div>
         </div>
         <VisibilitySensor onChange={onMetricsVisibility}>
-          <div className="metrics-container">{showMetrics()}</div>
+          <div className={styles["metrics-container"]}>{showMetrics()}</div>
         </VisibilitySensor>
-        <div className="arrow-placement">
+        <div className={styles["arrow-placement"]}>
           <div className="arrow-wrapper" onClick={scrollNext} />
         </div>
       </div>

@@ -45,7 +45,7 @@ function AdminNavbar() {
               <NavbarBrand href="#pablo">
                 <img
                   alt="..."
-                  src={require("assets/img/brand/nextjs_argon_white.png")}
+                  src={"assets/img/brand/nextjs_argon_white.png"}
                 />
               </NavbarBrand>
             </span>
@@ -71,7 +71,7 @@ function AdminNavbar() {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link href="/admin/dashboard">
-                    <img alt="..." src={require("assets/img/brand/blue.png")} />
+                    <img alt="..." src={"assets/img/brand/blue.png"} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

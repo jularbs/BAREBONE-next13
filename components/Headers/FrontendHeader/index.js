@@ -1,13 +1,13 @@
-import "./styles.scss";
+import styles from "./FrontendHeader.module.scss";
 
 const FrontendHeader = () => {
   return (
     <>
-      <div className="frontend-header-container">
-        <img src="/logos/main-color.png" className="logo" height="50px" />
+      <div className={styles["frontend-header-container"]}>
+        <img src="/logos/main-color.png" className={styles["logo"]} height="50px" />
 
         {/* Desktop Navigation */}
-        <nav className="desktop-nav">
+        <nav className={styles["desktop-nav"]}>
           <ul>
             <li>Our Story</li>
             <li>Our Company</li>

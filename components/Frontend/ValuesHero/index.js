@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./ValuesHero.module.scss";
 
 import { useState, useEffect, forwardRef } from "react";
 import { WHY_MBC_COMPANY_VALUES, WHY_MBC_CORE_VALUES } from "constants.js";
@@ -26,27 +26,27 @@ const ValuesHero = forwardRef(({ next }, myRef) => {
 
   return (
     <>
-      <div className="values-section-container" ref={myRef}>
-        <div className="title">Why MBC?</div>
-        <div className="core">
+      <div className={styles["values-section-container"]} ref={myRef}>
+        <div className={styles["title"]}>Why MBC?</div>
+        <div className={styles["core"]}>
           <div
-            className="banner"
+            className={styles["banner"]}
             style={{
               backgroundImage: `url(${
                 companyValues.media ? getLink(companyValues.media) : ""
               })`,
             }}
           >
-            <div className="header">Company Values</div>
+            <div className={styles["header"]}>Company Values</div>
             <p>{companyValues.value}</p>
           </div>
-          <div className="content">
-            <div className="header">our core values</div>
+          <div className={styles["content"]}>
+            <div className={styles["header"]}>our core values</div>
             <p>{coreValues.value}</p>
           </div>
         </div>
         {next && (
-          <div className="arrow-placement">
+          <div className={styles["arrow-placement"]}>
             <div className="arrow-wrapper bg-black" onClick={scrollNext} />
           </div>
         )}

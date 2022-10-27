@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./GalleryTile.module.scss";
 import { useState, useEffect } from "react";
 
 import { readOptions, readOption } from "actions/option";
@@ -47,7 +47,7 @@ const GalleryTile = () => {
     return optionIndex.map((item, key) => {
       return (
         <div
-          className={`tile-item ${key == 0 || key == 5 ? "span-2" : ""}`}
+          className={`${styles["tile-item"]} ${key == 0 || key == 5 ? styles["span-2"] : ""}`}
           key={key}
           style={{
             backgroundImage: `url(${
@@ -61,9 +61,9 @@ const GalleryTile = () => {
 
   return (
     <>
-      <div className="gallery-tile-container">
-        <div className="content-wrapper">{description.value}</div>
-        <div className="tile-container">{showTiles()}</div>
+      <div className={styles["gallery-tile-container"]}>
+        <div className={styles["content-wrapper"]}>{description.value}</div>
+        <div className={styles["tile-container"]}>{showTiles()}</div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./JobsSection.module.scss";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -21,12 +21,12 @@ const JobsSection = () => {
   const showOpenings = () => {
     return jobPostingList.map((job, key) => {
       return (
-        <div className="jobsItem">
-          <div className="title">{job.position}</div>
-          <div className="requirements">{job.requirements}</div>
-          <div className="company">{job.company}</div>
-          <div className="link">
-            <a href={job.destinationURL} target="_blank" className="openingLink">
+        <div className={styles["jobsItem"]}>
+          <div className={styles["title"]}>{job.position}</div>
+          <div className={styles["requirements"]}>{job.requirements}</div>
+          <div className={styles["company"]}>{job.company}</div>
+          <div className={styles["link"]}>
+            <a href={job.destinationURL} target="_blank" className={styles["openingLink"]}>
               APPLY NOW
             </a>
           </div>
@@ -37,19 +37,19 @@ const JobsSection = () => {
 
   return (
     <>
-      <div className="jobsSectionContainer">
-        <h1 className="header">Join our team!</h1>
+      <div className={styles["jobsSectionContainer"]}>
+        <h1 className={styles["header"]}>Join our team!</h1>
         {/* Search Bar */}
-        <div className="searchContainer">
+        <div className={styles["searchContainer"]}>
           <input
-            className="searchWrapper"
+            className={styles["searchWrapper"]}
             type="text"
             placeholder="Search for Job"
           />
         </div>
-        <div className="jobsContainer">{showOpenings()}</div>
+        <div className={styles["jobsContainer"]}>{showOpenings()}</div>
         <Link href="/work-with-us/internship">
-          <div className="internshipCTA">APPLY FOR INTERNSHIP</div>
+          <div className={styles["internshipCTA"]}>APPLY FOR INTERNSHIP</div>
         </Link>
       </div>
     </>

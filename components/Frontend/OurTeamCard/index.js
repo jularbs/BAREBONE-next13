@@ -1,6 +1,5 @@
-import "./styles.scss";
+import styles from "./OurTeamCard.module.scss";
 import { forwardRef } from "react";
-import Link from "next/link";
 import { Col, Row } from "reactstrap";
 
 const OurTeamCard = forwardRef(({ next, data, reverse }, myRef) => {
@@ -13,7 +12,9 @@ const OurTeamCard = forwardRef(({ next, data, reverse }, myRef) => {
   return (
     <>
       <div
-        className={`our-team-container ${reverse ? "reverse" : ""}`}
+        className={`${styles["our-team-container"]} ${
+          reverse ? styles.reverse : ""
+        }`}
         ref={myRef}
       >
         <Col
@@ -22,15 +23,17 @@ const OurTeamCard = forwardRef(({ next, data, reverse }, myRef) => {
           className="px-0 d-flex justify-content-center align-items-center"
         >
           <div
-            className="content-container"
+            className={styles["content-container"]}
             style={{ backgroundImage: `url("${data.logoLocation}")` }}
           >
-            <div className="bg-overlay"></div>
-            <div className="content-wrapper">
-              {data && data.title && <div className="title">{data.title}</div>}
+            <div className={styles["bg-overlay"]}></div>
+            <div className={styles["content-wrapper"]}>
+              {data && data.title && (
+                <div className={styles["title"]}>{data.title}</div>
+              )}
               {data && data.content && (
                 <div
-                  className="content"
+                  className={styles["content"]}
                   dangerouslySetInnerHTML={{ __html: data.content }}
                 />
               )}
@@ -40,13 +43,13 @@ const OurTeamCard = forwardRef(({ next, data, reverse }, myRef) => {
         <Col lg={6} sm={12} className="px-0">
           {data && data.imgLocation && (
             <div
-              className="img-container"
+              className={styles["img-container"]}
               style={{ backgroundImage: `url("${data.imgLocation}")` }}
             ></div>
           )}
         </Col>
         {next && (
-          <div className="arrow-placement">
+          <div className={styles["arrow-placement"]}>
             <div className="arrow-wrapper bg-black" onClick={scrollNext} />
           </div>
         )}

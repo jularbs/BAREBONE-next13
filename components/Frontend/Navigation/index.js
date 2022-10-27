@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./Navigation.module.scss";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -8,93 +8,93 @@ const Navigation = () => {
   const [visible, setVisible] = useState(false);
   return (
     <>
-      <div className="navigation-container">
+      <div className={styles["navigation-container"]}>
         <Link href="/">
           <img
             src="/logos/main-color.png"
             height="50px"
-            className="logo-wrapper"
+            className={styles["logo-wrapper"]}
             alt=""
           />
         </Link>
         {/* DESKTOP NAVIGATION */}
-        <nav className="desktop-nav-wrapper">
+        <nav className={styles["desktop-nav-wrapper"]}>
           <Link href="/our-story">
-            <div className="nav-item">OUR STORY</div>
+            <div className={styles["nav-item"]}>OUR STORY</div>
           </Link>
-          <div className="nav-item">
+          <div className={styles["nav-item"]}>
             OUR COMPANY
-            <div className="dropdown-wrapper">
+            <div className={styles["dropdown-wrapper"]}>
               <Link href="/our-company">
-                <div className="dropdown-item">HISTORY</div>
+                <div className={styles["dropdown-item"]}>HISTORY</div>
               </Link>
               <Link href="/our-company/vision-and-culture">
-                <div className="dropdown-item">VISION AND CULTURE</div>
+                <div className={styles["dropdown-item"]}>VISION AND CULTURE</div>
               </Link>
               <Link href="/our-company/leadership">
-                <div className="dropdown-item">LEADERSHIP</div>
+                <div className={styles["dropdown-item"]}>LEADERSHIP</div>
               </Link>
               <Link href="/our-company/our-teams">
-                <div className="dropdown-item">OUR TEAMS</div>
+                <div className={styles["dropdown-item"]}>OUR TEAMS</div>
               </Link>
               <Link href="/our-company/csr">
-                <div className="dropdown-item">
+                <div className={styles["dropdown-item"]}>
                   CORPORATE SOCIAL RESPONSIBILITY
                 </div>
               </Link>
               <Link href="/investor-relations">
-                <div className="dropdown-item">INVESTOR RELATIONS</div>
+                <div className={styles["dropdown-item"]}>INVESTOR RELATIONS</div>
               </Link>
             </div>
           </div>
-          <div className="nav-item">
+          <div className={styles["nav-item"]}>
             OUR BUSINESS
-            <div className="dropdown-wrapper">
+            <div className={styles["dropdown-wrapper"]}>
               <Link href="/our-businesses/radio">
-                <div className="dropdown-item">RADIO</div>
+                <div className={styles["dropdown-item"]}>RADIO</div>
               </Link>
               <Link href="/our-businesses/tv">
-                <div className="dropdown-item">TV</div>
+                <div className={styles["dropdown-item"]}>TV</div>
               </Link>
               <Link href="/our-businesses/digital">
-                <div className="dropdown-item">DIGITAL</div>
+                <div className={styles["dropdown-item"]}>DIGITAL</div>
               </Link>
               <Link href="/our-businesses/events">
-                <div className="dropdown-item">EVENTS</div>
+                <div className={styles["dropdown-item"]}>EVENTS</div>
               </Link>
               <Link href="/our-businesses/promos">
-                <div className="dropdown-item">PROMOS</div>
+                <div className={styles["dropdown-item"]}>PROMOS</div>
               </Link>
               <Link href="/our-businesses/talents">
-                <div className="dropdown-item">TALENTS</div>
+                <div className={styles["dropdown-item"]}>TALENTS</div>
               </Link>
             </div>
           </div>
           <Link href="/collaborate-with-us">
-            <div className="nav-item">COLLABORATE WITH US</div>
+            <div className={styles["nav-item"]}>COLLABORATE WITH US</div>
           </Link>
-          <div className="nav-item">
+          <div className={styles["nav-item"]}>
             WORK WITH US
-            <div className="dropdown-wrapper">
+            <div className={styles["dropdown-wrapper"]}>
               <Link href="/work-with-us">
-                <div className="dropdown-item">WHY MBC?</div>
+                <div className={styles["dropdown-item"]}>WHY MBC?</div>
               </Link>
               <Link href="/work-with-us/internship">
-                <div className="dropdown-item">INTERNSHIP PROGRAM</div>
+                <div className={styles["dropdown-item"]}>INTERNSHIP PROGRAM</div>
               </Link>
               <Link href="/work-with-us/careers">
-                <div className="dropdown-item">CAREER OPPORTUNITIES</div>
+                <div className={styles["dropdown-item"]}>CAREER OPPORTUNITIES</div>
               </Link>
             </div>
           </div>
           <Link href="/contact-us">
-            <div className="nav-item">CONTACT US</div>
+            <div className={styles["nav-item"]}>CONTACT US</div>
           </Link>
         </nav>
 
         {/* MOBILE NAVIGATION */}
         <div
-          className={`close-wrapper ${visible ? "open" : ""}`}
+          className={`${styles["close-wrapper"]} ${visible ? styles.open : ""}`}
           onClick={() => {
             setVisible(!visible);
           }}
@@ -104,13 +104,13 @@ const Navigation = () => {
           <div></div>
         </div>
 
-        <nav className={`nav-wrapper ${visible ? "visible" : ""}`}>
+        <nav className={`${styles["nav-wrapper"]} ${visible ? styles.visible : ""}`}>
           <Link href="/our-story">
-            <div className="nav-item">Our Story</div>
+            <div className={styles["nav-item"]}>Our Story</div>
           </Link>
           <div
-            className={`dropdown-nav ${
-              activeDropdown == "our-company" ? "active" : ""
+            className={`${styles["dropdown-nav"]} ${
+              activeDropdown == "our-company" ? styles.active : ""
             }`}
             onClick={() => {
               setActiveDropdown(
@@ -118,30 +118,30 @@ const Navigation = () => {
               );
             }}
           >
-            <div className="nav-item">Our Company</div>
-            <div className="dropdown-nav-wrapper">
+            <div className={styles["nav-item"]}>Our Company</div>
+            <div className={styles["dropdown-nav-wrapper"]}>
               <Link href="/our-company">
-                <div className="dropdown-item">History</div>
+                <div className={styles["dropdown-item"]}>History</div>
               </Link>
               <Link href="/our-company/vision-and-culture">
-                <div className="dropdown-item">Vision and Culture</div>
+                <div className={styles["dropdown-item"]}>Vision and Culture</div>
               </Link>
               <Link href="/our-company/leadership">
-                <div className="dropdown-item">Leadership</div>
+                <div className={styles["dropdown-item"]}>Leadership</div>
               </Link>
               <Link href="/our-company/csr">
-                <div className="dropdown-item">
+                <div className={styles["dropdown-item"]}>
                   Corporate Social Responsibility
                 </div>
               </Link>
               <Link href="/investor-relations">
-                <div className="dropdown-item">Investor Relations</div>
+                <div className={styles["dropdown-item"]}>Investor Relations</div>
               </Link>
             </div>
           </div>
           <div
-            className={`dropdown-nav ${
-              activeDropdown == "our-business" ? "active" : ""
+            className={`${styles["dropdown-nav"]} ${
+              activeDropdown == "our-business" ? styles.active : ""
             }`}
             onClick={() => {
               setActiveDropdown(
@@ -149,36 +149,36 @@ const Navigation = () => {
               );
             }}
           >
-            <div className="nav-item">Our Business</div>
-            <div className="dropdown-nav-wrapper">
+            <div className={styles["nav-item"]}>Our Business</div>
+            <div className={styles["dropdown-nav-wrapper"]}>
               <Link href="/our-businesses/radio">
-                <div className="dropdown-item">RADIO</div>
+                <div className={styles["dropdown-item"]}>RADIO</div>
               </Link>
               <Link href="/our-businesses/tv">
-                <div className="dropdown-item">TV</div>
+                <div className={styles["dropdown-item"]}>TV</div>
               </Link>
               <Link href="/our-businesses/digital">
-                <div className="dropdown-item">DIGITAL</div>
+                <div className={styles["dropdown-item"]}>DIGITAL</div>
               </Link>
               <Link href="/our-businesses/events">
-                <div className="dropdown-item">EVENTS</div>
+                <div className={styles["dropdown-item"]}>EVENTS</div>
               </Link>
               <Link href="/our-businesses/promos">
-                <div className="dropdown-item">PROMOS</div>
+                <div className={styles["dropdown-item"]}>PROMOS</div>
               </Link>
               <Link href="/our-businesses/talents">
-                <div className="dropdown-item">TALENTS</div>
+                <div className={styles["dropdown-item"]}>TALENTS</div>
               </Link>
             </div>
           </div>
           <Link href="/collaborate-with-us">
-            <div className="nav-item">Collaborate With Us</div>
+            <div className={styles["nav-item"]}>Collaborate With Us</div>
           </Link>
           <Link href="/work-with-us">
-            <div className="nav-item">Work With Us</div>
+            <div className={styles["nav-item"]}>Work With Us</div>
           </Link>
           <Link href="/contact-us">
-            <div className="nav-item">Contact Us</div>
+            <div className={styles["nav-item"]}>Contact Us</div>
           </Link>
         </nav>
       </div>

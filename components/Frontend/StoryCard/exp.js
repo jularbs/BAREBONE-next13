@@ -1,4 +1,4 @@
-import "./exp.scss";
+import styles from "./StoryCard.module.scss";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { forwardRef } from "react";
@@ -26,16 +26,16 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
       return (
         <>
           <div
-            className={`timeline-item ${index == labelIndex ? "active" : ""} ${
+            className={`${styles["timeline-item"]} ${index == labelIndex ? styles.active : ""} ${
               index == labelIndex + 1 ? "arrow-wrapper" : ""
             }`}
             onClick={() => {
               if (index == labelIndex + 1) scrollNext();
             }}
           >
-            <div className="label">{item}</div>
+            <div className={styles["label"]}>{item}</div>
           </div>
-          <div className="timeline-line" key={index}></div>
+          <div className={styles["timeline-line"]} key={index}></div>
         </>
       );
     });
@@ -44,44 +44,44 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
   return (
     <>
       <div
-        className="storycard-container"
+        className={styles["storycard-container"]}
         style={{ backgroundImage: `url('${getLink(data.background)}')` }}
         ref={myRef}
       >
         <div className="black-gradient-overlay" />
 
-        <div className="content">
+        <div className={styles["content"]}>
           <Row>
             <Col lg={6} sm={12} xs={12}>
-              <div className="img-container">
+              <div className={styles["img-container"]}>
                 {data.image && (
-                  <img className="img-wrapper" src={getLink(data.image)} />
+                  <img className={styles["img-wrapper"]} src={getLink(data.image)} />
                 )}
               </div>
             </Col>
             <Col lg={6} sm={12} xs={12}>
-              <div className="details-card">
-                <div className="label">{data.label}</div>
-                <div className="title">{data.title}</div>
-                <div className="excerpt">{data.excerpt}</div>
+              <div className={styles["details-card"]}>
+                <div className={styles["label"]}>{data.label}</div>
+                <div className={styles["title"]}>{data.title}</div>
+                <div className={styles["excerpt"]}>{data.excerpt}</div>
               </div>
             </Col>
           </Row>
           <Row>
             <Col>
-              <div className="timeline-container">
-                <div className="timeline-wrapper">
-                  <IoChevronBackOutline className="icon" />
-                  <div className="timeline-line"></div>
+              <div className={styles["timeline-container"]}>
+                <div className={styles["timeline-wrapper"]}>
+                  <IoChevronBackOutline className={styles["icon"]} />
+                  <div className={styles["timeline-line"]}></div>
 
                   {showTimeline(timeline)}
 
-                  <IoChevronForwardOutline className="icon" />
+                  <IoChevronForwardOutline className={styles["icon"]} />
 
                   {before && (
                     <>
-                      <IoChevronBackOutline className="icon" />
-                      <div className="timeline-line"></div>
+                      <IoChevronBackOutline className={styles["icon"]} />
+                      <div className={styles["timeline-line"]}></div>
                       {showTimeline(before)}
                     </>
                   )}
@@ -89,22 +89,22 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
                   {/* next */}
                   {current && (
                     <>
-                      <div className="timeline-item active">
-                        <div className="label">{current}</div>
+                      <div className={`${styles["timeline-item"]} ${styles.active}`}>
+                        <div className={styles["label"]}>{current}</div>
                       </div>
-                      <div className="timeline-line"></div>
+                      <div className={styles["timeline-line"]}></div>
                     </>
                   )}
 
                   {nextLabel && (
                     <>
                       <div
-                        className="timeline-item arrow-wrapper"
+                        className={`${styles["timeline-item"]} arrow-wrapper`}
                         onClick={scrollNext}
                       >
-                        <div className="label">{nextLabel}</div>
+                        <div className={styles["label"]}>{nextLabel}</div>
                       </div>
-                      <div className="timeline-line"></div>
+                      <div className={styles["timeline-line"]}></div>
                     </>
                   )}
 
@@ -112,7 +112,7 @@ const StoryCard = forwardRef(({ next, data, timeline }, myRef) => {
                   {futures && (
                     <>
                       {showTimeline(futures)}
-                      <IoChevronForwardOutline className="icon" />
+                      <IoChevronForwardOutline className={styles["icon"]} />
                     </>
                   )}
                 </div>

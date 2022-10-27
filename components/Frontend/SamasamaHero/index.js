@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./SamasamaHero.module.scss";
 
 import { forwardRef } from "react";
 import Link from "next/link";
@@ -14,22 +14,28 @@ const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
 
   return (
     <>
-      <div className="sama-sama-container" ref={myRef}>
+      <div className={styles["sama-sama-container"]} ref={myRef}>
         {next && (
-          <div className="arrow-placement">
+          <div className={styles["arrow-placement"]}>
             <div className="arrow-wrapper" onClick={scrollNext} />
           </div>
         )}
-        <div className="content">
+        <div className={styles["content"]}>
           {imgLocation && (
-            <img src={imgLocation} width="100%" className="logo-img" alt="" />
+            <img
+              src={imgLocation}
+              width="100%"
+              className={styles["logo-img"]}
+              alt=""
+            />
           )}
 
-          {content && <div className="excerpt">{content}</div>}
+          {content && <div className={styles["excerpt"]}>{content}</div>}
           {ctaLink && ctaText && (
             <Link href={data.ctaLink}>
-              <button className="btn btn-cta py-3">
-                {data.ctaText} <img src="/common/arrow-black.svg" className="ml-3"/>
+              <button className={`btn ${styles["btn-cta"]} py-3`}>
+                {data.ctaText}{" "}
+                <img src="/common/arrow-black.svg" className="ml-3" />
               </button>
             </Link>
           )}
@@ -41,7 +47,7 @@ const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
               : "/bg/sama-sama-desktop.svg"
           }
           width="100%"
-          className="desktop-bg"
+          className={styles["desktop-bg"]}
           alt=""
         />
         <img
@@ -51,7 +57,7 @@ const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
               : "/bg/sama-sama-mobile.svg"
           }
           width="100%"
-          className="mobile-bg"
+          className={styles["mobile-bg"]}
           alt=""
         />
       </div>

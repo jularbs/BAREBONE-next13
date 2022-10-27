@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./CollabTilesSection.module.scss";
 
 import { forwardRef, useState, useEffect } from "react";
 import { Modal, ModalBody, Row, Col } from "reactstrap";
@@ -42,10 +42,10 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
       <Modal
         toggle={() => setModalOpen(!modalOpen)}
         isOpen={modalOpen}
-        className="collab-modal"
+        className={styles["collab-modal"]}
       >
         <ModalBody>
-          <div className="collab-details-container">
+          <div className={styles["collab-details-container"]}>
             <button
               type="button"
               class="close-button-circle"
@@ -57,24 +57,24 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
             </button>
             <Row>
               <Col lg={6}>
-                <div className="content-container">
-                  <div className="company-wrapper">
+                <div className={styles["content-container"]}>
+                  <div className={styles["company-wrapper"]}>
                     {activeCollabData.company}
                   </div>
-                  <div className="campaign-wrapper">
+                  <div className={styles["campaign-wrapper"]}>
                     {activeCollabData.campaign}
                   </div>
-                  <div className="content-wrapper">
+                  <div className={styles["content-wrapper"]}>
                     {activeCollabData.content}
                   </div>
                 </div>
               </Col>
               <Col lg={6}>
-                <div className="video-container">
+                <div className={styles["video-container"]}>
                   <div className="embed-responsive embed-responsive-16by9">
                     <ReactPlayer
                       url={activeCollabData.videoSource}
-                      className="player"
+                      className={styles["player"]}
                       width="100%"
                       height="100%"
                     />
@@ -92,7 +92,7 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
     return collaborationList.map((item, key) => {
       return (
         <div
-          className="tile-item"
+          className={styles["tile-item"]}
           key={key}
           style={{
             backgroundImage: `url("${getLink(item.cover)}")`,
@@ -102,9 +102,9 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
             setActiveCollabData(item);
           }}
         >
-          <div className="tile-content">
-            <div className="company-wrapper">{item.company}</div>
-            <div className="campaign-wrapper">{item.campaign}</div>
+          <div className={styles["tile-content"]}>
+            <div className={styles["company-wrapper"]}>{item.company}</div>
+            <div className={styles["campaign-wrapper"]}>{item.campaign}</div>
           </div>
         </div>
       );
@@ -113,19 +113,19 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
   return (
     <>
       {showModal()}
-      <div className="collab-tiles-section" ref={myRef}>
+      <div className={styles["collab-tiles-section"]} ref={myRef}>
         <Col lg={4} md={12} className="px-0">
-          <div className="content-wrapper">
-            <div className="header">{headerText}</div>
-            <div className="description">{subText}</div>
+          <div className={styles["content-wrapper"]}>
+            <div className={styles["header"]}>{headerText}</div>
+            <div className={styles["description"]}>{subText}</div>
           </div>
         </Col>
         <Col lg={8} md={12} className="px-0">
-          <div className="tiles-grid-wrapper">{showCollabList()}</div>
+          <div className={styles["tiles-grid-wrapper"]}>{showCollabList()}</div>
         </Col>
 
         {next && (
-          <div className="arrow-placement">
+          <div className={styles["arrow-placement"]}>
             <div className="arrow-wrapper" onClick={scrollNext} />
           </div>
         )}

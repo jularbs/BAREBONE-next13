@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./LogoShowcase.module.scss";
 
 import { useState, useEffect } from "react";
 
@@ -25,7 +25,7 @@ const LogoShowcase = () => {
 
   return (
     <>
-      <div className="logo-showcase-container">{showLogos()}</div>
+      <div className={styles["logo-showcase-container"]}>{showLogos()}</div>
     </>
   );
 };

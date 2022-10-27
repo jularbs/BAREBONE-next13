@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./HeroBeforeAfter.module.scss";
 
 import { forwardRef, useState } from "react";
 import { getLink } from "actions/media";
@@ -16,34 +16,34 @@ const HeroBeforeAfter = forwardRef(({ next, then, now }, myRef) => {
 
   return (
     <>
-      <div className="hero-beforeafter-container" ref={myRef}>
-        <div className="hero-ba-item background">
+      <div className={styles["hero-beforeafter-container"]} ref={myRef}>
+        <div className={`${styles["hero-ba-item"]} ${styles["background"]}`}>
           <div
-            className="img-container"
+            className={styles["img-container"]}
             style={{ backgroundImage: `url("${getLink(now.media)}")` }}
           >
-            <div className="content">
-              <div className="header">NOW</div>
-              <div className="excerpt">{now.value}</div>
+            <div className={styles["content"]}>
+              <div className={styles["header"]}>NOW</div>
+              <div className={styles["excerpt"]}>{now.value}</div>
             </div>
             <div className="black-gradient-overlay-to-left"></div>
           </div>
         </div>
-        <div className="hero-ba-item foreground" style={{ width: `${width}%` }}>
+        <div className={`${styles["hero-ba-item"]} ${styles["foreground"]}`} style={{ width: `${width}%` }}>
           <div
-            className="img-container"
+            className={styles["img-container"]}
             style={{
               backgroundImage: `url("${getLink(then.media)}")`,
             }}
           >
-            <div className="content">
-              <div className="header">THEN</div>
-              <div className="excerpt">{then.value}</div>
+            <div className={styles["content"]}>
+              <div className={styles["header"]}>THEN</div>
+              <div className={styles["excerpt"]}>{then.value}</div>
             </div>
             <div className="black-gradient-overlay-to-left"></div>
           </div>
 
-          <div className="label">
+          <div className={styles["label"]}>
             <div>
               swipe <strong>now</strong>
             </div>
@@ -59,9 +59,9 @@ const HeroBeforeAfter = forwardRef(({ next, then, now }, myRef) => {
           onChange={(e) => {
             setWidth(e.target.value);
           }}
-          className="slider-ba"
+          className={styles["slider-ba"]}
         />
-        <div className="arrow-placement">
+        <div className={styles["arrow-placement"]}>
           <div className="arrow-wrapper" onClick={scrollNext} />
         </div>
       </div>

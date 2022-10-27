@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./WorkWithUsSection.module.scss";
 
 import { Fa500Px, FaAddressCard, FaGlasses, FaSearch } from "react-icons/fa";
 import { IoChevronDownOutline } from "react-icons/io5";
@@ -32,13 +32,13 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
     faqs.map((item, key) => {
       return (
         <div
-          className={`questionItem ${
-            activeQuestion === item._id ? "active" : ""
+          className={`${styles["questionItem"]} ${
+            activeQuestion === item._id ? styles.active : ""
           }`}
           key={key}
         >
           <div
-            className="question"
+            className={styles["question"]}
             onClick={() => {
               if (activeQuestion !== item._id) {
                 setActiveQuestion(item._id);
@@ -48,14 +48,14 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
             }}
           >
             <div>
-              <div className="englishTranslation">{item.englishQuestion}</div>
-              <div className="tagalogTranslation">{item.tagalogQuestion}</div>
+              <div className={styles["englishTranslation"]}>{item.englishQuestion}</div>
+              <div className={styles["tagalogTranslation"]}>{item.tagalogQuestion}</div>
             </div>
-            <IoChevronDownOutline className="arrow" />
+            <IoChevronDownOutline className={styles["arrow"]} />
           </div>
-          <div className="answer">
+          <div className={styles["answer"]}>
             <div>{item.englishAnswer}</div>
-            <div className="tagalog">{item.tagalogAnswer}</div>
+            <div className={styles["tagalog"]}>{item.tagalogAnswer}</div>
           </div>
         </div>
       );
@@ -69,28 +69,28 @@ const WorkWithUsSection = forwardRef(({}, myRef) => {
 
   return (
     <>
-      <div className="workWithUsSection" ref={myRef}>
-        <div className="faqs">
-          <div className="topbar">
-            <div className="searchContainer">
+      <div className={styles["workWithUsSection"]} ref={myRef}>
+        <div className={styles["faqs"]}>
+          <div className={styles["topbar"]}>
+            <div className={styles["searchContainer"]}>
               <input
                 type="text"
-                className="searchWrapper"
+                className={styles["searchWrapper"]}
                 placeholder="Search"
               ></input>
-              <FaSearch className="searchIcon" />
+              <FaSearch className={styles["searchIcon"]} />
             </div>
           </div>
 
-          <div className="questionsContainer">{showQuestions()}</div>
+          <div className={styles["questionsContainer"]}>{showQuestions()}</div>
         </div>
 
-        <div className="testimonials">
-          <div className="header">What our employees say about us</div>
-          <div className="testimonial-list-container">{showTestimonials()}</div>
+        <div className={styles["testimonials"]}>
+          <div className={styles["header"]}>What our employees say about us</div>
+          <div className={styles["testimonial-list-container"]}>{showTestimonials()}</div>
         </div>
 
-        <div className="ctaButtons">
+        <div className={styles["ctaButtons"]}>
           <Link href="work-with-us/careers">
             <button>search job postings</button>
           </Link>

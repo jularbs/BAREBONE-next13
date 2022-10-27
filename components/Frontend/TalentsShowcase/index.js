@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./TalentsShowcase.module.scss";
 import { forwardRef, useState } from "react";
 
 import AwesomeSlider from "react-awesome-slider";
@@ -60,7 +60,7 @@ const TalentsShowcase = forwardRef(({ next }, myRef) => {
       .map((item, key) => {
         return (
           <div
-            className="tile-item"
+            className={styles["tile-item"]}
             key={key}
             style={{
               backgroundImage: `url('${item.imgSrc}')`,
@@ -78,10 +78,10 @@ const TalentsShowcase = forwardRef(({ next }, myRef) => {
       <Modal
         toggle={() => setModalOpen(!modalOpen)}
         isOpen={modalOpen}
-        className="portait-modal"
+        className={styles["portait-modal"]}
       >
         <ModalBody>
-          <div className="portrait-details-container">
+          <div className={styles["portrait-details-container"]}>
             <button
               type="button"
               class="close-button-circle"
@@ -95,40 +95,40 @@ const TalentsShowcase = forwardRef(({ next }, myRef) => {
               <Col lg={4} className="">
                 <div
                   style={{ backgroundImage: `url(${testData.imgLocation})` }}
-                  className="img-details"
+                  className={styles["img-details"]}
                   alt=""
                 />
               </Col>
               <Col lg={8} className="px-0">
-                <div className="content">
-                  <div className="name">{testData.name}</div>
-                  <div className="position">{testData.position}</div>
-                  <div className="writeup">{testData.writeup}</div>
+                <div className={styles["content"]}>
+                  <div className={styles["name"]}>{testData.name}</div>
+                  <div className={styles["position"]}>{testData.position}</div>
+                  <div className={styles["writeup"]}>{testData.writeup}</div>
                   {testData.socMed && (
-                    <div className="socmed-icons">
+                    <div className={styles["socmed-icons"]}>
                       {testData.socMed.facebook && (
                         <a href={testData.socMed.facebook} target="_blank">
-                          <IoLogoFacebook className="socmed-item" />
+                          <IoLogoFacebook className={styles["socmed-item"]} />
                         </a>
                       )}
                       {testData.socMed.tiktok && (
                         <a href={testData.socMed.tiktok} target="_blank">
-                          <IoLogoTiktok className="socmed-item" />
+                          <IoLogoTiktok className={styles["socmed-item"]} />
                         </a>
                       )}
                       {testData.socMed.instagram && (
                         <a href={testData.socMed.instagram} target="_blank">
-                          <IoLogoInstagram className="socmed-item" />
+                          <IoLogoInstagram className={styles["socmed-item"]} />
                         </a>
                       )}
                       {testData.socMed.twitter && (
                         <a href={testData.socMed.twitter} target="_blank">
-                          <IoLogoTwitter className="socmed-item" />
+                          <IoLogoTwitter className={styles["socmed-item"]} />
                         </a>
                       )}
                       {testData.socMed.youtube && (
                         <a href={testData.socMed.youtube} target="_blank">
-                          <IoLogoYoutube className="socmed-item" />
+                          <IoLogoYoutube className={styles["socmed-item"]} />
                         </a>
                       )}
                     </div>
@@ -144,11 +144,11 @@ const TalentsShowcase = forwardRef(({ next }, myRef) => {
   return (
     <>
       {modalDetails()}
-      <div className="talents-hero-container" ref={myRef}>
-        <div className="talents-tile-container">
-          <div className="talents-tile-wrapper">{showTalentTiles()}</div>
+      <div className={styles["talents-hero-container"]} ref={myRef}>
+        <div className={styles["talents-tile-container"]}>
+          <div className={styles["talents-tile-wrapper"]}>{showTalentTiles()}</div>
         </div>
-        <div className="arrow-placement">
+        <div className={styles["arrow-placement"]}>
           <div className="arrow-wrapper bg-black" onClick={scrollNext} />
         </div>
       </div>

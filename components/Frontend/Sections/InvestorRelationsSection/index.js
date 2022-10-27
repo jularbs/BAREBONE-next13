@@ -1,17 +1,13 @@
 //TODOS: pick category with file then empty category then with file returns error
 
-import "./styles.scss";
+import styles from "./InvestorRelationsSection.module.scss";
 
 import { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import {
-  IoCaretBackOutline,
-  IoCaretForwardOutline,
   IoChevronForwardOutline,
   IoDownloadOutline,
   IoPrintOutline,
-  IoDownloadSharp,
-  IoPrintSharp,
 } from "react-icons/io5";
 
 import { getCategoryList } from "actions/categoryIR";
@@ -77,11 +73,13 @@ const InvestorRelationsSection = () => {
     return sorted.map((head, index) => {
       return (
         <div
-          className={`tab-item ${activeHeading == head.slug ? "active" : ""}`}
+          className={`${styles["tab-item"]} ${
+            activeHeading == head.slug ? styles.active : ""
+          }`}
           key={index}
         >
           <div
-            className="heading"
+            className={styles["heading"]}
             onClick={() => {
               if (activeHeading == head.slug) {
                 setActiveHeading(null);
@@ -91,9 +89,9 @@ const InvestorRelationsSection = () => {
             }}
           >
             <span>{head.label}</span>
-            <IoChevronForwardOutline className="chevron" />
+            <IoChevronForwardOutline className={styles["chevron"]} />
           </div>
-          <div className="children">{showChildren(head._id)}</div>
+          <div className={styles["children"]}>{showChildren(head._id)}</div>
         </div>
       );
     });
@@ -105,7 +103,7 @@ const InvestorRelationsSection = () => {
       .map((child, key) => {
         return (
           <div
-            className={`childItem ${activeChild == child._id ? "active" : ""}`}
+            className={`${styles["childItem"]} ${activeChild == child._id ? styles.active : ""}`}
             onClick={() => {
               setActiveChild(child._id);
             }}
@@ -140,43 +138,43 @@ const InvestorRelationsSection = () => {
 
   return (
     <>
-      <div className="investorRelationsSectionContainer">
+      <div className={styles["investorRelationsSectionContainer"]}>
         <Row noGutters>
-          <Col className="tabsRow">
-            <div className="tabsContainer">
-              <div className="header">
-                <div className="title">
+          <Col className={styles["tabsRow"]}>
+            <div className={styles["tabsContainer"]}>
+              <div className={styles["header"]}>
+                <div className={styles["title"]}>
                   <span>Investor</span> Relations
                 </div>
-                <div className="subtitle">SEC and PSE FILINGS</div>
+                <div className={styles["subtitle"]}>SEC and PSE FILINGS</div>
               </div>
-              <div className="tabsWrapper">{showHeadings()}</div>
+              <div className={styles["tabsWrapper"]}>{showHeadings()}</div>
             </div>
           </Col>
-          <Col className="pdfRow">
-            <div className={`pdfViewerContainer ${activeChild ? "show" : ""}`}>
+          <Col className={styles["pdfRow"]}>
+            <div className={`${styles["pdfViewerContainer"]} ${activeChild ? styles.show : ""}`}>
               {/* {activePdfNav && (
                 <>
                   <button
                     onClick={handlePageChange(-1)}
-                    className="btn-pdfNav prev"
+                    className={styles["btn-pdfNav prev"]}
                   >
-                    <IoCaretBackOutline className="__icon" />
+                    <IoCaretBackOutline className={styles["__icon"]} />
                   </button>
                   <button
                     onClick={handlePageChange(1)}
-                    className="btn-pdfNav next"
+                    className={styles["btn-pdfNav next"]}
                   >
-                    <IoCaretForwardOutline className="__icon" />
+                    <IoCaretForwardOutline className={styles["__icon"]} />
                   </button>
                 </>
               )} */}
 
-              <div className="pdfNavigator">
-                <div className="pdfSelector">
+              <div className={styles["pdfNavigator"]}>
+                <div className={styles["pdfSelector"]}>
                   <select onChange={handleFileChange}>{showFiles()}</select>
                   <div
-                    className="btn btn-default ml-2 close-control"
+                    className={`btn btn-default ml-2 ${styles["close-control"]}`}
                     onClick={() => {
                       setActiveChild("");
                     }}
@@ -186,16 +184,16 @@ const InvestorRelationsSection = () => {
                 </div>
                 {activePdfNav && (
                   <>
-                    <div className="pdfPagination">
+                    <div className={styles["pdfPagination"]}>
                       {pageNumber} / {numPages}
                     </div>
-                    {/* <div className="magnifyer">100%</div> */}
-                    <div className="tools">
-                      <a className="download" target="_blank" href={activeFile}>
-                        <IoDownloadOutline className="icon" />
+                    {/* <div className={styles["magnifyer"]}>100%</div> */}
+                    <div className={styles["tools"]}>
+                      <a className={styles["download"]} target="_blank" href={activeFile}>
+                        <IoDownloadOutline className={styles["icon"]} />
                       </a>
                       <span
-                        className="print"
+                        className={styles["print"]}
                         onClick={() => {
                           window.open(
                             activeFile,
@@ -204,17 +202,17 @@ const InvestorRelationsSection = () => {
                           );
                         }}
                       >
-                        <IoPrintOutline className="icon" />
+                        <IoPrintOutline className={styles["icon"]} />
                       </span>
                     </div>
                   </>
                 )}
               </div>
-              <div className="pdfWindow">
+              <div className={styles["pdfWindow"]}>
                 <Document
                   file={activeFile}
                   onLoadSuccess={onDocumentLoadSuccess}
-                  className="pdfWrapper"
+                  className={styles["pdfWrapper"]}
                 >
                   {/* <Page pageNumber={pageNumber} /> */}
                   {Array.apply(null, Array(numPages))

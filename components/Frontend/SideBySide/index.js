@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./SideBySide.module.scss";
 import { forwardRef } from "react";
 import Link from "next/link";
 import { Col, Row } from "reactstrap";
@@ -14,7 +14,9 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
   return (
     <>
       <div
-        className={`side-by-side-container ${reverse ? "reverse" : ""}`}
+        className={`${styles["side-by-side-container"]} ${
+          reverse ? styles.reverse : ""
+        }`}
         ref={myRef}
       >
         <Col
@@ -22,20 +24,22 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
           sm={12}
           className="px-0 d-flex justify-content-center align-items-center"
         >
-          <div className="content-container">
+          <div className={styles["content-container"]}>
             {data && data.logoLocation && (
-              <img src={data.logoLocation} className="logo" />
+              <img src={data.logoLocation} className={styles["logo"]} />
             )}
-            {data && data.title && <div className="title">{data.title}</div>}
+            {data && data.title && (
+              <div className={styles["title"]}>{data.title}</div>
+            )}
             {data && data.content && (
               <div
-                className="content"
+                className={styles["content"]}
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             )}
             {data && data.ctaLabel && data.ctaLink && (
               <Link href={data.ctaLink}>
-                <button className="btn btn-cta py-3">
+                <button className={`btn ${styles["btn-cta"]} py-3`}>
                   {data.ctaLabel}
                   <CustomArrow className="navy reverse ml-3" width="20px" />
                 </button>
@@ -46,13 +50,13 @@ const SideBySide = forwardRef(({ next, data, reverse }, myRef) => {
         <Col lg={6} sm={12} className="px-0">
           {data && data.imgLocation && (
             <div
-              className="img-container"
+              className={styles["img-container"]}
               style={{ backgroundImage: `url("${data.imgLocation}")` }}
             ></div>
           )}
         </Col>
         {next && (
-          <div className="arrow-placement">
+          <div className={styles["arrow-placement"]}>
             <div className="arrow-wrapper bg-black" onClick={scrollNext} />
           </div>
         )}

@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./styles.module.scss";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { forwardRef } from "react";

@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./OurBusinessesSection.module.scss";
 
 import { Row, Col } from "reactstrap";
 import CompanyCard from "components/Frontend/CompanyCard";
@@ -34,7 +34,7 @@ const OurBusinessesSection = forwardRef(({ location }, myRef) => {
   };
   return (
     <>
-      <div className="business-showcase" ref={myRef}>
+      <div className={styles["business-showcase"]} ref={myRef}>
         <Row style={{ maxWidth: "1400px", margin: "0 auto" }}>
           {showCards()}
         </Row>
