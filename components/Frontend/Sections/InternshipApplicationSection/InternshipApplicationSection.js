@@ -1,6 +1,6 @@
 import "./InternshipApplicationSection.module.scss";
 
-import { Row, Col } from "reactstrap";
+import { Row, Col, Input } from "reactstrap";
 const InternshipApplicationSection = ({ requirements }) => {
   return (
     <>
@@ -44,17 +44,30 @@ const InternshipApplicationSection = ({ requirements }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col sm="12" xs="12" md="12" lg="12" xl="4" className="px-1">
                 <label>* Curriculum Vitae</label>
-                <input type="text" className="textInputWrapper"></input>
+                <label className="d-block btn btn-outline-primary btnUpload">
+                  Choose File...
+                  <Input type="file" hidden />
+                </label>
+                {/* <input type="text" className="textInputWrapper"></input> */}
               </Col>
-              <Col>
-                <label>* Endorsement Letter from School</label>
-                <input type="text" className="textInputWrapper"></input>
+              <Col sm="6" xs="12" md="6" lg="6" xl="4" className="px-1">
+                <label>* School Endorsement Letter</label>
+                <label className="d-block btn btn-outline-primary btnUpload">
+                  Choose File...
+                  <Input type="file" hidden />
+                </label>
               </Col>
-              <Col>
-                <label>* Endorsement Letter from KBP</label>
-                <input type="text" className="textInputWrapper"></input>
+              <Col sm="6" xs="12" md="6" lg="6" xl="4" className="px-1">
+                <label>* KBP Endorsement Letter</label>
+                <label className="d-block btn btn-outline-primary btnUpload mb-0">
+                  Choose File...
+                  <Input type="file" hidden />
+                </label>
+                <label className="subtext">
+                  For Communication Students Only
+                </label>
               </Col>
             </Row>
             <Row>
@@ -63,7 +76,7 @@ const InternshipApplicationSection = ({ requirements }) => {
                 <textarea rows="8" className="textInputWrapper"></textarea>
               </Col>
             </Row>
-            <div className="submitBtn">Submit</div>
+            <div className="btn submitBtn">Submit</div>
           </div>
         </div>
       </div>

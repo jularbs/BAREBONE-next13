@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "reactstrap";
+import { Row, Container } from "reactstrap";
 
 // layout for this page
 import Admin from "layouts/Admin.js";
@@ -12,6 +12,7 @@ function ContactUs() {
     <>
       <AlternativeHeader name="Contact Us" parentName="Pages" />
       <Container className="mt--6" fluid></Container>
+      <Row className="justify-content-center"></Row>
     </>
   );
 }
