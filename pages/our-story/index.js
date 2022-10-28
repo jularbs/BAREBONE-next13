@@ -4,11 +4,9 @@ import Navigation from "components/Frontend/Navigation";
 import HeroBasic from "components/Frontend/HeroBasic";
 import HeroBeforeAfter from "components/Frontend/HeroBeforeAfter";
 import GalleryTile from "components/Frontend/GalleryTile";
-
 import { useRef, useState, useEffect } from "react";
 import SamasamaHero from "components/Frontend/SamasamaHero";
 import { readOption } from "actions/option";
-
 import { readByLocation } from "actions/hero";
 
 import {

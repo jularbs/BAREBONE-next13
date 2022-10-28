@@ -1,5 +1,4 @@
-import React from "react";
-import App from "next/app";
+import React, { useEffect } from "react";
 import Head from "next/head";
 
 // plugins styles from node_modules
@@ -9,48 +8,61 @@ import "@fullcalendar/common/main.min.css";
 import "@fullcalendar/daygrid/main.min.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "select2/dist/css/select2.min.css";
-import "quill/dist/quill.core.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // plugins styles downloaded
 import "assets/vendor/nucleo/css/nucleo.css";
 // core styles
 import "assets/scss/nextjs-argon-dashboard-pro.scss?v1.1.0";
-import "assets/scss/user-defined.scss";
 
 import Footer from "components/Frontend/Footer";
+import "assets/scss/user-defined.scss";
 
-export default class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
+import { useRouter } from "next/router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+NProgress.configure({ showSpinner: true });
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
+export function App({ Component, pageProps }) {
+  const router = useRouter();
+  const Layout = Component.layout || (({ children }) => <>{children}</>);
 
-    return { pageProps };
-  }
+  useEffect(() => {
+    const handleStart = (url) => {
+      NProgress.start();
+    };
 
-  render() {
-    const { Component, pageProps } = this.props;
+    const handleStop = () => {
+      NProgress.done();
+    };
 
-    const Layout = Component.layout || (({ children }) => <>{children}</>);
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleStop);
+    router.events.on("routeChangeError", handleStop);
 
-    return (
-      <React.Fragment>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <title>MBC Media Group</title>
-        </Head>
-        <Layout>
-          <div className="container-min-h">
-            <Component {...pageProps} />
-            <Footer></Footer>
-          </div>
-        </Layout>
-      </React.Fragment>
-    );
-  }
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleStop);
+      router.events.off("routeChangeError", handleStop);
+    };
+  }, [router]);
+
+  return (
+    <React.Fragment>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>MBC Media Group</title>
+      </Head>
+      <Layout>
+        <div className="container-min-h">
+          <Component {...pageProps} />
+          <Footer></Footer>
+        </div>
+      </Layout>
+    </React.Fragment>
+  );
 }
+
+export default App;
