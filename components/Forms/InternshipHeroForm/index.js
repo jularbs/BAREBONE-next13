@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./InternshipHeroForm.module.scss";
 import React from "react";
 import {
   Row,
@@ -154,18 +154,18 @@ const InternshipHeroForm = ({ formTitle, location, fields }) => {
   const showShowcaseTiles = () => {
     return showcaseIndex.map((item, key) => {
       return (
-        <div className="showcase-item" key={key}>
+        <div className={`${styles["showcase-item"]}`} key={key}>
           {getShowcaseTile(item) && (
             <img
               src={getLink(getShowcaseTile(item)?.media)}
               alt=""
-              className="showcase-icon"
+              className={`${styles["showcase-icon"]}`}
             />
           )}
 
-          <div className="title">{getShowcaseTile(item)?.value}</div>
-          <div className="description">{getShowcaseTile(item)?.meta}</div>
-          <div className="control-wrapper">
+          <div className={`${styles["title"]}`}>{getShowcaseTile(item)?.value}</div>
+          <div className={`${styles["description"]}`}>{getShowcaseTile(item)?.meta}</div>
+          <div className={`${styles["control-wrapper"]}`}>
             <Button
               color="primary"
               onClick={() => {
@@ -413,8 +413,8 @@ const InternshipHeroForm = ({ formTitle, location, fields }) => {
             </Col>
             <Col lg="6">
               <h3>Internship Showcase</h3>
-              <div className="form-internship-showcase-container">
-                <div className="grid-container">{showShowcaseTiles()}</div>
+              <div className={`${styles["form-internship-showcase-container"]}`}>
+                <div className={`${styles["grid-container"]}`}>{showShowcaseTiles()}</div>
               </div>
             </Col>
           </Row>

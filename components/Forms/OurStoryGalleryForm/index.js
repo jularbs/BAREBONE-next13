@@ -1,4 +1,4 @@
-import "./styles.scss";
+import styles from "./OurStoryGalleryForm.module.scss";
 
 import React from "react";
 import {
@@ -160,7 +160,7 @@ const OurStoryGalleryForm = ({}) => {
     return optionIndex.map((item, key) => {
       return (
         <div
-          className={`tile-item ${key == 0 || key == 5 ? "span-2" : ""}`}
+          className={`${styles["tile-item"]} ${key == 0 || key == 5 ? styles["span-2"] : ""}`}
           key={key}
           style={{
             backgroundImage: `url(${
@@ -168,9 +168,9 @@ const OurStoryGalleryForm = ({}) => {
             })`,
           }}
         >
-          <div className="label">{key + 1}</div>
+          <div className={`${styles["label"]}`}>{key + 1}</div>
 
-          <div className="control-container">
+          <div className={`${styles["control-container"]}`}>
             <button
               className="btn btn-primary"
               onClick={() => {
@@ -284,8 +284,8 @@ const OurStoryGalleryForm = ({}) => {
               </FormGroup>
             </Col>
           </Row>
-          <div className="OurStoryGalleryFormContainer">
-            <div className="tile-container">{showTiles()}</div>
+          <div className={`${styles["OurStoryGalleryFormContainer"]}`}>
+            <div className={`${styles["tile-container"]}`}>{showTiles()}</div>
           </div>
         </CardBody>
       </Card>
