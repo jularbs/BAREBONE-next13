@@ -62,7 +62,7 @@ const InternshipApplicationSection = ({ requirements }) => {
               </Col>
             </Row>
             <Row>
-              <Col sm="12" xs="12" md="12" lg="12" xl="4" className="px-1">
+              <Col sm="12" xs="12" md="12" lg="12" xl="4">
                 <label>* Curriculum Vitae</label>
                 <label
                   className={`d-block btn btn-outline-primary ${styles["btnUpload"]}`}
@@ -71,7 +71,7 @@ const InternshipApplicationSection = ({ requirements }) => {
                   <Input type="file" hidden />
                 </label>
               </Col>
-              <Col sm="6" xs="12" md="6" lg="6" xl="4" className="px-1">
+              <Col sm="6" xs="12" md="6" lg="6" xl="4">
                 <label>* School Endorsement Letter</label>
                 <label
                   className={`d-block btn btn-outline-primary ${styles["btnUpload"]}`}
@@ -80,7 +80,7 @@ const InternshipApplicationSection = ({ requirements }) => {
                   <Input type="file" hidden />
                 </label>
               </Col>
-              <Col sm="6" xs="12" md="6" lg="6" xl="4" className="px-1">
+              <Col sm="6" xs="12" md="6" lg="6" xl="4">
                 <label>* KBP Endorsement Letter</label>
                 <label
                   className={`d-block btn btn-outline-primary ${styles["btnUpload"]}`}
@@ -102,7 +102,7 @@ const InternshipApplicationSection = ({ requirements }) => {
                 ></textarea>
               </Col>
             </Row>
-            <div className={styles["btn submitBtn"]}>Submit</div>
+            <div className={`${styles["submitBtn"]} btn`}>Submit</div>
           </div>
         </div>
       </div>

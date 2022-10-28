@@ -735,19 +735,19 @@ const BenefitsComponentForm = () => {
             <label className="form-control-label" htmlFor="title">
               Header Text
             </label>
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Header Text"
                 value={headerText}
                 onChange={(e) => {
                   setHeaderText(e.target.value);
                 }}
               />
-              <div class="input-group-append">
+              <div className="input-group-append">
                 <button
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   type="button"
                   onClick={handleHeaderSubmit(BENEFIT_HEADER_TEXT)}
                 >
@@ -761,19 +761,19 @@ const BenefitsComponentForm = () => {
             <label className="form-control-label" htmlFor="title">
               Header Subtext
             </label>
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Content"
                 value={headerSubtext}
                 onChange={(e) => {
                   setHeaderSubtext(e.target.value);
                 }}
               />
-              <div class="input-group-append">
+              <div className="input-group-append">
                 <button
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   type="button"
                   onClick={handleHeaderSubmit(BENEFIT_SUB_TEXT)}
                 >

@@ -48,12 +48,12 @@ const CollabTilesSection = forwardRef(({ next }, myRef) => {
           <div className={styles["collab-details-container"]}>
             <button
               type="button"
-              class="close-button-circle"
+              className="close-button-circle"
               onClick={() => {
                 setModalOpen(false);
               }}
             >
-              <span class="icon-x"></span>
+              <span className="icon-x"></span>
             </button>
             <Row>
               <Col lg={6}>

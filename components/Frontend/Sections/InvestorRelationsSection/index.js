@@ -103,10 +103,13 @@ const InvestorRelationsSection = () => {
       .map((child, key) => {
         return (
           <div
-            className={`${styles["childItem"]} ${activeChild == child._id ? styles.active : ""}`}
+            className={`${styles["childItem"]} ${
+              activeChild == child._id ? styles.active : ""
+            }`}
             onClick={() => {
               setActiveChild(child._id);
             }}
+            key={key}
           >
             {child.label}
           </div>
@@ -131,11 +134,6 @@ const InvestorRelationsSection = () => {
     setActiveFile(getLink(item.file));
   };
 
-  const handlePageChange = (direction) => () => {
-    if (pageNumber + direction > 0 && pageNumber + direction <= numPages)
-      setPageNumber(pageNumber + direction);
-  };
-
   return (
     <>
       <div className={styles["investorRelationsSectionContainer"]}>
@@ -152,24 +150,11 @@ const InvestorRelationsSection = () => {
             </div>
           </Col>
           <Col className={styles["pdfRow"]}>
-            <div className={`${styles["pdfViewerContainer"]} ${activeChild ? styles.show : ""}`}>
-              {/* {activePdfNav && (
-                <>
-                  <button
-                    onClick={handlePageChange(-1)}
-                    className={styles["btn-pdfNav prev"]}
-                  >
-                    <IoCaretBackOutline className={styles["__icon"]} />
-                  </button>
-                  <button
-                    onClick={handlePageChange(1)}
-                    className={styles["btn-pdfNav next"]}
-                  >
-                    <IoCaretForwardOutline className={styles["__icon"]} />
-                  </button>
-                </>
-              )} */}
-
+            <div
+              className={`${styles["pdfViewerContainer"]} ${
+                activeChild ? styles.show : ""
+              }`}
+            >
               <div className={styles["pdfNavigator"]}>
                 <div className={styles["pdfSelector"]}>
                   <select onChange={handleFileChange}>{showFiles()}</select>
@@ -187,9 +172,12 @@ const InvestorRelationsSection = () => {
                     <div className={styles["pdfPagination"]}>
                       {pageNumber} / {numPages}
                     </div>
-                    {/* <div className={styles["magnifyer"]}>100%</div> */}
                     <div className={styles["tools"]}>
-                      <a className={styles["download"]} target="_blank" href={activeFile}>
+                      <a
+                        className={styles["download"]}
+                        target="_blank"
+                        href={activeFile}
+                      >
                         <IoDownloadOutline className={styles["icon"]} />
                       </a>
                       <span
@@ -214,11 +202,10 @@ const InvestorRelationsSection = () => {
                   onLoadSuccess={onDocumentLoadSuccess}
                   className={styles["pdfWrapper"]}
                 >
-                  {/* <Page pageNumber={pageNumber} /> */}
                   {Array.apply(null, Array(numPages))
                     .map((x, i) => i + 1)
-                    .map((page) => (
-                      <Page pageNumber={page} />
+                    .map((page, key) => (
+                      <Page pageNumber={page} key={key} />
                     ))}
                 </Document>
               </div>

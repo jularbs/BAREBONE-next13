@@ -71,6 +71,8 @@
           font-size: 1rem;
           padding: 1rem;
           padding-left: 2rem;
+          text-transform: uppercase;
+          font-weight: 600;
           cursor: pointer;
 
           .chevron {
@@ -215,18 +217,26 @@
 
       .pdfPagination {
         justify-content: flex-start;
+        padding-top: 1rem;
+
         @include for-tablet-landscape-up {
           justify-content: center;
+          padding-top: 0;
         }
       }
       .tools {
+        padding-top: 1rem;
         justify-content: flex-end;
+
+        @include for-tablet-landscape-up {
+          padding-top: 0;
+        }
         .download,
         .print {
           padding: 0 5px;
           .icon {
             cursor: pointer;
-            width: 28px;
+            font-size: 28px;
             color: black;
           }
         }
@@ -237,10 +247,6 @@
       padding: 1rem;
       .pdfWrapper {
         margin: 0 auto;
-        .react-pdf__Page__canvas {
-          width: 100% !important;
-          height: auto !important;
-        }
       }
     }
   }

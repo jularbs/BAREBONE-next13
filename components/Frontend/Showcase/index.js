@@ -30,7 +30,7 @@ const Showcase = forwardRef(({ next, data }, myRef) => {
               <div className={styles["logo"]}>
                 <img src={getLink(item.logo)} height="30px" alt="" />
               </div>
-              <CustomArrow className="reverse arrow-icon" />
+              <CustomArrow className={`${styles["arrow-icon"]} reverse`} />
             </div>
           </Link>
         </Col>

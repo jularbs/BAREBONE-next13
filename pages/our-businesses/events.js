@@ -1,6 +1,4 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
-
 import Navigation from "components/Frontend/Navigation";
 import HeroBranding from "components/Frontend/HeroBranding";
 import ContactUsSection from "components/Frontend/Sections/ContactUsSection";
@@ -39,7 +37,6 @@ const EventsPage = ({ hero }) => {
           sm={12}
           header="Network initiated events"
         />
-
         <BasicPostViewer
           location={CLIENT_INITIATED_EVENTS}
           lg={6}
@@ -47,21 +44,17 @@ const EventsPage = ({ hero }) => {
           sm={12}
           header="Client initiated events"
         />
-        <ContactUsSection />
       </div>
+      <ContactUsSection />
     </>
   );
 };
 
 export async function getServerSideProps() {
-  // Fetch data from external API
   const hero = await readByLocation(HERO_EVENTS);
-  // const sbsList = await getSideBySideByLocation(OUR_BUSINESS_MBC_TELEVISION);
-  // Pass data to the page via props
   return {
     props: {
       hero: hero.data,
-      // sbsList: sbsList.data,
     },
   };
 }

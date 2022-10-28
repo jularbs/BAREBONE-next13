@@ -79,7 +79,7 @@ function Admin({ router, children }) {
         sidenavOpen={sidenavOpen}
         logo={{
           innerLink: "/",
-          imgSrc: "assets/img/brand/nextjs_argon_black.png",
+          imgSrc: "/logos/mbc-long.png",
           imgAlt: "...",
         }}
       />

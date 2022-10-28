@@ -19,8 +19,8 @@ const Navigation = () => {
         </Link>
         {/* DESKTOP NAVIGATION */}
         <nav className={styles["desktop-nav-wrapper"]}>
-          <Link href="/our-story">
-            <div className={styles["nav-item"]}>OUR STORY</div>
+          <Link href="/our-story" className={styles["nav-item"]}>
+            <div>OUR STORY</div>
           </Link>
           <div className={styles["nav-item"]}>
             OUR COMPANY
@@ -29,7 +29,9 @@ const Navigation = () => {
                 <div className={styles["dropdown-item"]}>HISTORY</div>
               </Link>
               <Link href="/our-company/vision-and-culture">
-                <div className={styles["dropdown-item"]}>VISION AND CULTURE</div>
+                <div className={styles["dropdown-item"]}>
+                  VISION AND CULTURE
+                </div>
               </Link>
               <Link href="/our-company/leadership">
                 <div className={styles["dropdown-item"]}>LEADERSHIP</div>
@@ -43,7 +45,9 @@ const Navigation = () => {
                 </div>
               </Link>
               <Link href="/investor-relations">
-                <div className={styles["dropdown-item"]}>INVESTOR RELATIONS</div>
+                <div className={styles["dropdown-item"]}>
+                  INVESTOR RELATIONS
+                </div>
               </Link>
             </div>
           </div>
@@ -70,8 +74,8 @@ const Navigation = () => {
               </Link>
             </div>
           </div>
-          <Link href="/collaborate-with-us">
-            <div className={styles["nav-item"]}>COLLABORATE WITH US</div>
+          <Link href="/collaborate-with-us" className={styles["nav-item"]}>
+            <div>COLLABORATE WITH US</div>
           </Link>
           <div className={styles["nav-item"]}>
             WORK WITH US
@@ -80,15 +84,19 @@ const Navigation = () => {
                 <div className={styles["dropdown-item"]}>WHY MBC?</div>
               </Link>
               <Link href="/work-with-us/internship">
-                <div className={styles["dropdown-item"]}>INTERNSHIP PROGRAM</div>
+                <div className={styles["dropdown-item"]}>
+                  INTERNSHIP PROGRAM
+                </div>
               </Link>
               <Link href="/work-with-us/careers">
-                <div className={styles["dropdown-item"]}>CAREER OPPORTUNITIES</div>
+                <div className={styles["dropdown-item"]}>
+                  CAREER OPPORTUNITIES
+                </div>
               </Link>
             </div>
           </div>
-          <Link href="/contact-us">
-            <div className={styles["nav-item"]}>CONTACT US</div>
+          <Link href="/contact-us" className={styles["nav-item"]}>
+            <div>CONTACT US</div>
           </Link>
         </nav>
 
@@ -104,7 +112,11 @@ const Navigation = () => {
           <div></div>
         </div>
 
-        <nav className={`${styles["nav-wrapper"]} ${visible ? styles.visible : ""}`}>
+        <nav
+          className={`${styles["nav-wrapper"]} ${
+            visible ? styles.visible : ""
+          }`}
+        >
           <Link href="/our-story">
             <div className={styles["nav-item"]}>Our Story</div>
           </Link>
@@ -124,7 +136,9 @@ const Navigation = () => {
                 <div className={styles["dropdown-item"]}>History</div>
               </Link>
               <Link href="/our-company/vision-and-culture">
-                <div className={styles["dropdown-item"]}>Vision and Culture</div>
+                <div className={styles["dropdown-item"]}>
+                  Vision and Culture
+                </div>
               </Link>
               <Link href="/our-company/leadership">
                 <div className={styles["dropdown-item"]}>Leadership</div>
@@ -135,7 +149,9 @@ const Navigation = () => {
                 </div>
               </Link>
               <Link href="/investor-relations">
-                <div className={styles["dropdown-item"]}>Investor Relations</div>
+                <div className={styles["dropdown-item"]}>
+                  Investor Relations
+                </div>
               </Link>
             </div>
           </div>

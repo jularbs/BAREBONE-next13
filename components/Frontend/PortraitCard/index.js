@@ -38,12 +38,12 @@ const PortraitCard = ({ data }) => {
           <div className={styles["portrait-details-container"]}>
             <button
               type="button"
-              class="close-button-circle"
+              className="close-button-circle"
               onClick={() => {
                 setModalOpen(false);
               }}
             >
-              <span class="icon-x"></span>
+              <span className="icon-x"></span>
             </button>
             <Row className="">
               <Col lg={4} className="">

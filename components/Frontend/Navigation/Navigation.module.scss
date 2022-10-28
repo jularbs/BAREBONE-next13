@@ -159,6 +159,7 @@
       font-weight: 700;
       text-transform: uppercase;
       cursor: pointer;
+      color: rgba(22, 37, 112, 1);
 
       &:hover {
         background-color: rgba(97, 46, 46, 0.05);
@@ -207,7 +208,7 @@
           color: white;
           min-width: 250px;
 
-          &:hover{
+          &:hover {
             background-color: rgba(18, 59, 134, 1);
           }
         }
@@ -215,8 +216,7 @@
 
       &.active,
       &:hover {
-
-        &::after{
+        &::after {
           position: absolute;
           content: "";
           width: 100%;

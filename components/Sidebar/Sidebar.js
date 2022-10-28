@@ -73,6 +73,7 @@ function Sidebar({
     routes.map((prop, key) => {
       if (prop.collapse) {
         initialState = {
+          key: key,
           [prop.state]: getCollapseInitialState(prop.views),
           ...getCollapseStates(prop.views),
           ...initialState,
@@ -110,13 +111,13 @@ function Sidebar({
       }
       if (prop.header) {
         return (
-          <>
+          <div key={key}>
             <hr className="my-2" />
             <h6 className="navbar-heading px-4 text-muted">
               <span className="docs-normal">{prop.header}</span>
               <span className="docs-mini">{prop.header[0]}</span>
             </h6>
-          </>
+          </div>
         );
       }
       if (prop.collapse) {

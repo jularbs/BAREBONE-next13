@@ -13,7 +13,7 @@ const ContactUsSection = () => {
               <Row>
                 <Col lg={12} sm={12}>
                   <FormGroup>
-                    <Input type="select">
+                    <Input type="select" className={styles["form-control"]}>
                       <option>
                         Choose the department you would like to contact
                       </option>
@@ -22,7 +22,7 @@ const ContactUsSection = () => {
                 </Col>
                 <Col lg={12} sm={12}>
                   <FormGroup>
-                    <Input type="select">
+                    <Input type="select" className={styles["form-control"]}>
                       <option>Please select from our business</option>
                     </Input>
                   </FormGroup>
@@ -30,50 +30,74 @@ const ContactUsSection = () => {
                 <Col lg={4} sm={12}>
                   <FormGroup>
                     <label htmlFor="companyName">* Company Name</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">* Email Address</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">* Website/ Company URL</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={12}>
                   <FormGroup>
                     <label htmlFor="companyName">* Full Name</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">* Mobile Number</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">Landline Number</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
 
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">* Industry</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={6} xs={6}>
                   <FormGroup>
                     <label htmlFor="companyName">* Advertiser or Agency?</label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={4} sm={12}>
@@ -81,13 +105,20 @@ const ContactUsSection = () => {
                     <label htmlFor="companyName">
                       *What Best Describes Your Role
                     </label>
-                    <Input type="text"></Input>
+                    <Input
+                      type="text"
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
                 <Col lg={12} sm={12} xs={12}>
                   <FormGroup>
                     <label htmlFor="companyName">Message *</label>
-                    <Input type="textarea" rows={6}></Input>
+                    <Input
+                      type="textarea"
+                      rows={6}
+                      className={styles["form-control"]}
+                    ></Input>
                   </FormGroup>
                 </Col>
               </Row>

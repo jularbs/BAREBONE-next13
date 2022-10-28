@@ -23,11 +23,11 @@ const HeroWhyMBC = forwardRef(({ data, black, blue, next }, myRef) => {
         <div className={styles["title"]}>{data.title}</div>
         <div className={styles["content"]}>{data.content}</div>
         <div className={styles["cta-container"]}>
-          <Link href={data.ctaLink}>
-            <div className={styles["cta-button"]}>{data.ctaText}</div>
+          <Link href={data.ctaLink} className={styles["cta-button"]}>
+            <div>{data.ctaText}</div>
           </Link>
-          <Link href={data.secondaryCtaLink}>
-            <div className={styles["cta-button"]}>{data.secondaryCtaText}</div>
+          <Link href={data.secondaryCtaLink} className={styles["cta-button"]}>
+            <div>{data.secondaryCtaText}</div>
           </Link>
         </div>
         <div className={styles["arrow-placement"]}>

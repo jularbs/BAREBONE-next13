@@ -31,18 +31,25 @@ const HeroBranding = forwardRef(({ data, next }, myRef) => {
         <div className={styles["arrow-placement"]}>
           <div className="arrow-wrapper" onClick={scrollNext} />
         </div>
-        <Row>
+        <Row className={styles.row}>
           <Col lg={6} sm={12} className="w-100">
-            <div className={`${styles["content-container"]} justify-content-center`}>
+            <div
+              className={`${styles["content-container"]} justify-content-center`}
+            >
               <div className={styles["title"]} style={{ width: "100%" }}>
                 <div className={styles["main-title"]}>{title}</div>
-                <img className={styles["logo"]} src={logoLocation} width="100%" />
+                <img
+                  className={styles["logo"]}
+                  src={logoLocation}
+                  width="100%"
+                />
               </div>
               <div className={styles["content"]}>{content}</div>
-              <Link href={ctaLink}>
-                <button className={`${styles["cta-button"]} btn btn-block`}>
-                  <span>{ctaText}</span> <img src="/common/arrow-white.svg" />
-                </button>
+              <Link
+                href={ctaLink}
+                className={`btn btn-block ${styles["cta-button"]}`}
+              >
+                <span>{ctaText}</span> <img src="/common/arrow-white.svg" />
               </Link>
             </div>
           </Col>

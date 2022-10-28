@@ -25,10 +25,11 @@ const HeroBasic = forwardRef(({ data, black, blue, next }, myRef) => {
         <div className={styles["content"]}>{data.content}</div>
 
         {data.ctaText && data.ctaLink && (
-          <Link href={data.ctaLink}>
-            <button className={`${styles["cta-button"]} btn btn-block`}>
-              <span>{data.ctaText}</span> <img src="/common/arrow-white.svg" />
-            </button>
+          <Link
+            href={data.ctaLink}
+            className={`${styles["cta-button"]} btn btn-block`}
+          >
+            <span>{data.ctaText}</span> <img src="/common/arrow-white.svg" />
           </Link>
         )}
         <div className={styles["arrow-placement"]}>

@@ -26,6 +26,7 @@
       display: flex;
 
       &.main-content {
+        position: relative;
         padding: 3rem;
         flex-direction: column;
         justify-content: center;
@@ -65,6 +66,7 @@
       }
 
       .cta-button {
+       position: relative;
         padding: 1rem 5rem;
         border: 1px white solid;
         text-transform: uppercase;

@@ -170,7 +170,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                           <img
                             alt="..."
                             className="avatar rounded-circle"
-                            src={"assets/img/theme/team-1.jpg"}
+                            src="/img/theme/team-1.jpg"
                           />
                         </Col>
                         <div className="col ml--2">
@@ -199,7 +199,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                           <img
                             alt="..."
                             className="avatar rounded-circle"
-                            src={"assets/img/theme/team-2.jpg"}
+                            src="/img/theme/team-2.jpg"
                           />
                         </Col>
                         <div className="col ml--2">
@@ -228,7 +228,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                           <img
                             alt="..."
                             className="avatar rounded-circle"
-                            src={"assets/img/theme/team-3.jpg"}
+                            src="/img/theme/team-3.jpg"
                           />
                         </Col>
                         <div className="col ml--2">
@@ -257,7 +257,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                           <img
                             alt="..."
                             className="avatar rounded-circle"
-                            src={"assets/img/theme/team-4.jpg"}
+                            src="/img/theme/team-4.jpg"
                           />
                         </Col>
                         <div className="col ml--2">
@@ -286,7 +286,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                           <img
                             alt="..."
                             className="avatar rounded-circle"
-                            src={"assets/img/theme/team-5.jpg"}
+                            src="/img/theme/team-5.jpg"
                           />
                         </Col>
                         <div className="col ml--2">

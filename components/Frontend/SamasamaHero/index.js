@@ -32,11 +32,12 @@ const SamasamaHero = forwardRef(({ data, next, withLogo }, myRef) => {
 
           {content && <div className={styles["excerpt"]}>{content}</div>}
           {ctaLink && ctaText && (
-            <Link href={data.ctaLink}>
-              <button className={`btn ${styles["btn-cta"]} py-3`}>
-                {data.ctaText}{" "}
-                <img src="/common/arrow-black.svg" className="ml-3" />
-              </button>
+            <Link
+              href={data.ctaLink}
+              className={`btn ${styles["btn-cta"]} py-3`}
+            >
+              {data.ctaText}{" "}
+              <img src="/common/arrow-black.svg" className="ml-3" />
             </Link>
           )}
         </div>
