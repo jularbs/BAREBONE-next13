@@ -1,3 +1,5 @@
+@import "assets/scss/breakpoints.scss";
+
 .hero-metrics-container {
   position: relative;
   display: flex;
@@ -9,6 +11,15 @@
   justify-content: center;
   height: 100vh;
 
+  .mapOverlay {
+    position: absolute;
+    height: 100%;
+    right: -200px;
+
+    @include for-tablet-landscape-up {
+      right: 150px;
+    }
+  }
   .arrow-placement {
     position: absolute;
     bottom: 2.5rem;

@@ -1,7 +1,13 @@
 import React from "react";
 // reactstrap components
 // core components
-import HeroBranding from "components/Frontend/HeroBranding";
+import dynamic from "next/dynamic";
+
+const HeroBranding = dynamic(() => import("components/Frontend/HeroBranding"), {
+  ssr: false,
+});
+
+// import HeroBranding from "components/Frontend/HeroBranding";
 import Showcase from "components/Frontend/Showcase";
 import HeroMetrics from "components/Frontend/HeroMetrics";
 import GenericCTA from "components/Frontend/GenericCTA";

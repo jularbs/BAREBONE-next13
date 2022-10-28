@@ -1,9 +1,15 @@
-import { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState, useEffect, createRef } from "react";
 import styles from "./HeroMetrics.module.scss";
 import { readOption } from "actions/option";
 import { HERO_METRIC_HEADER, HERO_METRIC_SUBTEXT } from "constants.js";
 
 import VisibilitySensor from "react-visibility-sensor";
+import dynamic from "next/dynamic";
+
+const Odometer = dynamic(import("react-odometerjs"), {
+  ssr: false,
+  loading: () => 0,
+});
 
 const HeroMetrics = forwardRef(({ next, data }, myRef) => {
   const scrollNext = () => {
@@ -14,15 +20,24 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
 
   const onMetricsVisibility = (isVisible) => {
     if (isVisible) {
-      data.forEach((item) => {
-        document.getElementById(`${item.slug}-odo`).innerHTML = item.figures;
+      console.log("Is visible");
+      setDisplayOdo(data);
+      data.map((item, key) => {
+        // console.log(refs[key]);
+        // if (refs[key].current) {
+        //   refs[key].current.update(item.figures);
+        // }
       });
     }
   };
 
   const [headerText, setHeaderText] = useState("");
   const [headerSubtext, setHeaderSubtext] = useState("");
-
+  const [displayOdo, setDisplayOdo] = useState(
+    data.map((item) => {
+      return { ...item, figures: 0 };
+    })
+  );
   useEffect(() => {
     readOption(HERO_METRIC_HEADER).then((data) => {
       if (data.data) setHeaderText(data.data.value);
@@ -34,16 +49,11 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
   }, []);
 
   const showMetrics = () => {
-    return data.map((item, key) => {
+    return displayOdo.map((item, key) => {
       return (
         <div className={styles["metric-item"]} key={key}>
           <div className="d-flex justify-content-center">
-            <span
-              className={`${styles["figures"]} odometer`}
-              id={`${item.slug}-odo`}
-            >
-              0
-            </span>
+            <Odometer value={item.figures} format="(.ddd),dd" />
             <div className={styles["figures"]} style={{ paddingTop: "3px" }}>
               {item.suffix}
             </div>
@@ -58,6 +68,7 @@ const HeroMetrics = forwardRef(({ next, data }, myRef) => {
   return (
     <>
       <div className={styles["hero-metrics-container"]} ref={myRef}>
+        <img className={styles.mapOverlay} src="/bg/map.png" />
         <div className={styles["header-container"]}>
           <div className={styles["title"]}>{headerText}</div>
           <div className={styles["content"]}>{headerSubtext}</div>
