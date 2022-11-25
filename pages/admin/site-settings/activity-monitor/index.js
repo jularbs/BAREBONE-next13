@@ -21,7 +21,7 @@ import Admin from "layouts/Admin.js";
 import SimpleHeader from "components/Headers/SimpleHeader.js";
 import { useState, useEffect } from "react";
 import { listAuditTrail, getCookie } from "actions/auth";
-import ShowDateTime from "assets/vendor/moment/ShowDateTime";
+import ShowDateTime from "asset/vendor/moment/ShowDateTime";
 
 function SalesManagement() {
   const token = getCookie("token");

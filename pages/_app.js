@@ -10,12 +10,12 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "select2/dist/css/select2.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // plugins styles downloaded
-import "assets/vendor/nucleo/css/nucleo.css";
+import "asset/vendor/nucleo/css/nucleo.css";
 // core styles
-import "assets/scss/nextjs-argon-dashboard-pro.scss?v1.1.0";
+import "asset/scss/nextjs-argon-dashboard-pro.scss?v1.1.0";
 
 import Footer from "components/Frontend/Footer";
-import "assets/scss/user-defined.scss";
+import "asset/scss/user-defined.scss";
 
 import { useRouter } from "next/router";
 import NProgress from "nprogress";

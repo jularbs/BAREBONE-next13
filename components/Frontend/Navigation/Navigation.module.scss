@@ -1,4 +1,4 @@
-@import "assets/scss/breakpoints.scss";
+@import "asset/scss/breakpoints.scss";
 
 .navigation-container {
   position: fixed;
@@ -10,6 +10,7 @@
   background-color: white;
   z-index: 100;
   justify-content: space-between;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   .logo-wrapper {
     margin-left: 20px;

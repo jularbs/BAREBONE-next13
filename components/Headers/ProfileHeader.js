@@ -27,7 +27,7 @@ function ProfileHeader() {
         style={{
           minHeight: "500px",
           backgroundImage:
-            'url("assets/img/theme/profile-cover.jpg")',
+            'url("asset/img/theme/profile-cover.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

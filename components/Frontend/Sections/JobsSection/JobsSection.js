@@ -26,7 +26,11 @@ const JobsSection = () => {
           <div className={styles["requirements"]}>{job.requirements}</div>
           <div className={styles["company"]}>{job.company}</div>
           <div className={styles["link"]}>
-            <a href={job.destinationURL} target="_blank" className={styles["openingLink"]}>
+            <a
+              href={job.destinationURL}
+              target="_blank"
+              className={styles["openingLink"]}
+            >
               APPLY NOW
             </a>
           </div>
@@ -48,8 +52,11 @@ const JobsSection = () => {
           />
         </div>
         <div className={styles["jobsContainer"]}>{showOpenings()}</div>
-        <Link href="/work-with-us/internship">
-          <div className={styles["internshipCTA"]}>APPLY FOR INTERNSHIP</div>
+        <Link
+          href="/work-with-us/internship"
+          className={styles["internshipCTA"]}
+        >
+          APPLY FOR INTERNSHIP
         </Link>
       </div>
     </>

@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* NextJS Argon Dashboard PRO - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard-pro
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
@@ -50,6 +34,7 @@ function Sidebar({
     setNavigatorPlatform(navigator.platform);
     // eslint-disable-next-line
   }, []);
+
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return router.pathname.indexOf(routeName) > -1 ? "active" : "";
@@ -120,6 +105,7 @@ function Sidebar({
           </div>
         );
       }
+
       if (prop.collapse) {
         var st = {};
         st[prop["state"]] = !state[prop.state];
@@ -157,43 +143,39 @@ function Sidebar({
           </NavItem>
         );
       }
+
       return (
         <NavItem className={activeRoute(prop.layout + prop.path)} key={key}>
-          <Link href={prop.layout + prop.path}>
-            <NavLink href="#pablo" onClick={closeSidenav}>
-              {prop.icon !== undefined ? (
-                <>
-                  <i className={prop.icon} />
-                  <span className="nav-link-text">{prop.name}</span>
-                </>
-              ) : prop.miniName !== undefined ? (
-                <>
-                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                  <span className="sidenav-normal"> {prop.name} </span>
-                </>
-              ) : (
-                prop.name
-              )}
-            </NavLink>
-          </Link>
+          <NavLink href={prop.layout + prop.path} onClick={closeSidenav}>
+            {prop.icon !== undefined ? (
+              <>
+                <i className={prop.icon} />
+                <span className="nav-link-text">{prop.name}</span>
+              </>
+            ) : prop.miniName !== undefined ? (
+              <>
+                <span className="sidenav-mini-icon"> {prop.miniName} </span>
+                <span className="sidenav-normal"> {prop.name} </span>
+              </>
+            ) : (
+              prop.name
+            )}
+          </NavLink>
         </NavItem>
       );
     });
   };
+
   const scrollBarInner = (
     <div className="scrollbar-inner">
       <div className="sidenav-header d-flex align-items-center">
         {logo && logo.innerLink ? (
           <Link href={logo.innerLink}>
-            <span>
-              <NavbarBrand href="#pablo">
-                <img
-                  alt={logo.imgAlt}
-                  className="navbar-brand-img"
-                  src={logo.imgSrc}
-                />
-              </NavbarBrand>
-            </span>
+            <img
+              alt={logo.imgAlt}
+              className="navbar-brand-img"
+              src={logo.imgSrc}
+            />
           </Link>
         ) : null}
         {logo && logo.outterLink ? (
@@ -223,49 +205,6 @@ function Sidebar({
       <div className="navbar-inner">
         <Collapse navbar isOpen={true}>
           <Nav navbar>{createLinks(routes)}</Nav>
-          {/* <hr className="my-3" />
-          <h6 className="navbar-heading p-0 text-muted">
-            <span className="docs-normal">Documentation</span>
-            <span className="docs-mini">D</span>
-          </h6>
-          <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink
-                href="https://www.creative-tim.com/learning-lab/nextjs/overview/argon-dashboard?ref=njsadp-sidebar"
-                target="_blank"
-              >
-                <i className="ni ni-spaceship" />
-                <span className="nav-link-text">Getting started</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://www.creative-tim.com/learning-lab/nextjs/colors/argon-dashboard?ref=njsadp-sidebar"
-                target="_blank"
-              >
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Foundation</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://www.creative-tim.com/learning-lab/nextjs/alerts/argon-dashboard?ref=njsadp-sidebar"
-                target="_blank"
-              >
-                <i className="ni ni-ui-04" />
-                <span className="nav-link-text">Components</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                href="https://www.creative-tim.com/learning-lab/nextjs/react-chartjs-2/argon-dashboard?ref=njsadp-sidebar"
-                target="_blank"
-              >
-                <i className="ni ni-chart-pie-35" />
-                <span className="nav-link-text">Plugins</span>
-              </NavLink>
-            </NavItem>
-          </Nav> */}
         </Collapse>
       </div>
     </div>

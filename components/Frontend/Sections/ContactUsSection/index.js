@@ -1,8 +1,67 @@
+//TO DOS: show messages, add recaptcha
 import styles from "./ContactUsSection.module.scss";
+
+import { useState, useEffect } from "react";
 
 import { Row, Col, FormGroup, Label, Input, Button } from "reactstrap";
 import { IoCall, IoLocationSharp } from "react-icons/io5";
+
+import { getRecipientList } from "actions/inquiryRecipient";
+
+import { createInquiry } from "actions/inquiry";
+
+import { Spinner } from "reactstrap";
+
 const ContactUsSection = () => {
+  const [recipients, setRecipients] = useState([]);
+  const [formValues, setFormValues] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState({
+    success: "",
+    error: "",
+  });
+  useEffect(() => {
+    getRecipientList().then((data) => {
+      setRecipients(data.data);
+    });
+  }, []);
+
+  const showRecipientList = () => {
+    return recipients.map((item, key) => (
+      <option key={key} value={item._id}>
+        {item.name}
+      </option>
+    ));
+  };
+
+  const handleFormChange = (name) => (e) => {
+    setFormValues({ ...formValues, [name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    setLoading(true);
+    createInquiry("", formValues)
+      .then((data) => {
+        setLoading(false);
+        setMessages({
+          success: "Your inquiry has be sent",
+        });
+        setFormValues({});
+      })
+      .catch((e) => {
+        setLoading(false);
+        if (e.response?.data?.message) {
+          setMessages({
+            error: e.response.data.message,
+          });
+        } else {
+          setMessages({
+            error:
+              "There was a problem sending your inquiry. Please try again later or you may contact ...",
+          });
+        }
+      });
+  };
   return (
     <>
       <div className={styles["contactus-section-container"]}>
@@ -13,17 +72,15 @@ const ContactUsSection = () => {
               <Row>
                 <Col lg={12} sm={12}>
                   <FormGroup>
-                    <Input type="select" className={styles["form-control"]}>
-                      <option>
+                    <Input
+                      type="select"
+                      className={styles["form-control"]}
+                      onChange={handleFormChange("sendTo")}
+                    >
+                      <option value="">
                         Choose the department you would like to contact
                       </option>
-                    </Input>
-                  </FormGroup>
-                </Col>
-                <Col lg={12} sm={12}>
-                  <FormGroup>
-                    <Input type="select" className={styles["form-control"]}>
-                      <option>Please select from our business</option>
+                      {showRecipientList()}
                     </Input>
                   </FormGroup>
                 </Col>
@@ -33,6 +90,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("companyName")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -42,6 +100,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("emailAddress")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -51,6 +110,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("companyURL")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -60,6 +120,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("fullName")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -69,6 +130,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("mobileNumber")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -78,6 +140,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("landlineNumber")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -88,6 +151,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("industry")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -97,6 +161,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("isAdvertiser")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -108,6 +173,7 @@ const ContactUsSection = () => {
                     <Input
                       type="text"
                       className={styles["form-control"]}
+                      onChange={handleFormChange("role")}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -118,12 +184,20 @@ const ContactUsSection = () => {
                       type="textarea"
                       rows={6}
                       className={styles["form-control"]}
+                      onChange={handleFormChange("message")}
                     ></Input>
                   </FormGroup>
                 </Col>
               </Row>
               <div className="text-center">
-                <Button color="primary" className={styles["custom-submit"]}>
+                <Button
+                  color="primary"
+                  className={styles["custom-submit"]}
+                  onClick={handleSubmit}
+                >
+                  {loading && (
+                    <Spinner size="sm" color="white" className="mr-2" />
+                  )}
                   Submit
                 </Button>
               </div>

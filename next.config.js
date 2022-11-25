@@ -1,8 +1,5 @@
 const path = require("path");
 const withImage = require("next-images");
-// for transpiling all ESM @fullcalendar/* packages
-// also, for piping fullcalendar thru babel (to learn why, see babel.config.js)
-// const withTM = require("next-transpile-modules")(["@fullcalendar/core"]);
 
 const nextConfig = {
   reactStrictMode: false,
@@ -14,10 +11,8 @@ const nextConfig = {
   },
   webpack(config, options) {
     config.module.rules.push({
-      test: /\.(eot|woff|woff2)$/,
-      use: {
-        loader: "url-loader",
-      },
+      test: /\.(eot|ttf|woff|woff2)$/,
+      type: "asset",
     });
     config.resolve.modules.push(path.resolve("./"));
     return config;
