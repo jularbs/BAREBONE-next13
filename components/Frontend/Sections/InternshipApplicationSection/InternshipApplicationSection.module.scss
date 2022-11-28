@@ -52,16 +52,15 @@
       .btnUpload {
         border-radius: 0;
         border: 1px rgba(196, 196, 196, 1) solid;
-
-        // color: rgba(22, 37, 112, 1);
         color: black;
-        // text-transform: uppercase;
         text-align: start;
         font-size: 12px;
         font-weight: 400;
         margin-right: 0;
         padding: 14px 10px;
-
+        white-space: nowrap;
+        overflow-x: hidden;
+        
         &:hover {
           background-color: rgba(0, 146, 221, 1);
           border-color: rgba(0, 146, 221, 1);

@@ -1,18 +1,20 @@
 //TO DOS: show messages, add recaptcha
 import styles from "./ContactUsSection.module.scss";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-import { Row, Col, FormGroup, Label, Input, Button } from "reactstrap";
+import { Row, Col, FormGroup, Input, Button } from "reactstrap";
 import { IoCall, IoLocationSharp } from "react-icons/io5";
 
 import { getRecipientList } from "actions/inquiryRecipient";
 
 import { createInquiry } from "actions/inquiry";
 
-import { Spinner } from "reactstrap";
+import { Spinner, UncontrolledAlert } from "reactstrap";
+import ReCaptchaV2 from "react-google-recaptcha";
 
 const ContactUsSection = () => {
+  const recaptchaRef = useRef(null);
   const [recipients, setRecipients] = useState([]);
   const [formValues, setFormValues] = useState({});
   const [loading, setLoading] = useState(false);
@@ -20,6 +22,7 @@ const ContactUsSection = () => {
     success: "",
     error: "",
   });
+
   useEffect(() => {
     getRecipientList().then((data) => {
       setRecipients(data.data);
@@ -40,13 +43,37 @@ const ContactUsSection = () => {
 
   const handleSubmit = () => {
     setLoading(true);
+
+    if (formValues.token == null) {
+      setLoading(false);
+      setMessages({
+        ...messages,
+        error:
+          "Please prove you are not a robot by clicking the checkbox below",
+        success: "",
+      });
+      return;
+    }
+
     createInquiry("", formValues)
       .then((data) => {
         setLoading(false);
         setMessages({
           success: "Your inquiry has be sent",
         });
-        setFormValues({});
+        setFormValues({
+          sendTo: "",
+          companyName: "",
+          emailAddress: "",
+          companyURL: "",
+          fullName: "",
+          mobileNumber: "",
+          landlineNumber: "",
+          industry: "",
+          isAdvertiser: "",
+          role: "",
+          message: "",
+        });
       })
       .catch((e) => {
         setLoading(false);
@@ -61,7 +88,47 @@ const ContactUsSection = () => {
           });
         }
       });
+
+    if (recaptchaRef.current != null) {
+      recaptchaRef.current.reset();
+    }
   };
+
+  const showSuccessMessage = () =>
+    messages.success && (
+      <UncontrolledAlert
+        color="success"
+        onClick={() => {
+          setMessages({ success: "", error: "" });
+        }}
+      >
+        <span className="alert-icon">
+          <i className="ni ni-like-2" />
+        </span>
+        <span className="alert-text ml-1"> {messages.success}</span>
+      </UncontrolledAlert>
+    );
+
+  const showErrorMessage = () =>
+    messages.error && (
+      <UncontrolledAlert
+        color="danger"
+        onClick={() => {
+          setMessages({ success: "", error: "" });
+        }}
+      >
+        <span className="alert-text ml-1">{messages.error}</span>
+      </UncontrolledAlert>
+    );
+
+  const handleToken = (token) => {
+    setFormValues({ ...formValues, token });
+  };
+
+  const handleExpire = () => {
+    setFormValues({ ...formValues, token: null });
+  };
+
   return (
     <>
       <div className={styles["contactus-section-container"]}>
@@ -69,6 +136,8 @@ const ContactUsSection = () => {
           <Col lg={6} sm={12}>
             <div className={styles["form-container"]}>
               <h2 className="mb-4">Need to reach us?</h2>
+              {showSuccessMessage()}
+              {showErrorMessage()}
               <Row>
                 <Col lg={12} sm={12}>
                   <FormGroup>
@@ -76,6 +145,7 @@ const ContactUsSection = () => {
                       type="select"
                       className={styles["form-control"]}
                       onChange={handleFormChange("sendTo")}
+                      value={formValues.sendTo}
                     >
                       <option value="">
                         Choose the department you would like to contact
@@ -91,6 +161,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("companyName")}
+                      value={formValues.companyName}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -101,6 +172,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("emailAddress")}
+                      value={formValues.emailAddress}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -111,6 +183,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("companyURL")}
+                      value={formValues.companyURL}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -121,6 +194,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("fullName")}
+                      value={formValues.fullName}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -131,6 +205,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("mobileNumber")}
+                      value={formValues.mobileNumber}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -141,6 +216,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("landlineNumber")}
+                      value={formValues.landlineNumber}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -152,6 +228,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("industry")}
+                      value={formValues.industry}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -162,6 +239,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("isAdvertiser")}
+                      value={formValues.isAdvertiser}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -174,6 +252,7 @@ const ContactUsSection = () => {
                       type="text"
                       className={styles["form-control"]}
                       onChange={handleFormChange("role")}
+                      value={formValues.role}
                     ></Input>
                   </FormGroup>
                 </Col>
@@ -185,11 +264,19 @@ const ContactUsSection = () => {
                       rows={6}
                       className={styles["form-control"]}
                       onChange={handleFormChange("message")}
+                      value={formValues.message}
                     ></Input>
                   </FormGroup>
                 </Col>
               </Row>
               <div className="text-center">
+                <ReCaptchaV2
+                  ref={recaptchaRef}
+                  style={{ display: "inline-block" }}
+                  onChange={handleToken}
+                  onExpire={handleExpire}
+                  sitekey={process.env.RECAPTCHA_SITEKEY}
+                />
                 <Button
                   color="primary"
                   className={styles["custom-submit"]}
