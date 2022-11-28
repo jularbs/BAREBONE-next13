@@ -37,7 +37,7 @@ export const readInquiry = (id) => {
 export const removeInquiry = (token, id) => {
   return axios({
     method: "DELETE",
-    url: `${process.env.API}/v1/inquiry-recipient/${id}`,
+    url: `${process.env.API}/v1/inquiry/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

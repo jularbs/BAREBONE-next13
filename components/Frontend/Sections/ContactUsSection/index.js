@@ -1,4 +1,4 @@
-//TO DOS: show messages, add recaptcha
+//TO DOS: Convert Success message to a modal success
 import styles from "./ContactUsSection.module.scss";
 
 import { useState, useEffect, useRef } from "react";

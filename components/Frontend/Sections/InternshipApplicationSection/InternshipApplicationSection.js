@@ -1,3 +1,4 @@
+//TO DOS: Convert Success message to a modal success
 import styles from "./InternshipApplicationSection.module.scss";
 
 import { Row, Col, Input, UncontrolledAlert, Spinner } from "reactstrap";

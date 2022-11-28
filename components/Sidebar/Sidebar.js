@@ -170,13 +170,11 @@ function Sidebar({
     <div className="scrollbar-inner">
       <div className="sidenav-header d-flex align-items-center">
         {logo && logo.innerLink ? (
-          <Link href={logo.innerLink}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
-          </Link>
+          <NavbarBrand href="/">
+            <span style={{ fontWeight: "700", fontSize: ".8rem" }}>
+              MBC MEDIA GROUP
+            </span>
+          </NavbarBrand>
         ) : null}
         {logo && logo.outterLink ? (
           <NavbarBrand href={logo.outterLink} target="_blank">
