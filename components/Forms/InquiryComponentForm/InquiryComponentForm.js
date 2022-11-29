@@ -1,3 +1,4 @@
+//TODOS: remove data when inquiry is deleted. Pagination
 import { useEffect, useState } from "react";
 import { getRecipientList } from "actions/inquiryRecipient";
 import { getInquiryList } from "actions/inquiry";
@@ -105,6 +106,8 @@ const InquiryComponentForm = () => {
         isOpen={deleteModalOpen}
         setIsOpen={setDeleteModalOpen}
         values={deleteValues}
+        list={inquiryList}
+        setList={setInquiryList}
       />
       <ViewComponent
         isOpen={viewModalOpen}
@@ -115,7 +118,7 @@ const InquiryComponentForm = () => {
         <CardHeader className="d-flex align-items-center justify-content-between">
           <h2 className="mb-0 d-inline-block">Inquiries</h2>
         </CardHeader>
-        <CardBody>
+        <CardBody className="p-0">
           {inquiryList.length > 0 ? (
             showInquiryListTable()
           ) : (

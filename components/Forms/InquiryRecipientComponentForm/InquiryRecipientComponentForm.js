@@ -1,13 +1,20 @@
+//TODOS: edit component
 import { Button, Card, CardHeader, CardBody, Table } from "reactstrap";
 import { useState, useEffect } from "react";
 
 import { getRecipientList } from "actions/inquiryRecipient";
 import dynamic from "next/dynamic";
 const AddComponent = dynamic(() => import("./AddComponent"));
+const DeleteComponent = dynamic(() => import("./DeleteComponent"));
+const UpdateComponent = dynamic(() => import("./UpdateComponent"));
 
 const InquiryRecipientComponentForm = () => {
   const [recipientList, setRecipientList] = useState([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteValues, setDeleteValues] = useState({});
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [updateValues, setUpdateValues] = useState({});
 
   useEffect(() => {
     getRecipientList().then((data) => {
@@ -25,10 +32,26 @@ const InquiryRecipientComponentForm = () => {
           <div>{item.email}</div>
         </td>
         <td className="d-flex justify-content-end">
-          <Button size="sm" color="danger" outline onClick={() => {}}>
+          <Button
+            size="sm"
+            color="danger"
+            outline
+            onClick={() => {
+              setIsDeleteModalOpen(true);
+              setDeleteValues(item);
+            }}
+          >
             Delete
           </Button>
-          <Button size="sm" color="primary" className="px-3" onClick={() => {}}>
+          <Button
+            size="sm"
+            color="primary"
+            className="px-3"
+            onClick={() => {
+              setIsUpdateModalOpen(true);
+              setUpdateValues(item);
+            }}
+          >
             Edit
           </Button>
         </td>
@@ -57,6 +80,20 @@ const InquiryRecipientComponentForm = () => {
         setIsOpen={setIsAddModalOpen}
         values={recipientList}
         setValues={setRecipientList}
+      />
+      <DeleteComponent
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        values={deleteValues}
+        list={recipientList}
+        setList={setRecipientList}
+      />
+      <UpdateComponent
+        isOpen={isUpdateModalOpen}
+        setIsOpen={setIsUpdateModalOpen}
+        values={updateValues}
+        list={recipientList}
+        setList={setRecipientList}
       />
       <Card>
         <CardHeader className="d-flex align-items-center justify-content-between">

@@ -11,9 +11,17 @@ import {
   Spinner,
 } from "reactstrap";
 
-import { removeInquiry } from "actions/inquiry";
+import { removeRecipient } from "actions/inquiryRecipient";
+import withNotifications from "hoc/withNotifications";
 
-const DeleteComponent = ({ isOpen, setIsOpen, values, list, setList }) => {
+const DeleteComponent = ({
+  isOpen,
+  setIsOpen,
+  values,
+  list,
+  setList,
+  notify,
+}) => {
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({});
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
@@ -33,17 +41,24 @@ const DeleteComponent = ({ isOpen, setIsOpen, values, list, setList }) => {
     setLoading(true);
 
     if (deleteConfirmation === "DANGER") {
-      removeInquiry("", formValues._id)
+      removeRecipient("", formValues.slug)
         .then((data) => {
           setLoading(false);
           setIsOpen(false);
-          //update inquiry list
-
+          //update recipient list
           const removed = list.filter((item) => item._id !== values._id);
           setList(removed);
+          notify({
+            type: "success",
+            message: "Recipient removed successfully",
+          });
         })
         .catch((e) => {
           setLoading(false);
+          notify({
+            type: "danger",
+            message: "There was a problem removing the recipient.",
+          });
         });
     } else {
       setLoading(false);
@@ -59,7 +74,7 @@ const DeleteComponent = ({ isOpen, setIsOpen, values, list, setList }) => {
         }}
         isOpen={isOpen}
       >
-        <ModalHeader>Deleting Inquiry from {values.companyName}</ModalHeader>
+        <ModalHeader>Deleting Inquiry Recipient {formValues.name}</ModalHeader>
         <ModalBody className="py-0">
           <FormGroup className="mb-0">
             <label className="form-control-label" htmlFor="title">
@@ -87,7 +102,7 @@ const DeleteComponent = ({ isOpen, setIsOpen, values, list, setList }) => {
             </Button>
             <Button color="danger" onClick={handleSubmit} className="px-5">
               {loading && <Spinner color="white" size="sm" className="mr-2" />}
-              Delete Station
+              Delete Recipient
             </Button>
           </div>
         </ModalFooter>
@@ -96,4 +111,4 @@ const DeleteComponent = ({ isOpen, setIsOpen, values, list, setList }) => {
   );
 };
 
-export default DeleteComponent;
+export default withNotifications(DeleteComponent);
