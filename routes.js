@@ -131,6 +131,12 @@ const routes = [
         layout: "/admin",
       },
       {
+        path: "/pages-management/work-with-us/applications",
+        name: "Internship Applications",
+        miniName: "A",
+        layout: "/admin",
+      },
+      {
         path: "/pages-management/work-with-us/careers",
         name: "Career Opportunities",
         miniName: "U",
@@ -142,6 +148,13 @@ const routes = [
     path: "/pages-management/contact-us",
     name: "Contact us",
     icon: "ni ni-single-copy-04",
+    layout: "/admin",
+  },
+  { header: "AUTO RESPONSE" },
+  {
+    path: "/pages-management/autoresponse",
+    name: "Configuration",
+    icon: "ni ni-settings-gear-65 ",
     layout: "/admin",
   },
   { header: "SITE SETTINGS" },

@@ -1,4 +1,4 @@
-//TODOS: remove data when inquiry is deleted. Pagination
+//TODOS: Pagination. Filtering by recipient. Messages/Notifs
 import { useEffect, useState } from "react";
 import { getRecipientList } from "actions/inquiryRecipient";
 import { getInquiryList } from "actions/inquiry";
@@ -122,7 +122,7 @@ const InquiryComponentForm = () => {
           {inquiryList.length > 0 ? (
             showInquiryListTable()
           ) : (
-            <div className="mx-auto text-center">No data found</div>
+            <div className="mx-auto text-center p-4">No inquiries found</div>
           )}
         </CardBody>
       </Card>

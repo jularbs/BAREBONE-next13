@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "reactstrap";
 
-import { removeInquiry } from "actions/inquiry";
+import { removeApplication } from "actions/internshipApplication";
 import withNotifications from "hoc/withNotifications";
 
 const DeleteComponent = ({
@@ -41,7 +41,7 @@ const DeleteComponent = ({
     setLoading(true);
 
     if (deleteConfirmation === "DANGER") {
-      removeInquiry("", formValues._id)
+      removeApplication("", formValues.slug)
         .then((data) => {
           setLoading(false);
           setIsOpen(false);
@@ -52,14 +52,14 @@ const DeleteComponent = ({
 
           notify({
             type: "success",
-            message: "Inquiry removed successfully",
+            message: "Application removed successfully",
           });
         })
         .catch((e) => {
           setLoading(false);
           notify({
             type: "danger",
-            message: "There was a problem removing the inquiry",
+            message: "There was a problem removing the application",
           });
         });
     } else {
@@ -76,7 +76,9 @@ const DeleteComponent = ({
         }}
         isOpen={isOpen}
       >
-        <ModalHeader>Deleting Inquiry from {values.companyName}</ModalHeader>
+        <ModalHeader>
+          Deleting Application from {values.firstName} {values.lastName}
+        </ModalHeader>
         <ModalBody className="py-0">
           <FormGroup className="mb-0">
             <label className="form-control-label" htmlFor="title">
@@ -104,7 +106,7 @@ const DeleteComponent = ({
             </Button>
             <Button color="danger" onClick={handleSubmit} className="px-5">
               {loading && <Spinner color="white" size="sm" className="mr-2" />}
-              Delete Station
+              Delete Application
             </Button>
           </div>
         </ModalFooter>

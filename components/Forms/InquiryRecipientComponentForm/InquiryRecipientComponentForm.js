@@ -7,14 +7,17 @@ import dynamic from "next/dynamic";
 const AddComponent = dynamic(() => import("./AddComponent"));
 const DeleteComponent = dynamic(() => import("./DeleteComponent"));
 const UpdateComponent = dynamic(() => import("./UpdateComponent"));
-
+import { useRouter } from "next/router";
 const InquiryRecipientComponentForm = () => {
+  const router = useRouter();
+
   const [recipientList, setRecipientList] = useState([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteValues, setDeleteValues] = useState({});
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [updateValues, setUpdateValues] = useState({});
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     getRecipientList().then((data) => {
@@ -24,36 +27,62 @@ const InquiryRecipientComponentForm = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setSelected(router.query.selected);
+  }, [router.query.selected]);
+
   const showRecipientListData = () => {
     return recipientList.map((item, index) => (
-      <tr key={index}>
-        <td>
+      <tr
+        key={index}
+        style={{
+          backgroundColor: selected == item.slug ? "rgba(0,0,0,.1)" : "",
+        }}
+      >
+        <td
+          onClick={() => {
+            if (selected !== item.slug)
+              router.push(
+                {
+                  pathname: router.route,
+                  query: {
+                    selected: item.slug,
+                  },
+                },
+                `${router.route}?selected=${item.slug}`,
+                { shallow: true }
+              );
+          }}
+          style={{ cursor: "pointer" }}
+        >
           <div>{item.name}</div>
           <div>{item.email}</div>
         </td>
-        <td className="d-flex justify-content-end">
-          <Button
-            size="sm"
-            color="danger"
-            outline
-            onClick={() => {
-              setIsDeleteModalOpen(true);
-              setDeleteValues(item);
-            }}
-          >
-            Delete
-          </Button>
-          <Button
-            size="sm"
-            color="primary"
-            className="px-3"
-            onClick={() => {
-              setIsUpdateModalOpen(true);
-              setUpdateValues(item);
-            }}
-          >
-            Edit
-          </Button>
+        <td>
+          <div className="d-flex justify-content-end">
+            <Button
+              size="sm"
+              color="danger"
+              outline
+              onClick={() => {
+                setIsDeleteModalOpen(true);
+                setDeleteValues(item);
+              }}
+            >
+              Delete
+            </Button>
+            <Button
+              size="sm"
+              color="primary"
+              className="px-3"
+              onClick={() => {
+                setIsUpdateModalOpen(true);
+                setUpdateValues(item);
+              }}
+            >
+              Edit
+            </Button>
+          </div>
         </td>
       </tr>
     ));
