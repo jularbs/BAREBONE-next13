@@ -1,4 +1,4 @@
-//TODOS: edit component
+//TODOS: SELECTED HIGHLIGHT
 import { Button, Card, CardHeader, CardBody, Table } from "reactstrap";
 import { useState, useEffect } from "react";
 
@@ -36,7 +36,7 @@ const InquiryRecipientComponentForm = () => {
       <tr
         key={index}
         style={{
-          backgroundColor: selected == item.slug ? "rgba(0,0,0,.1)" : "",
+          backgroundColor: selected == item._id ? "rgba(0,0,0,.1)" : "",
         }}
       >
         <td
@@ -46,10 +46,10 @@ const InquiryRecipientComponentForm = () => {
                 {
                   pathname: router.route,
                   query: {
-                    selected: item.slug,
+                    selected: item._id,
                   },
                 },
-                `${router.route}?selected=${item.slug}`,
+                `${router.route}?selected=${item._id}`,
                 { shallow: true }
               );
           }}

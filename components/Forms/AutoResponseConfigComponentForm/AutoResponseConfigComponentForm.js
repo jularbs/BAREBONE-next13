@@ -14,7 +14,7 @@ import {
 import { IoCloseSharp } from "react-icons/io5";
 import {
   createAutoResponseConfig,
-  getAutoResponseConfig,
+  getAutoResponseConfigByRecipient,
 } from "actions/autoResponseConfig";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRouter } from "next/router";
@@ -27,7 +27,6 @@ const AutoResponseConfigComponentForm = () => {
   const [bodyContent, setBodyContent] = useState("");
   const [initValue, setInitValue] = useState("");
   const [selected, setSelected] = useState("");
-  const [autoResponseConfigId, setAutoResponseConfigId] = useState("");
   const [loading, setLoading] = useState({
     fetch: false,
     submit: false,
@@ -38,22 +37,11 @@ const AutoResponseConfigComponentForm = () => {
   });
 
   useEffect(() => {
+    //GER RECEPIENT ID
     setSelected(router.query.selected);
     setLoading({ ...loading, fetch: true });
-    //fetch option from query selected
-    if (router.query.selected) {
-      readOption(`autorespond-config-${router.query.selected}`).then((data) => {
-        if (data.data) {
-          setAutoResponseConfigId(data.data?.value);
-        } else {
-          setAutoResponseConfigId("");
-          setLoading({ ...loading, fetch: false });
-        }
-      });
-    }
-  }, [router.query.selected]);
 
-  useEffect(() => {
+    //RESET FORM
     setAttachments([]);
     setFormValues({
       senderName: "",
@@ -62,22 +50,17 @@ const AutoResponseConfigComponentForm = () => {
       attachments: [],
     });
     setInitValue("");
-    if (autoResponseConfigId) {
-      getAutoResponseConfig(autoResponseConfigId).then((data) => {
-        console.log("DATA: ", data.data);
+
+    //GET AUTOCONFIG BASED ON INQUIRY RECIPIENT ID
+  }, [router.query.selected]);
+
+  useEffect(() => {
+    if (selected) {
+      getAutoResponseConfigByRecipient(selected).then((data) => {
         setLoading({ ...loading, fetch: false });
-        setFormValues({
-          _id: data.data?._id,
-          senderName: data.data?.senderName,
-          subject: data.data?.subject,
-          attachments: data.data?.attachments,
-          isEnabled: data.data?.isEnabled,
-        });
-        setInitValue(data.data?.body);
-        setBodyContent(data.data?.body);
       });
     }
-  }, [autoResponseConfigId]);
+  }, [selected]);
 
   const handleSubmit = () => {
     setLoading({ ...loading, submit: true });

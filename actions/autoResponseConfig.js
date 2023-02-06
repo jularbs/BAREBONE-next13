@@ -13,10 +13,19 @@ export const createAutoResponseConfig = (token, data) => {
   });
 };
 
-export const getAutoResponseConfig = (id) => {
+export const getAutoResponseConfigById = (id) => {
   return axios({
     method: "GET",
-    url: `${process.env.API}/v1/auto-response-config/${id}`,
+    url: `${process.env.API}/v1/auto-response-config/id/${id}`,
+  }).then((res) => {
+    return res.data;
+  });
+};
+
+export const getAutoResponseConfigByRecipient = (id) => {
+  return axios({
+    method: "GET",
+    url: `${process.env.API}/v1/auto-response-config/recipient/${id}`,
   }).then((res) => {
     return res.data;
   });
