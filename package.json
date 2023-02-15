@@ -3,8 +3,8 @@
   "version": "1.1.0",
   "private": true,
   "engines": {
-    "node": "^14.17.3",
-    "npm": "^6.14.13"
+    "node": "19.x",
+    "npm": "9.x"
   },
   "scripts": {
     "start": "next start -p $PORT",
