@@ -158,12 +158,12 @@ const routes = [
     layout: "/admin",
   },
   { header: "SITE SETTINGS" },
-  {
-    path: "/site-settings",
-    name: "Manage Settings",
-    icon: "ni ni-settings-gear-65 ",
-    layout: "/admin",
-  },
+  // {
+  //   path: "/site-settings",
+  //   name: "Manage Settings",
+  //   icon: "ni ni-settings-gear-65 ",
+  //   layout: "/admin",
+  // },
   {
     collapse: true,
     name: "User Management",
