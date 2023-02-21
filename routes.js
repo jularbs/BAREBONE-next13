@@ -1,6 +1,6 @@
 const routes = [
   {
-    path: "/general-settings",
+    path: "/",
     name: "Dashboard",
     icon: "ni ni-chart-bar-32",
     layout: "/admin",
@@ -150,13 +150,13 @@ const routes = [
     icon: "ni ni-single-copy-04",
     layout: "/admin",
   },
-  { header: "AUTO RESPONSE" },
-  {
-    path: "/pages-management/autoresponse",
-    name: "Configuration",
-    icon: "ni ni-settings-gear-65 ",
-    layout: "/admin",
-  },
+  // { header: "AUTO RESPONSE" },
+  // {
+  //   path: "/pages-management/autoresponse",
+  //   name: "Configuration",
+  //   icon: "ni ni-settings-gear-65 ",
+  //   layout: "/admin",
+  // },
   { header: "SITE SETTINGS" },
   // {
   //   path: "/site-settings",
