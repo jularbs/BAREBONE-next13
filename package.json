@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-argon-dashboard-pro",
-  "version": "1.1.0",
+  "name": "kbp-client",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "next start -p $PORT",
@@ -10,7 +10,7 @@
     "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js asset/scss/nextjs-argon-dashboard-pro.scss asset/css/nextjs-argon-dashboard-pro.min.css --output-style compressed",
     "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js asset/scss/nextjs-argon-dashboard-pro.scss asset/css/nextjs-argon-dashboard-pro.css --source-map true",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss",
-    "dev": "next dev"
+    "dev": "next dev -- -p 3002"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "5.5.0",
