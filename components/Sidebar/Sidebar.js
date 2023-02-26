@@ -172,7 +172,7 @@ function Sidebar({
         {logo && logo.innerLink ? (
           <NavbarBrand href="/">
             <span style={{ fontWeight: "700", fontSize: ".8rem" }}>
-              MBC MEDIA GROUP
+              KBP CMS
             </span>
           </NavbarBrand>
         ) : null}

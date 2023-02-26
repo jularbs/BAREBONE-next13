@@ -11,10 +11,6 @@
 import React from "react";
 import { withRouter } from "next/router";
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
-
-import routes from "routes.js";
 
 function Auth({ children }) {
   React.useEffect(() => {
@@ -26,10 +22,7 @@ function Auth({ children }) {
   });
   return (
     <>
-      <div className="main-content">
-        {/* <AuthNavbar />  */}
-        {children}
-      </div>
+      <div className="main-content">{children}</div>
     </>
   );
 }

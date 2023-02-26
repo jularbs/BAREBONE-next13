@@ -113,7 +113,7 @@ function Login() {
   return (
     <>
       <AuthHeader
-        title="MBC Media Group"
+        title="KBP"
         lead="Please Log in to continue."
       />
       <Container className="mt--9 pb-5">

@@ -79,7 +79,7 @@ function Admin({ router, children }) {
         sidenavOpen={sidenavOpen}
         logo={{
           innerLink: "/",
-          imgSrc: "/logos/mbc-long.png",
+          // imgSrc: "/logos/mbc-long.png",
           imgAlt: "...",
         }}
       />
