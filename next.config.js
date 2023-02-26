@@ -3,6 +3,17 @@ const withImage = require("next-images");
 
 const nextConfig = {
   headers: () => {
+    const defaultArr = ["'self'"];
+    const fontArr = ["'self'", "fonts.gstatic.com"];
+    const styleArr = ["'self'", "'unsafe-inline'"];
+    const scriptArr = ["'self'", "'unsafe-eval'"];
+    const connectArr = ["'self'", "localhost:8000", "ws://localhost:8000"];
+    const imgArr = ["'self'"];
+    const frameArr = ["'self'"];
+    const frameAncestorsArr = ["'self'"];
+    const mediaArr = ["'self'"];
+    const objectArr = ["'self'"];
+
     return [
       {
         source: "/:path*{/}?",
@@ -14,16 +25,16 @@ const nextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self';" +
-              "font-src 'self' data: fonts.gstatic.com;" +
-              "style-src 'self' 'unsafe-inline' cdn.tiny.cloud fonts.googleapis.com github.hubspot.com www.google.com;" +
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' github.hubspot.com cdn.tiny.cloud www.google.com www.gstatic.com *.youtube.com github.hubspot.com;" +
-              "connect-src 'self' localhost:8000 github.hubspot.com www.google.com mmg-cms-api.herokuapp.com;" +
-              "img-src 'self' data: sp.tinymce.com localhost:8000 mmg-cms-api.herokuapp.com;" +
-              "frame-src 'self' www.google.com *.youtube.com;" +
-              "frame-ancestors 'self';" +
-              "media-src 'self';" +
-              "object-src 'self';",
+              `default-src ${defaultArr.join(" ")};` +
+              `font-src ${fontArr.join(" ")};` +
+              `style-src ${styleArr.join(" ")};` +
+              `script-src ${scriptArr.join(" ")};` +
+              `connect-src ${connectArr.join(" ")};` +
+              `img-src ${imgArr.join(" ")};` +
+              `frame-src ${frameArr.join(" ")};` +
+              `frame-ancestors ${frameAncestorsArr.join(" ")};` +
+              `media-src ${mediaArr.join(" ")};` +
+              `object-src ${objectArr.join(" ")};`,
           },
           {
             key: "Permissions-Policy",
@@ -42,6 +53,7 @@ const nextConfig = {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
+          { key: "Access-Control-Allow-Headers", value: "market, request-id" },
         ],
       },
     ];
